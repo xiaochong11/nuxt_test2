@@ -20,8 +20,11 @@ module.exports = {
   /*
   ** Add axios globally
   */
+  plugins:[
+      {src:'~/plugins/element-ui.js'}
+  ],
   build: {
-    vendor: ['axios'],
+    vendor: ['axios','~/plugins/element-ui.js'],
     /*
     ** Run ESLINT on save
     */
@@ -30,8 +33,11 @@ module.exports = {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
+          // loader: 'eslint-loader',
           exclude: /(node_modules)/
+        },{
+            test: /\.less$/,
+            loader: "less-loader"
         })
       }
     }
