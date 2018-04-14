@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="footer-sec">
         <div class="main-footer">
 
         </div>
@@ -20,24 +20,30 @@
     </div>
 </template>
 <style lang="less">
-    .main-footer{
+    #footer-sec{
         width:100%;
-        height:100px;
-        background:#f7f7f7;
-    }
-    footer{
-        width:100%;
-        background: #333;
-        color:#999;
-        a{
+        position:absolute;
+        bottom:0;
+        .main-footer{
+            width:100%;
+            height:100px;
+            background:#f7f7f7;
+        }
+        footer{
+            width:100%;
+            background: #333;
             color:#999;
-            &:hover{
-                color:#31c27c;
+            a{
+                color:#999;
+                &:hover{
+                    color:#31c27c;
+                }
+            }
+            .copyright{
+                text-align: center;
+                padding:24px 0;
             }
         }
-        .copyright{
-            text-align: center;
-            padding:24px 0;
-        }
     }
+
 </style>

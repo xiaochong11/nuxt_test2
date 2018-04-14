@@ -134,6 +134,12 @@
                         }
                     }
                   }
+                  h2{
+                      font-size:15px;
+                      border-bottom:1px solid #eee;
+                      padding-bottom:10px;
+                      margin-bottom:25px;
+                  }
               }
               .content{
                   float:none;
@@ -142,49 +148,50 @@
                   background:#FFF;
                   /*height:600px;*/
                   padding-top:25px;
-              }
-              .recommend{
-                  box-sizing:border-box;
-                  width:800px;
-                  padding:0 120px 0 35px;
-                  text-align:left;
-                  //background:#f00;
-                  h2{
-                      font-size:15px;
-                      border-bottom:1px solid #eee;
-                      padding-bottom:10px;
-                      margin-bottom:25px;
-                  }
-                  ul{
-                      li{
-                          margin-bottom:25px;
-                          padding-bottom:30px;
+                  .recommend{
+                      box-sizing:border-box;
+                      width:800px;
+                      padding:0 80px 0 35px;
+                      text-align:left;
+                      //background:#f00;
+                      h2{
+                          font-size:15px;
                           border-bottom:1px solid #eee;
-                          h3{
-                             a{
-                                 color:#0da4d3;
-                                 &:hover{
-                                     color: #000;
-                                     border-bottom: 1px solid #000!important;
-                                 }
-                             }
-                          }
-                          img{
-                              width:100%;
-                          }
-                          p{
-                              margin:15px 0;
-                          }
-                          p.article-info{
-                              font-size:12px;
-                              color:#bbb;
-                          }
-                          p.article-summary{
-                              font-size:13px;
+                          padding-bottom:10px;
+                          margin-bottom:25px;
+                      }
+                      ul{
+                          li{
+                              margin-bottom:25px;
+                              padding-bottom:30px;
+                              border-bottom:1px solid #eee;
+                              h3{
+                                  a{
+                                      color:#0da4d3;
+                                      &:hover{
+                                          color: #000;
+                                          border-bottom: 1px solid #000!important;
+                                      }
+                                  }
+                              }
+                              img{
+                                  width:100%;
+                              }
+                              p{
+                                  margin:15px 0;
+                              }
+                              p.article-info{
+                                  font-size:12px;
+                                  color:#bbb;
+                              }
+                              p.article-summary{
+                                  font-size:13px;
+                              }
                           }
                       }
                   }
               }
+
           }
 
       }

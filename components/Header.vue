@@ -5,17 +5,17 @@
                 <img src="https://www.baidu.com/img/baidu_jgylogo3.gif"/>
             </div>
             <ul>
-                <li >
-                    <span>首页</span>
+                <li>
+                    <span class="cur">首页</span>
                 </li>
                 <li >
-                    <span>首页</span>
+                    <span>主播课堂</span>
                 </li>
                 <li >
-                    <span>首页</span>
+                    <span>精选</span>
                 </li>
                 <li >
-                    <span>首页</span>
+                    <span>关于我们</span>
                 </li>
             </ul>
         </nav>
@@ -37,6 +37,7 @@
                 display:inline-block;
                 vertical-align: top;
                 width:120px;
+                margin-right:100px;
                 img{
                     vertical-align: middle;
                 }
@@ -45,15 +46,27 @@
                 font-size:0;
                 display:inline-block;
                 height:60px;
-                width:880px;
                 padding:0;
                 li{
                     display: inline-block;
                     padding:0 10px;
                     font-size:20px;
-                    width:25%;
                     text-align: center;
                     box-sizing:border-box;
+                    span{
+                        cursor:pointer;
+                        padding:0 20px;
+                        display: inline-block;
+                        height:60px;
+                        box-sizing: border-box;
+                        &.cur{
+                            color:#ff6000;
+                            border-bottom:5px solid #ff6000;
+                        }
+                        &:hover{
+                            color:#ff6000;
+                        }
+                    }
                 }
             }
         }
