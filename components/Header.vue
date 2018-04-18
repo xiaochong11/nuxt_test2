@@ -2,25 +2,41 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="https://www.baidu.com/img/baidu_jgylogo3.gif"/>
+                <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="直播客"/>
             </div>
             <ul>
-                <li>
-                    <span class="cur">首页</span>
-                </li>
-                <li >
-                    <span>主播课堂</span>
-                </li>
-                <li >
-                    <span>精选</span>
-                </li>
-                <li >
-                    <span>关于我们</span>
+                <li @click="toNavUrl(nav)" v-for="(nav,index) in navArr">
+                    <span :class="curIndex===index?'cur':''">{{nav.name}}</span>
                 </li>
             </ul>
         </nav>
     </header>
 </template>
+<script type="text/javascript">
+import {navArr} from '../util/index.js';
+
+export default{
+    data(){
+        return{
+            navArr:navArr,
+            curIndex:0,
+        }
+    },
+    created(){
+        console.log(this.$route);
+        if(this.$route.path.indexOf('/article')>=0){
+            this.curIndex = 1;
+        }
+    },
+    methods:{
+        toNavUrl(nav){
+            this.$router.push({
+                path:nav.path
+            })
+        }
+    }
+}
+</script>
 <style lang="less">
     header{
         background:#fff;
