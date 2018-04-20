@@ -6,14 +6,17 @@
             </div>
             <ul>
                 <li @click="toNavUrl(nav)" v-for="(nav,index) in navArr">
-                    <span :class="curIndex===index?'cur':''">{{nav.name}}</span>
+                    <span :class="curIndex===index?'cur':''">
+                        {{nav.name}}
+                        <i v-if="nav.hot"></i>
+                    </span>
                 </li>
             </ul>
         </nav>
     </header>
 </template>
 <script type="text/javascript">
-import {navArr} from '../util/index.js';
+import {navArr} from '../conf/index.js';
 
 export default{
     data(){
@@ -44,6 +47,8 @@ export default{
         height:60px;
         line-height:60px;
         box-sizing:border-box;
+        position:sticky;
+        top:0;
         nav{
             width:1000px;
             margin:0 auto;
@@ -66,7 +71,7 @@ export default{
                 li{
                     display: inline-block;
                     padding:0 10px;
-                    font-size:20px;
+                    font-size:18px;
                     text-align: center;
                     box-sizing:border-box;
                     span{
@@ -81,6 +86,12 @@ export default{
                         }
                         &:hover{
                             color:#ff6000;
+                        }
+                        i{
+                            display: inline-block;
+                            width: 11px;
+                            height: 11px;
+                            background: url(https://image.uisdc.com/wp-content/uploads/2013/08/hot.gif) no-repeat left top;
                         }
                     }
                 }

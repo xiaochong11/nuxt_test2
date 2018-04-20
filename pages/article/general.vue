@@ -8,7 +8,14 @@
     </section>
 </template>
 <script>
+    export default {
+        data(){
 
+        },
+        created(){
+
+        }
+    }
 </script>
 <style lang="less">
     .general-article{

@@ -1,4 +1,5 @@
-import { Router } from 'express'
+import { Router } from 'express';
+import userDao from '../dao/user/index.js';
 
 const router = Router()
 
@@ -10,9 +11,9 @@ const users = [
 ]
 
 /* GET users listing. */
-router.get('/users', function (req, res, next) {
-  res.json(users)
-})
+router.get('/getAll', function (req, res, next) {
+    userDao.getAll(req,res,next);
+});
 
 /* GET user by ID. */
 router.get('/users/:id', function (req, res, next) {

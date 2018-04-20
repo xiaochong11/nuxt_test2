@@ -1,5 +1,7 @@
 import express from 'express'
+import bodyParser from 'body-parser';
 import { Nuxt, Builder } from 'nuxt'
+import {timed} from "./schedule/index";
 
 import api from './api'
 
@@ -8,6 +10,11 @@ const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
 app.set('port', port)
+
+app.use(bodyParser.json({limit: '1mb'}));  //这里指定参数使用 json 格式
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // Import API Routes
 app.use('/api', api)
@@ -31,3 +38,6 @@ app.use(nuxt.render)
 // Listen the server
 app.listen(port, host)
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
+
+//定时任务
+//timed();

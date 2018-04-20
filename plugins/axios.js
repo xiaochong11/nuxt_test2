@@ -1,5 +1,5 @@
 import * as axios from 'axios'
-
+import qs from 'qs';
 
 // The server-side needs a full url to works
 if (process.server) {
@@ -9,6 +9,10 @@ if (process.server) {
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
     //console.log(config);
+    if (config.method==="post"){
+        //config.data = qs.stringify(config.data);
+        config.headers['Content-Type'] = 'application/json';
+    }
     return config;
 }, function (error) {
     // Do something with request error
