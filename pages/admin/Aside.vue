@@ -10,7 +10,7 @@
                 <el-menu-item index="index"><i class="el-icon-menu"></i>总览</el-menu-item>
                 <el-submenu index="1">
                     <template slot="title"><i class="el-icon-document"></i>文章</template>
-                    <el-menu-item index="orgList">文章列表</el-menu-item>
+                    <el-menu-item index="articleList">文章列表</el-menu-item>
                     <el-menu-item index="articleCreate">新增文章</el-menu-item>
                 </el-submenu>
 

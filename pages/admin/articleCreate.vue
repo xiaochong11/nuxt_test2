@@ -1,6 +1,6 @@
 <template>
     <left-aside>
-        <section class="container">
+        <section class="ac-container">
             <p>文章标题：<p>
             <p><el-input v-model="title"></el-input></p>
             <p>文章内容</p>
@@ -86,7 +86,7 @@
 </script>
 
 <style lang="less" scoped>
-    .container {
+    .ac-container {
         width: 60%;
         margin: 0 auto;
         padding: 50px 0;

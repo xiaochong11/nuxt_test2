@@ -1,10 +1,11 @@
 import mohair from 'mohair';
 import executeQuery from '../base/index';
+let userTable = mohair.table('admin_user');
 
 let userDao = {
     getAll:async function(req,res,next){
         let param = req.query || req.params;
-        let userQuery =mohair.table('admin_user').select('*');
+        let userQuery =userTable.select('*');
 
         try{
             let result = await executeQuery(userQuery.sql(),userQuery.params())

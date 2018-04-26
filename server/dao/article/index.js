@@ -3,10 +3,11 @@ import executeQuery from '../base/index';
 
 let articleTable = mohair.table('article_info');
 let articleDao = {
-    postArticle:async function(req,res,next){
+    async postArticle(req,res,next){
         let params = req.body;
         // console.log(req)
-        console.log(req.body);
+        console.log(params);
+        params.article_create_date = new Date();
         let articleQuery =articleTable.insert(params);
         try{
             let result = await executeQuery(articleQuery.sql(),articleQuery.params())
@@ -22,6 +23,23 @@ let articleDao = {
         }
 
     },
+    async getArticleList(req,res,next){
+        let params = req.query;
+
+        let articleQuery =articleTable.select('*');
+        try{
+            let result = await executeQuery(articleQuery.sql(),articleQuery.params())
+            res.json({
+                code:'200',
+                data:result
+            })
+        }catch(err){
+            res.json({
+                code:'500',
+                data:err
+            })
+        }
+    }
 };
 
 export default articleDao;
