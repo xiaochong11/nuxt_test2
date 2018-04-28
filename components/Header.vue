@@ -43,7 +43,7 @@ export default{
 <style lang="less">
     header{
         background:#fff;
-        border-bottom:1px solid #efefef;
+        border-bottom:2px solid #efefef;
         height:60px;
         line-height:60px;
         box-sizing:border-box;

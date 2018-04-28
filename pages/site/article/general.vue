@@ -1,19 +1,35 @@
 <template>
     <section class="general-article">
        <article>
-           <h3>我是标题</h3>
-           <p>我是第一段，我是第一段</p>
-           <p>我是第二段</p>
+           <h3>{{article.article_title}}</h3>
+           <section v-html="article.article_content">
+
+           </section>
        </article>
     </section>
 </template>
 <script>
+    import axios from '~/plugins/axios'
     export default {
         data(){
+            return{
+                article:{}
+            }
 
         },
         created(){
-
+            this.getArticle()
+        },
+        methods:{
+            async getArticle(){
+                let article_id = this.$route.query.id;
+                let res = await axios.get('/api/article/getArticle',{params:
+                    {
+                        article_id:article_id
+                    }
+                });
+                this.article = res.data.data;
+            }
         }
     }
 </script>

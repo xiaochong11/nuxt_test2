@@ -93,4 +93,7 @@
             color:#000;
         }
     }
+    #__nuxt{
+        padding:0
+    }
 </style>

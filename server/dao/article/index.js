@@ -39,6 +39,22 @@ let articleDao = {
                 data:err
             })
         }
+    },
+    async getArticle(req,res,next){
+        let params = req.query;
+        let articleQuery =articleTable.where({article_id:params.article_id}).select();
+        try{
+            let result = await executeQuery(articleQuery.sql(),articleQuery.params());
+            res.json({
+                code:200,
+                data:result[0]
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
     }
 };
 

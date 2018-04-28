@@ -7,12 +7,16 @@
                 <el-table-column
                         prop="article_id"
                         label="文章ID"
-
                         width="100">
                 </el-table-column>
                 <el-table-column
                         prop="article_title"
                         label="文章标题">
+                </el-table-column>
+                <el-table-column
+                        prop="auth_id"
+                        label="作者ID"
+                        width="100">
                 </el-table-column>
                 <el-table-column
                         prop="article_create_date"
@@ -21,6 +25,16 @@
                 <el-table-column
                         prop="article_create_date"
                         label="修改日期">
+                </el-table-column>
+                <el-table-column
+                        label="操作"
+                        width="140">
+                    <template slot-scope="scope">
+                        <div class="operating">
+                            <span @click="editCourse(scope.row)">编辑</span>
+                            <!--<span @click="deleteCourse(scope.row)">禁用</span>-->
+                        </div>
+                    </template>
                 </el-table-column>
             </el-table>
         </section>
@@ -43,7 +57,7 @@
 
         },
         mounted() {
-
+            this.getArticleList();
         },
         methods: {
             async getArticleList(){
@@ -58,9 +72,7 @@
 
 <style lang="less" scoped>
     .al-container {
-        width: 60%;
-        margin: 0 auto;
-        padding: 50px 0;
+        padding:30px;
         .quill-editor {
             min-height: 200px;
             max-height: 400px;

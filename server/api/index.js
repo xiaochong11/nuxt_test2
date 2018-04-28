@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import user from './user';
-import article from './article';
-import admin from './admin'
+import user from './user/user';
+import article from './site/article';
+import admin from './admin/admin'
 
 const router = Router()
 

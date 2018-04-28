@@ -132,5 +132,15 @@
             }
         }
     }
+    .operating{
+        color:#409eff;
+        >span{
+            margin:0 10px;
+            cursor:pointer;
+        }
+    }
+    .el-table{
+        color:#5a5e66
+    }
 
 </style>
