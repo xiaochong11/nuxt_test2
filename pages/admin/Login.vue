@@ -24,6 +24,7 @@
 <script>
     import CryptoJS from "crypto-js"
     import axios from '~/plugins/axios'
+    import {store} from '../../conf/index'
     export default {
         data(){
             return{
@@ -65,6 +66,7 @@
                 });
                 console.log(data);
                 if(data.data.code==='200'){
+                    store.setItem(1,'a')
                     this.$router.push({
                         path:'/admin/articleCreate'
                     })

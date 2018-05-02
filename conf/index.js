@@ -1,3 +1,3 @@
 import navArr from './navArr.js';
-
-export {navArr}
+import store from './store'
+export {navArr,store}

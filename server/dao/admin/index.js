@@ -13,7 +13,7 @@ let userDao = {
                 console.log(111);
                 res.json({
                     code:'200',
-                    data:'OK'
+                    data:result[0]
                 })
             }else{
                 res.json({
