@@ -83,6 +83,7 @@
         .el-main{
             font-size:14px;
             min-width:1000px;
+            overflow:visible;
         }
         .el-dropdown{
             cursor: pointer;

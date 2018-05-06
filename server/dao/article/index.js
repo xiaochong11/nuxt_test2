@@ -12,12 +12,12 @@ let articleDao = {
         try{
             let result = await executeQuery(articleQuery.sql(),articleQuery.params())
             res.json({
-                code:'200',
+                code:200,
                 data:result
             })
         }catch(err){
             res.json({
-                code:'500',
+                code:500,
                 data:err
             })
         }

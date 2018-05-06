@@ -26,9 +26,21 @@ export default{
         }
     },
     created(){
-        console.log(this.$route);
-        if(this.$route.path.indexOf('/article')>=0){
-            this.curIndex = 1;
+
+    },
+    watch:{
+        '$route' (to, from) {
+            let path = this.$route.path;
+            console.log(path);
+            if(path==='/'||path==='/index'){
+                this.curIndex = 0;
+            }
+            if(path.indexOf('/article')>=0){
+                this.curIndex = 1;
+            }
+            if(path.indexOf('/advice')>=0){
+                this.curIndex = 3;
+            }
         }
     },
     methods:{

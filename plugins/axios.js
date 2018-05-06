@@ -1,5 +1,6 @@
 import * as axios from 'axios'
 import qs from 'qs';
+import store from '../conf/store';
 
 // The server-side needs a full url to works
 if (process.server) {
@@ -8,10 +9,13 @@ if (process.server) {
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
-    //console.log(config);
+    console.log(config);
     if (config.method==="post"){
         //config.data = qs.stringify(config.data);
         config.headers['Content-Type'] = 'application/json';
+    }
+    if(config.url.indexOf('/admin/')>-1&&config.url.indexOf('/admin/login')<=-1){
+        config.headers['token'] = store.getItem('token');
     }
     return config;
 }, function (error) {

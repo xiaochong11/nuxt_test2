@@ -9,10 +9,14 @@
                 type="textarea"
                 :rows="5"
                 placeholder="请输入建议内容"
-                v-model="adivce">
+                v-model="advice">
                 </el-input>
             </div>
-            <div class="submit-btn">
+            <div class="adive-contact">
+                <el-input placeholder="你的邮箱，处理结果我们回复你" v-model="contact">
+                </el-input>
+            </div>
+            <div class="submit-btn" @click="submit">
                 <el-button type="primary">提交</el-button>
             </div>
         </div>
@@ -23,16 +27,20 @@
     export default {
         data(){
             return{
-                advice:''
+                advice:'',
+                contact:''
             }
 
         },
         created(){
-            this.getArticle()
+
         },
         methods:{
-            async getArticle(){
-                let res = await axios.post('/api/site/advice',this.advice);
+            async submit(){
+                let res = await axios.post('/api/site/advice/postAdvice',{
+                    advice_content:this.advice,
+                    advice_contact:this.contact,
+                });
                 if(res.data.data===200){
 
                 };
@@ -49,6 +57,9 @@
             margin:0 auto;
             .advice-content{
                 margin:30px 0;
+            }
+            .adive-contact{
+                margin-bottom:30px;
             }
             .submit-btn{
                 button{

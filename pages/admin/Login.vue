@@ -65,8 +65,8 @@
                     password:this.model.password
                 });
                 console.log(data);
-                if(data.data.code==='200'){
-                    store.setItem(1,'a')
+                if(data.data.code===200){
+                    store.setItem('token',data.data.data)
                     this.$router.push({
                         path:'/admin/articleCreate'
                     })

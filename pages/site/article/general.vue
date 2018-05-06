@@ -23,7 +23,7 @@
         methods:{
             async getArticle(){
                 let article_id = this.$route.query.id;
-                let res = await axios.get('/api/article/getArticle',{params:
+                let res = await axios.get('/api/site/article/getArticle',{params:
                     {
                         article_id:article_id
                     }

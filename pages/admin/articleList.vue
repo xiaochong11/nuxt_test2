@@ -61,7 +61,7 @@
         },
         methods: {
             async getArticleList(){
-                let res = await axios.get('/api/article/getArticleList',{
+                let res = await axios.get('/api/admin/getArticleList',{
 
                 });
                 this.articleList = res.data.data;

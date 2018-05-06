@@ -2,8 +2,12 @@
     <left-aside>
         <section class="ac-container">
             <p>文章标题：<p>
-            <p><el-input v-model="title"></el-input></p>
-            <p>文章内容</p>
+            <p>
+                <el-input v-model="title"></el-input>
+            </p>
+            <p>封面图片：</p>
+                <el-input v-model="imgUrl" placeholder="图片的URL"></el-input>
+            <p>文章内容:</p>
             <div class="quill-editor"
                  :content="content"
                  @change="onEditorChange($event)"
@@ -13,7 +17,7 @@
                  v-quill:myQuillEditor="editorOption">
             </div>
             <p style="text-align: center">
-                <el-button @click="submit">
+                <el-button type="primary" @click="submit">
                     提交
                 </el-button>
             </p>
@@ -31,6 +35,7 @@
         data () {
             return {
                 title:'',
+                imgUrl:'',
                 content: '<p>I am Example</p>',
                 editorOption: {
                     // some quill options
@@ -78,6 +83,7 @@
             async submit(){
                 let data = await axios.post('/api/article/postArticle',{
                     article_title:this.title,
+                    article_cover_img:this.imgUrl,
                     article_content:this.content
                 });
             }
