@@ -5,7 +5,9 @@
                 <h4>联系我们</h4>
                 <p>新闻线索&nbsp;&nbsp;&nbsp;&nbsp;iresearch@hey.show</p>
                 <p>商务合作&nbsp;&nbsp;&nbsp;&nbsp;pr@hey.show</p>
-                <p><a href="https://shimo.im/doc/XhOt90ueJr0wHIXi/" target="“_blank&quot;">常见问题解答</a></p>
+                <p>
+                    <router-link :to="{path:'/site/article/general',query:{id:8}}">常见问题解答</router-link>
+                </p>
             </div>
             <div class="link">
                 <h4>友情链接</h4>
