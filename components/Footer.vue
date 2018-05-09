@@ -5,7 +5,11 @@
                 <h4 @click="toAboutUs">联系我们</h4>
                 <p>投稿邮箱&nbsp;&nbsp;&nbsp;&nbsp;166303307@foxmail.com</p>
                 <p>商务合作&nbsp;&nbsp;&nbsp;&nbsp;zhiboke@foxmail.com</p>
-                <p><a href="https://shimo.im/doc/XhOt90ueJr0wHIXi/" target="“_blank&quot;">常见问题解答</a></p>
+                <p>
+                    <router-link :to="{path:'/site/article/general',query:{id:8}}">
+                        常见问题解答
+                    </router-link>
+                </p>
             </div>
             <div class="link">
                 <h4>友情链接</h4>

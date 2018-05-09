@@ -41,6 +41,9 @@ export default{
             if(path.indexOf('/advice')>=0){
                 this.curIndex = 3;
             }
+            if(path.indexOf('/rank')>=0){
+                this.curIndex = 2;
+            }
         }
     },
     methods:{

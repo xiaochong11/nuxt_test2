@@ -11,25 +11,35 @@
 <script>
     import axios from '~/plugins/axios'
     export default {
+  //        async asyncData ({ params }) {
+  //   let { data } = await axios.get(`https://my-api/posts/${params.id}`)
+  //   return { title: data.title }
+  // }
+        async asyncData({ query,error}){
+            console.log(query);
+            let article_id = query.id
+            let {data} = await axios.get('/api/site/article/getArticle?article_id='+article_id);
+            console.log(data)
+            if(data.data){
+                return {article:data.data};
+            }else{
+                error({ statusCode: 404, message: 'User not found' })
+            } 
+        },
         data(){
             return{
-                article:{}
+                article:{
+                    article_title:'',
+                    article_content:''
+               }
             }
 
         },
         created(){
-            this.getArticle()
+
         },
         methods:{
-            async getArticle(){
-                let article_id = this.$route.query.id;
-                let res = await axios.get('/api/site/article/getArticle',{params:
-                    {
-                        article_id:article_id
-                    }
-                });
-                this.article = res.data.data;
-            }
+            
         }
     }
 </script>
