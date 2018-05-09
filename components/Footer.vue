@@ -2,9 +2,9 @@
     <div id="footer-sec">
         <div class="main-footer">
             <div>
-                <h4>联系我们</h4>
-                <p>新闻线索&nbsp;&nbsp;&nbsp;&nbsp;iresearch@hey.show</p>
-                <p>商务合作&nbsp;&nbsp;&nbsp;&nbsp;pr@hey.show</p>
+                <h4 @click="toAboutUs">联系我们</h4>
+                <p>投稿邮箱&nbsp;&nbsp;&nbsp;&nbsp;166303307@foxmail.com</p>
+                <p>商务合作&nbsp;&nbsp;&nbsp;&nbsp;zhiboke@foxmail.com</p>
                 <p><a href="https://shimo.im/doc/XhOt90ueJr0wHIXi/" target="“_blank&quot;">常见问题解答</a></p>
             </div>
             <div class="link">
@@ -34,6 +34,18 @@
         </footer>
     </div>
 </template>
+<script>
+    export default {
+        methods:{
+            toAboutUs(){
+                this.$route.push({
+                    path:'',
+                    query:''
+                })
+            }
+        }
+    }
+</script>
 <style lang="less">
     #footer-sec{
         width:100%;

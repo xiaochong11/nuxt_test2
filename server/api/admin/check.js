@@ -1,25 +1,4 @@
-// const fs = require('fs');
-// const path = require('path');
-import fs from 'fs';
-import path from 'path';
-const jwt = require('jsonwebtoken');
-
-function verifyToken(token){
-    console.log('进入验证');
-    let cert = fs.readFileSync(path.join(__dirname, '../../config/rsa_public_key.pem'));//公钥
-    console.log(cert);
-    let res;
-    try{
-        let result = jwt.verify(token, cert, {algorithms: ['RS256']}) || {};
-        let {exp = 0} = result,current = Math.floor(Date.now()/1000);
-        if(current <= exp){
-             res = result.data || {};
-        }
-    }catch(e){
-        console.log(e);
-    }
-    return res;
-}
+import {jwt} from '../../util/index';
 
 async function check(req,res,next){
     let url= req.originalUrl;
@@ -27,7 +6,7 @@ async function check(req,res,next){
         let token = req.headers.token;
         console.log(token);
         if (token) {
-            let result = verifyToken(token);
+            let result = jwt.verifyToken(token);
             let {uid} = result;
             console.log(uid);
             if (uid) {

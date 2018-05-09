@@ -82,7 +82,6 @@ async function getPandaAllRank() {
     await instance.exit();
 };
 
-
 //getHuyaAllRank();
-//getDouyuAllRank();
-getPandaAllRank();
+getDouyuAllRank();
+//getPandaAllRank();
