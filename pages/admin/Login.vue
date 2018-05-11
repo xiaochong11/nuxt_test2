@@ -47,11 +47,11 @@
             },
             async login(){
                 if(!this.model.username){
-                    bus.$emit('dialogShow','用户名不能为空');
+                    window.bus.$emit('dialogShow','用户名不能为空');
                     return;
                 }
                 if(!this.originPassword){
-                    bus.$emit('dialogShow','密码不能为空');
+                    window.bus.$emit('dialogShow','密码不能为空');
                     return;
                 }
 //                if(!this.model.vcode===''){

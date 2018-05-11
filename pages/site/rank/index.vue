@@ -8,6 +8,14 @@
     export default {
         data() {
             return {}
+        },
+        head(){
+            return {
+                title: '主播排名',
+                meta: [
+                    { hid: 'description', name: 'description', content: '各大平台主播排名' }
+                ]
+            }
         }
     }
 
