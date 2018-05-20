@@ -18,7 +18,7 @@
         async asyncData({ query,error}){
             console.log(query);
             let article_id = query.id
-            let {data} = await axios.get('/api/site/article/getArticle?article_id='+article_id);
+            let {data} = await axios.get('http:127.0.0.01:3000/api/site/article/getArticle?article_id='+article_id);
             console.log(data)
             if(data.data){
                 return {article:data.data};

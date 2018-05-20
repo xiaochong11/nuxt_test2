@@ -3,6 +3,7 @@ import user from './user/user';
 import article from './site/article';
 import admin from './admin/index'
 import advice from './site/advice';
+import competition from './site/competition';
 import adminCheck from './admin/check'
 
 const router = Router()
@@ -16,5 +17,7 @@ router.use('/admin',(req,res,next)=>{
 router.use('/admin',admin);
 router.use('/site/article',article);
 router.use('/site/advice',advice);
+router.use('/site/competition',competition);
+
 
 export default router

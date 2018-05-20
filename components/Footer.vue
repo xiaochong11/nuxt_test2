@@ -3,7 +3,7 @@
         <div class="main-footer">
             <div>
                 <h4 @click="toAboutUs">联系我们</h4>
-                <p>投稿邮箱&nbsp;&nbsp;&nbsp;&nbsp;166303307@foxmail.com</p>
+                <p>广告合作&nbsp;&nbsp;&nbsp;&nbsp;zhiboke@foxmail.com</p>
                 <p>商务合作&nbsp;&nbsp;&nbsp;&nbsp;zhiboke@foxmail.com</p>
                 <p>
                     <router-link :to="{path:'/site/article/general',query:{id:8}}">
@@ -14,13 +14,13 @@
             <div class="link">
                 <h4>友情链接</h4>
                 <ul>
-                    <li>
-                        <a href="">百度</a>
+                    <li v-for="(link,index) in interLink">
+                        <a :href="link.url">{{link.name}}</a>
                     </li>
                 </ul>
             </div>
             <div>
-                <img src="http://www.iresearch.tv/wp-content/themes/urionz/static/imgs/zbgc.png"/>
+                <!--<img src="http://www.iresearch.tv/wp-content/themes/urionz/static/imgs/zbgc.png"/>-->
             </div>
         </div>
         <footer>
@@ -33,13 +33,19 @@
                     <a href="">免责声明</a>|
                     <a href="">关于我们</a>
                 </p>
-                <p>Copyright © 2018</p>
+                <p>Copyright 直播客 © 2018</p>
             </section>
         </footer>
     </div>
 </template>
 <script>
+    import {interLink} from '../conf/index';
     export default {
+        data(){
+            return {
+                interLink:interLink
+            }
+        },
         methods:{
             toAboutUs(){
                 this.$route.push({
@@ -72,17 +78,21 @@
             .link{
                 width:400px;
                 margin-left:80px;
+                ul{
+                    font-size:0;
+                    li{
+                        display: inline-block;
+                        font-size:16px;
+                        margin-right:20px;
+                    }
+                }
             }
 
         }
         footer{
             width:100%;
-            color:#999;
             a{
-                color:#999;
-                &:hover{
-                    color:#31c27c;
-                }
+
             }
             .copyright{
                 text-align: center;

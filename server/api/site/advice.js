@@ -7,4 +7,8 @@ router.post('/postAdvice', function (req, res, next) {
     adviceDao.postAdvice(req,res,next);
 });
 
+router.get('/getAdviceList', function (req, res, next) {
+    adviceDao.getAdviceList(req,res,next);
+});
+
 export default router;

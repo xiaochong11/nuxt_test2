@@ -12,6 +12,11 @@
                     </span>
                 </li>
             </ul>
+            <div class="user">
+                <span>登录</span>
+                <i class="icon">|</i>
+                <span>注册</span>
+            </div>
         </nav>
     </header>
 </template>
@@ -26,31 +31,38 @@ export default{
         }
     },
     created(){
-
+        this.activeNav();
     },
     watch:{
         '$route' (to, from) {
+            this.activeNav();
+        }
+    },
+    methods:{
+        toNavUrl(nav){
+            console.log(nav);
+            this.$router.push({
+                path:nav.path
+            })
+        },
+        activeNav(){
             let path = this.$route.path;
             console.log(path);
             if(path==='/'||path==='/index'){
                 this.curIndex = 0;
             }
-            if(path.indexOf('/article')>=0){
-                this.curIndex = 1;
-            }
             if(path.indexOf('/advice')>=0){
-                this.curIndex = 3;
+                this.curIndex = 4;
             }
             if(path.indexOf('/rank')>=0){
+                this.curIndex = 3;
+            }
+            if(path.indexOf('/competition')>=0){
                 this.curIndex = 2;
             }
-        }
-    },
-    methods:{
-        toNavUrl(nav){
-            this.$router.push({
-                path:nav.path
-            })
+            if(path.indexOf('/bulletScreen')>=0){
+                this.curIndex = 1;
+            }
         }
     }
 }
@@ -64,8 +76,10 @@ export default{
         box-sizing:border-box;
         position:sticky;
         top:0;
+        z-index:1000;
         nav{
-            width:1000px;
+            position: relative;
+            width:1200px;
             margin:0 auto;
             font-size:0;
             height:60px;
@@ -109,6 +123,23 @@ export default{
                             background: url(https://image.uisdc.com/wp-content/uploads/2013/08/hot.gif) no-repeat left top;
                         }
                     }
+                }
+            }
+            .user{
+                position: absolute;
+                right:20px;
+                top:0;
+                font-size:14px;
+                span{
+                    cursor: pointer;
+                    &:hover{
+                        color:#3c9cfe
+                    }
+                }
+                .icon{
+                    display: inline-block;
+                    font-size:16px;
+                    margin:0 8px;
                 }
             }
         }

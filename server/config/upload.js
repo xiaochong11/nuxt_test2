@@ -1,4 +1,4 @@
 let  uploadConfig = {
-    path: process.cwd() + '/uploads'
+    path: process.cwd() + '/static/uploads'
 };
 export default uploadConfig;

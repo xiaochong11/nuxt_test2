@@ -19,7 +19,23 @@ let adviceDao = {
                 data:err
             })
         }
-    }
+    },
+    async getAdviceList(req,res,next){
+        let adviceQuery =adviceTable.order('advice_id desc').select('*').limit(4);
+        try{
+            let result = await executeQuery(adviceQuery.sql(),adviceQuery.params())
+            res.json({
+                code:200,
+                data:result
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+    },
+
 };
 
 export default adviceDao;

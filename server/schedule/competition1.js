@@ -3,18 +3,21 @@ const cheerio = require('cheerio');
 let fs = require('fs');
 let path = require('path');
 
+var _ph, _page, _outObj;
+
+
 const huyaComPetitionUrl = 'http://www.huya.com/m';
 const douyuCompetitionUrlArr=[
     //英雄联盟官方赛事
     'https://www.douyu.com/t/2018MSI',
 
-    // 'https://www.douyu.com/t/2018kplspring',
-    // //175电竞
-    // 'https://www.douyu.com/2660926',
-    // //QQ游戏街机
-    // 'https://www.douyu.com/156332',
-    // //英雄联盟赛事活动
-    // 'https://www.douyu.com/673320',
+    'https://www.douyu.com/t/2018kplspring',
+    //175电竞
+    'https://www.douyu.com/2660926',
+    //QQ游戏街机
+    'https://www.douyu.com/156332',
+    //英雄联盟赛事活动
+    'https://www.douyu.com/673320',
 ];
 let resultArr = [];
 
@@ -40,24 +43,61 @@ const pool = createPhantomPool({
 // Automatically acquires a phantom instance and releases it back to the
 // pool when the function resolves or throws
 
+function waitUntil(asyncTest) {
+    return new Promise(function(resolve, reject) {
+        function wait() {
+            console.log('loop...');
+            asyncTest().then(function(value) {
+                console.log('value', value)
+                if (value) {
+                    resolve();
+                } else {
+                    setTimeout(wait, 1000);
+                }
+            }).catch(function(e) {
+                console.log('Error found. Rejecting.', e);
+                reject();
+            });
+        }
+        wait();
+    });
+}
+// const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+// var delay = function(r,s){
+//     return new Promise(function(resolve,reject){
+//         setTimeout(function(){
+//             resolve(r);
+//         },s);
+//     });
+// };
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function getInstance(url){
     return new Promise((resolve,reject)=>{
         pool.use(async (instance) => {
-            const page = await instance.createPage();
-
+            const page = await instance.createPage(['--load-images=true', '--local-to-remote-url-access=true']);
+            // page.setting("resourceTimeout", 7000);
             const status = await page.open(url, { operation: 'GET' })
-            await delay(10000);
-            if (status !== 'success') {
-                throw new Error(`cannot open ${url}`)
-            }
-            console.log('开始延迟');
+            //
+            // // const content = await page.property('content');
+            // console.log('等待开始')
+            // await delay(5000);
+            // let content = await page.evaluate(function() {
+            //     return document.documentElement.outerHTML
+            // })
+            // console.log('等待结束');
 
-            console.log('延迟结束')
-            const content = await page.property('content');
-            console.log('content获取到')
-            return resolve(content)
+
+            await  page.open(url, { operation: 'GET' }).then(()=>{
+                return waitUntil(function() {
+                    return page.evaluate(function() {
+                        // console.log('src:'+document.querySelectorAll('.live-list li img.pic')[3].getAttribute('src'));
+                        return (document.querySelectorAll('.live-list li img.pic')[3].getAttribute('src').indexOf('/338x190.'));
+                    })
+                })
+            }).then(content=>{
+                resolve(page.property('content'))
+            })
+
         })
     })
 }
@@ -65,35 +105,39 @@ async function getInstance(url){
 async function getCompetition(){
     let content;
     let $;
-    // content = await getInstance(huyaComPetitionUrl);
-    // $ = cheerio.load(content);
-    // $(".live-list li").each((i,ele)=>{
-    //     //console.log(i);
-    //     let obj={
-    //         imgUrl:$(ele).find('img').attr('src'),
-    //         title:$(ele).find('.title.new-clickstat').text().trim(),
-    //         nick:$(ele).find('.txt').find('.nick').eq(0).text().trim(),
-    //         num:$(ele).find('.js-num').text().trim(),
-    //         type:$(ele).find('.game-type>a').text(),
-    //         url:$(ele).find('.video-info').attr('href').trim()
-    //     }
-    //     resultArr.push(obj);
-    // });
-    for(let i=0;i<=douyuCompetitionUrlArr.length-1;i++){
-        content = await getInstance(douyuCompetitionUrlArr[i]);
-        $ = cheerio.load(content);
+    content = await getInstance(huyaComPetitionUrl);
+    console.log('执行到这里')
+    //console.log(content)
+    $ = cheerio.load(content);
+    $(".live-list li").each((i,ele)=>{
+        //console.log(i);
         let obj={
-            imgUrl: $('.anchor-pic').find('img').attr('src'),
-            title:$('.relate-text').find('h2').text().trim(),
-            nick:$('h1').text().trim(),
-            num:$('.hot-v-con').find('.hot-v').text()+'a',
-            type:$('.head-room-tag').text().trim(),
-            url:douyuCompetitionUrlArr[i]
-        };
+            imgUrl:'http:'+$(ele).find('img').attr('data-original'),
+            title:$(ele).find('.title.new-clickstat').text().trim(),
+            nick:$(ele).find('.txt').find('.nick').eq(0).text().trim(),
+            num:$(ele).find('.js-num').text().trim(),
+            type:$(ele).find('.game-type>a').text(),
+            url:$(ele).find('.video-info').attr('href').trim(),
+            os:'huya'
+        }
         resultArr.push(obj);
-    }
+    });
+    // for(let i=0;i<=douyuCompetitionUrlArr.length-1;i++){
+    //     content = await getInstance(douyuCompetitionUrlArr[i]);
+    //     $ = cheerio.load(content);
+    //     let obj={
+    //         imgUrl: $('.anchor-pic').find('img').attr('src'),
+    //         title:$('.relate-text').find('h2').text().trim(),
+    //         nick:$('h1').text().trim(),
+    //         num:$('.hot-v-con').find('.hot-v').text()+'a',
+    //         type:$('.head-room-tag').text().trim(),
+    //         url:douyuCompetitionUrlArr[i],
+    //          os:'huya'
+    //     };
+    //     resultArr.push(obj);
+    // }
 
-    console.log(resultArr);
+    //console.log(resultArr);
     pool.drain().then(() => pool.clear());
     out.write(JSON.stringify(resultArr));
     out.end();

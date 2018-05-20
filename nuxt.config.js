@@ -3,12 +3,12 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'starter',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: '', name: 'description', content: 'Nuxt.js project' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      title: 'starter',
+      meta: [
+          { charset: 'utf-8' },
+          { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+          { hid: 'keywords', name: 'keywords', content: 'Nuxt.js project' },
+          { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -28,10 +28,14 @@ module.exports = {
   ** Add axios globally
   */
   plugins:[
-      {src:'~/plugins/element-ui.js'},{src:'~/plugins/quill-editor.js',ssr: false }
+      // {src:'~/plugins/axios.js',ssr: true},
+      {src:'~/plugins/element-ui.js'},
+      {src:'~/plugins/quill-editor.js',ssr: false },
+      {src:'~/plugins/vue-socketio.js',ssr: false},
+      {src:'~/plugins/barrage.js',ssr: false}
   ],
   build: {
-    vendor: ['axios','~/plugins/element-ui.js'],
+    vendor: ['axios','~/plugins/element-ui.js','~/plugins/quill-editor.js','~/plugins/vue-socketio.js','~/plugins/barrage.js'],
     /*
     ** Run ESLINT on save
     */

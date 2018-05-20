@@ -30,11 +30,11 @@
                 this.param.append('avatar',file);//通过append向form对象添加数据
             },
             async submit(){
-                let res = await axios.post('/api/admin/upload',this.param,{
+                let {data} = await axios.post('/api/admin/upload',this.param,{
                     headers: { 'Content-Type': 'multipart/form-data' }
                 });
-                if(res.data.code===200){
-                    alert('上传成功');
+                if(data.code===200){
+                    bus.$emit('dialogShow',`上传成功,url: ${window.location.protocol+'//'+window.location.hostname+'/uploads/'+data.message}`);
                 }
             }
         }

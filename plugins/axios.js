@@ -3,9 +3,11 @@ import qs from 'qs';
 import store from '../conf/store';
 
 // The server-side needs a full url to works
+console.log('server:'+process.server)
 if (process.server) {
     axios.defaults.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
 }
+
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
@@ -34,4 +36,5 @@ axios.interceptors.response.use(function (response) {
     // Do something with response error
     return Promise.reject(error);
 });
+
 export default axios;

@@ -1,11 +1,11 @@
 html, body
 {
-  background-color: #fff;
-  color: #000;
-  letter-spacing: 0.5px;
-  font-family: "Source Sans Pro", Arial, sans-serif;
-  height: 100vh;
-  margin: 0;
+    background-color: #f7f7f7;
+      color: #000;
+      letter-spacing: 0.5px;
+      font-family: "Source Sans Pro", Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
 }
 
 /*html{*/
@@ -17,9 +17,13 @@ html, body
 /*}*/
 #__nuxt{
   box-sizing: border-box;
-  min-height:100%;
+  min-height: 100vh;
   position: relative;
-  padding-bottom:400px;
+  padding-bottom:360px;
+}
+
+#__layout>div>section{
+
 }
 
 /*a, a:hover, a:focus, a:visited*/
@@ -28,6 +32,11 @@ html, body
 /*}*/
 a{
   text-decoration:none;
+  color:#000;
+
+}
+a:hover{
+  color:rgb(0, 0, 238);
 }
 
 .logo {
