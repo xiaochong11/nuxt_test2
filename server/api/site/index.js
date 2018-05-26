@@ -1,6 +1,6 @@
 // 首页接口
 import { Router } from 'express';
-import articleDao from '../../dao/article/index.js';
+import articleDao from '../../dao/king/index.js';
 
 const router = Router();
 

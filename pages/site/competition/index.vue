@@ -2,8 +2,8 @@
     <section class="competition-page">
         <div class="page">
             <div class="os">
-                <button class="active">虎牙</button>
-                <button>斗鱼</button>
+                <button :class="{'active':os==='huya'}" @click="activeOs('huya')">虎牙</button>
+                <button :class="{'active':os==='douyu'}"  @click="activeOs('douyu')">斗鱼</button>
             </div>
             <ul>
                 <Li v-for="(competition,index) in competitionList" :key="index" @click="toCompetition(competition.url)">
@@ -15,9 +15,11 @@
                     </p>
                     <div class="li-footer">
                         <p class="nick">
+                            <i class="os-icon" :style="'background-image:url('+getIcon(competition.os).img+')'">
+                            </i>
                             {{competition.nick}}
                         </p>
-                        <p>
+                        <p class="info">
                         <span>{{competition.num}}</span>
                         <span>{{competition.type}}</span>
                         </p>
@@ -28,13 +30,14 @@
     </section>
 </template>
 <script>
+    import {downloadArr} from '../../../conf/index'
     import axios from 'axios';
     export default {
         async asyncData({ query,error}){
             let {data} = await axios.get('http://127.0.0.1:3000/api/site/competition/getCompetition');
             console.log(data)
             if(data.data){
-                return {competitionList:JSON.parse(data.data)};
+                return {competitionList:JSON.parse(data.data),competitionOrigin:JSON.parse(data.data),os:''};
             }else{
                 error({ statusCode: 404, message: 'User not found' })
             }
@@ -42,7 +45,9 @@
         data(){
             return{
                 article:{
-                    competitionList:[]
+                    os:'',
+                    competitionList:[],
+                    competitionOrigin:[]
                 }
             }
 
@@ -50,6 +55,22 @@
         methods:{
             toCompetition(url){
                 window.location.href=url;
+            },
+            activeOs(os){
+                this.os = os;
+                let temp = [];
+                this.competitionOrigin.forEach((arr,index)=>{
+                    if(arr.os === os){
+                        temp.push(arr);
+                    }
+                })
+                this.competitionList = temp;
+            },
+            getIcon(os){
+                console.log(os);
+                downloadArr.find((arr)=>{
+                   return arr.os = os
+                })
             }
         }
     }
@@ -114,12 +135,32 @@
                     }
                     .li-footer{
                         font-size:0;
+                        position:relative;
                         p{
                             margin-top:10px;
                             font-size:12px;
                             display: inline-block;
                             &.nick{
                                 width:150px;
+                                .os-icon{
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    width:20px;
+                                    height:20px;
+                                    border-radius:50%;
+                                    background-size: 100% 100%;
+                                }
+                            }
+                            &.info{
+                                position: absolute;
+                                top:0;
+                                right:0;
+                                width:130px;
+                                height:20px;
+                                overflow: hidden;
+                                span{
+                                    margin-left:5px;
+                                }
                             }
                         }
 

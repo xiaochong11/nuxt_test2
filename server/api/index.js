@@ -4,7 +4,8 @@ import article from './site/article';
 import admin from './admin/index'
 import advice from './site/advice';
 import competition from './site/competition';
-import adminCheck from './admin/check'
+import adminCheck from './admin/check';
+import king from './site/king'
 
 const router = Router()
 
@@ -18,6 +19,6 @@ router.use('/admin',admin);
 router.use('/site/article',article);
 router.use('/site/advice',advice);
 router.use('/site/competition',competition);
-
+router.use('/site/king',king);
 
 export default router

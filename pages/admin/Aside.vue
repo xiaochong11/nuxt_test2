@@ -13,9 +13,13 @@
                     <el-menu-item index="articleList">文章列表</el-menu-item>
                     <el-menu-item index="articleCreate">新增文章</el-menu-item>
                 </el-submenu>
-                <el-submenu index="1">
+                <el-submenu index="2">
                     <template slot="title"><i class="el-icon-document"></i>文件</template>
                     <el-menu-item index="upload">上传文件</el-menu-item>
+                </el-submenu>
+                <el-submenu index="3">
+                    <template slot="title"><i class="el-icon-document"></i>王者荣耀</template>
+                    <el-menu-item index="KingPeak">巅峰赛数据</el-menu-item>
                 </el-submenu>
 
                 <el-menu-item index="loginInfo"><i class="el-icon-menu"></i>登录信息</el-menu-item>

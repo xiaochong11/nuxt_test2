@@ -91,7 +91,9 @@ async function getInstance(url){
                 return waitUntil(function() {
                     return page.evaluate(function() {
                         // console.log('src:'+document.querySelectorAll('.live-list li img.pic')[3].getAttribute('src'));
-                        return (document.querySelectorAll('.live-list li img.pic')[3].getAttribute('src').indexOf('/338x190.'));
+                        // return (document.querySelectorAll('.live-list li img.pic')[3].getAttribute('src').indexOf('/338x190.'));
+                        // return document.querySelectorAll('.hot-v')[0].innerText!=='';
+                        return true;
                     })
                 })
             }).then(content=>{
@@ -112,7 +114,7 @@ async function getCompetition(){
     $(".live-list li").each((i,ele)=>{
         //console.log(i);
         let obj={
-            imgUrl:'http:'+$(ele).find('img').attr('data-original'),
+            imgUrl:$(ele).find('img').attr('data-original').indexOf('http')>-1?$(ele).find('img').attr('data-original'):'http:'+$(ele).find('img').attr('data-original'),
             title:$(ele).find('.title.new-clickstat').text().trim(),
             nick:$(ele).find('.txt').find('.nick').eq(0).text().trim(),
             num:$(ele).find('.js-num').text().trim(),
@@ -122,20 +124,20 @@ async function getCompetition(){
         }
         resultArr.push(obj);
     });
-    // for(let i=0;i<=douyuCompetitionUrlArr.length-1;i++){
-    //     content = await getInstance(douyuCompetitionUrlArr[i]);
-    //     $ = cheerio.load(content);
-    //     let obj={
-    //         imgUrl: $('.anchor-pic').find('img').attr('src'),
-    //         title:$('.relate-text').find('h2').text().trim(),
-    //         nick:$('h1').text().trim(),
-    //         num:$('.hot-v-con').find('.hot-v').text()+'a',
-    //         type:$('.head-room-tag').text().trim(),
-    //         url:douyuCompetitionUrlArr[i],
-    //          os:'huya'
-    //     };
-    //     resultArr.push(obj);
-    // }
+    for(let i=0;i<=douyuCompetitionUrlArr.length-1;i++){
+        content = await getInstance(douyuCompetitionUrlArr[i]);
+        $ = cheerio.load(content);
+        let obj={
+            imgUrl: $('.anchor-pic').find('img').attr('src'),
+            title:$('.relate-text').find('h2').text().trim(),
+            nick:$('h1').text().trim(),
+            num:$('.hot-v-con').find('.hot-v').text()||'未知人数',
+            type:$('.head-room-tag').eq(1).text().trim(),
+            url:douyuCompetitionUrlArr[i],
+            os:'douyu'
+        };
+        resultArr.push(obj);
+    }
 
     //console.log(resultArr);
     pool.drain().then(() => pool.clear());
