@@ -3,7 +3,7 @@ import adminDao from '../../dao/admin/index.js';
 import uploadDao from '../../dao/upload/index.js';
 import articleDao from '../../dao/article/index';
 import kingDao from '../../dao/king/index';
-
+import indexDao from '../../dao/index/index';
 
 const router = Router();
 
@@ -29,6 +29,14 @@ router.post('/updatePeakData', function (req, res, next) {
 router.post('/updatePeakTime', function (req, res, next) {
     kingDao.updatePeakTime(req,res,next);
 });
+router.get('/getIndexData', function (req, res, next) {
+    indexDao.getList(req,res,next);
+});
+router.post('/updateIndexData', function (req, res, next) {
+    console.log(555);
+    indexDao.updateIndexData(req,res,next);
+});
+
 
 
 

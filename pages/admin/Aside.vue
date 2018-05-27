@@ -7,7 +7,14 @@
                      active-text-color="#409EFF"
                      style="position:fixed;top:0;left:0;min-height: 100%;width:250px;z-index:100"
                      router>
-                <el-menu-item index="index"><i class="el-icon-menu"></i>总览</el-menu-item>
+                <!--<el-menu-item index="index"><i class="el-icon-menu"></i>总览</el-menu-item>-->
+                <!---->
+                <el-submenu index="1">
+                    <template slot="title"><i class="el-icon-document"></i>首页设置</template>
+                    <el-menu-item index="bannerList">Banner列表</el-menu-item>
+                    <el-menu-item index="hotList">热点列表</el-menu-item>
+                    <el-menu-item index="recommandList">推荐列表</el-menu-item>
+                </el-submenu>
                 <el-submenu index="1">
                     <template slot="title"><i class="el-icon-document"></i>文章</template>
                     <el-menu-item index="articleList">文章列表</el-menu-item>
@@ -22,7 +29,7 @@
                     <el-menu-item index="KingPeak">巅峰赛数据</el-menu-item>
                 </el-submenu>
 
-                <el-menu-item index="loginInfo"><i class="el-icon-menu"></i>登录信息</el-menu-item>
+                <!--<el-menu-item index="loginInfo"><i class="el-icon-menu"></i>登录信息</el-menu-item>-->
             </el-menu>
         </el-aside>
         <el-main>

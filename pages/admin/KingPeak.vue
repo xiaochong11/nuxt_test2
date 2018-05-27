@@ -20,14 +20,14 @@
                         width="180"
                         label="积分">
                     <template slot-scope="scope">
-                        <el-input v-model="scope.row.score" @change="postPeakData(scope.row)"></el-input>
+                        <el-input v-model="scope.row.score" @change="updatePeakData(scope.row)"></el-input>
                     </template>
                 </el-table-column>
             </el-table>
-            <div>
-                <p>更新日期</p>
-                <el-input v-model="updateTime" @change="updatePeakTime"></el-input>
-            </div>
+            <!--<div>-->
+                <!--<p>更新日期</p>-->
+                <!--<el-input v-model="updateTime" @change="updatePeakTime"></el-input>-->
+            <!--</div>-->
         </section>
     </left-aside>
 </template>
@@ -60,17 +60,18 @@
                 this.updateTime = this.tableData[0].update_date;
                 console.log(this.updateTime);
             },
+
             async updatePeakData(row){
                 console.log(row);
                 let {data} = await axios.post('/api/admin/updatePeakData',{
                     row
                 });
             },
-            async updatePeakTime(){
-                let {data} = await axios.post('/api/admin/updatePeakTime',{
-                    update_date:this.updateTime
-                });
-            }
+//            async updatePeakTime(){
+//                let {data} = await axios.post('/api/admin/updatePeakTime',{
+//                    update_date:this.updateTime
+//                });
+//            }
         }
     }
 </script>

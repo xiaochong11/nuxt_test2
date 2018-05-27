@@ -24,9 +24,11 @@ let kingDao = {
         let params = req.body;
         // console.log(req)
         console.log(params.row.nickname);
-        let kingQuery =kingTable.where({order_id:params.row.order_id}).update(params.row);
+        let kingQuery = kingTable.where({order_id:params.row.order_id}).update(params.row);
+        let kingQuery1 = kingTable.update({update_date:new Date()});
         try{
-            let result = await executeQuery(kingQuery.sql(),kingQuery.params())
+            let result = await executeQuery(kingQuery.sql(),kingQuery.params());
+            let result1 = await executeQuery(kingQuery1.sql(),kingQuery1.params());
             res.json({
                 code:200,
                 data:'OK'
@@ -38,6 +40,7 @@ let kingDao = {
             })
         }
     },
+    //暂时废弃了
     async updatePeakTime(req,res,next){
         let params = req.body;
         let kingQuery =kingTable.update(params);

@@ -90,7 +90,7 @@
             }
         },
         mounted(){
-            console.log(this.$start);
+            //console.log(this.$start);
             this.send = this.$start(this.$refs.cover,[0.2,0.5]);
         },
         methods:{
