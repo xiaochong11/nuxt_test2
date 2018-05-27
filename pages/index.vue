@@ -78,6 +78,14 @@
 
 <script>
     export default {
+        head () {
+            return {
+                title:'直播客|打造直播乐园',
+//                meta: [
+//                    { hid: 'description', name: 'description', content: 'My custom description' }
+//                ]
+            }
+        },
         data(){
             return{
                 carouselList:[
@@ -107,7 +115,7 @@
               background:#f7f7f7;
               padding:45px 0 40px;
               .el-carousel{
-                  width:1000px;
+                  width:1200px;
                   margin:0 auto;
                   img{
                       width:100%;

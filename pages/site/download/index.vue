@@ -2,11 +2,11 @@
     <section class="download-page">
         <div class="page">
             <ul>
-                <li v-for="item in downloadArr" @click="toDownload(item.url)">
-                    <a :href="item.url" target="_blank">
-                        <div class="os-logo" :style="'background-image:url('+item.img+')'"></div>
+                <li v-for="item in osArr">
+                    <a :href="item.downUrl" target="_blank">
+                        <div class="os-logo" :style="'background-image:url('+item.icon+')'"></div>
                         <div class="to-download">
-                            <h1>{{item.os}}</h1>
+                            <h1>{{item.name}}</h1>
                             <div>
                                 <a>进入下载</a>
                             </div>
@@ -19,17 +19,15 @@
     </section>
 </template>
 <script>
-    import {downloadArr} from '../../../conf/index';
+    import {osArr} from '../../../conf/index';
     export default {
         data(){
             return{
-                downloadArr:downloadArr
+                osArr:osArr
             }
         },
         methods:{
-            toDownload(url){
 
-            }
         }
     }
 </script>

@@ -15,7 +15,7 @@
                     </p>
                     <div class="li-footer">
                         <p class="nick">
-                            <i class="os-icon" :style="'background-image:url('+getIcon(competition.os).img+')'">
+                            <i class="os-icon" :style="'background-image:url('+getIcon(competition.os)+')'">
                             </i>
                             {{competition.nick}}
                         </p>
@@ -30,7 +30,7 @@
     </section>
 </template>
 <script>
-    import {downloadArr} from '../../../conf/index'
+    import {osArr} from '../../../conf/index'
     import axios from 'axios';
     export default {
         async asyncData({ query,error}){
@@ -67,10 +67,9 @@
                 this.competitionList = temp;
             },
             getIcon(os){
-                console.log(os);
-                downloadArr.find((arr)=>{
-                   return arr.os = os
-                })
+                return osArr.find((arr)=>{
+                   return arr.os === os
+                }).icon
             }
         }
     }

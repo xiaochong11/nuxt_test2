@@ -12,7 +12,7 @@ router.get('/getCompetition', function (req, res, next) {
         competitionList += chunk;
     });
     readerStream.on('end',function(){
-        console.log('data:'+competitionList);
+        // console.log('data:'+competitionList);
         res.json({
             code:200,
             data:competitionList

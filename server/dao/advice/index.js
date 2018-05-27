@@ -1,11 +1,13 @@
 import mohair from 'mohair';
 import executeQuery from '../base/index';
+import filter from '../../util/text-censor/index';
 let adviceTable = mohair.table('advice_info');
 
 let adviceDao = {
     async postAdvice(req,res,next){
         let params = req.body;
-        console.log(params);
+        params.advice_content = filter(params.advice_content);
+        params.advice_contact = filter(params.advice_contact);
         let adviceQuery =adviceTable.insert(params);
         try{
             let result = await executeQuery(adviceQuery.sql(),adviceQuery.params())

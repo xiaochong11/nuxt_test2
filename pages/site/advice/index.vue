@@ -50,6 +50,9 @@
         },
         methods:{
             async submit(){
+                if(!this.advice){
+                    return;
+                }
                 let {data} = await axios.post('/api/site/advice/postAdvice',{
                     advice_content:this.advice,
                     advice_contact:this.contact,
