@@ -23,6 +23,26 @@ let articleDao = {
         }
 
     },
+    async updateArticle(req,res,next){
+        let params = req.body;
+        // console.log(req)
+        console.log(params);
+        params.article_edit_date = new Date();
+        let articleQuery =articleTable.update(params).where({article_id:params.article_id});
+        try{
+            let result = await executeQuery(articleQuery.sql(),articleQuery.params())
+            res.json({
+                code:200,
+                data:result
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+
+    },
     async getArticleList(req,res,next){
         let params = req.query;
 

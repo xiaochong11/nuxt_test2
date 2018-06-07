@@ -34,7 +34,7 @@
     import axios from 'axios';
     export default {
         async asyncData({ query,error}){
-            let {data} = await axios.get('http://127.0.0.1:3000/api/site/competition/getCompetition');
+            let {data} = await axios.get('/api/site/competition/getCompetition');
             console.log(data)
             if(data.data){
                 return {competitionList:JSON.parse(data.data),competitionOrigin:JSON.parse(data.data),os:''};

@@ -55,7 +55,6 @@ let indexDao = {
         let params = req.body;
         console.log(params);
         let indexQuery = indexTable.where({id:params.row.id}).update(params.row);
-        console.log(indexQuery.sql());
         try{
             let result = await executeQuery(indexQuery.sql(),indexQuery.params());
             res.json({
@@ -69,6 +68,24 @@ let indexDao = {
             })
         }
     },
+    async addIndexData(req,res,next){
+        let params = req.body;
+        console.log(666);
+        params.date = new Date();
+        let indexQuery = indexTable.insert(params);
+        try{
+            let result = await executeQuery(indexQuery.sql(),indexQuery.params());
+            res.json({
+                code:200,
+                data:'OK'
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+    }
 };
 
 export default indexDao;

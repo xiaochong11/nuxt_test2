@@ -14,10 +14,14 @@ router.post('/login', function (req, res, next) {
 router.post('/postArticle', function (req, res, next) {
     articleDao.postArticle(req,res,next);
 });
+router.post('/updateArticle', function (req, res, next) {
+    articleDao.updateArticle(req,res,next);
+});
 
 router.get('/getArticleList', function (req, res, next) {
     articleDao.getArticleList(req,res,next);
 });
+
 
 router.get('/getPeakData', function (req, res, next) {
     kingDao.getPeakData(req,res,next);
@@ -33,9 +37,13 @@ router.get('/getIndexData', function (req, res, next) {
     indexDao.getList(req,res,next);
 });
 router.post('/updateIndexData', function (req, res, next) {
-    console.log(555);
     indexDao.updateIndexData(req,res,next);
 });
+
+router.post('/addIndexData', function (req, res, next) {
+    indexDao.addIndexData(req,res,next);
+});
+
 
 
 

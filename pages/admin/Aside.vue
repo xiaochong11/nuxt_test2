@@ -19,6 +19,7 @@
                     <template slot="title"><i class="el-icon-document"></i>文章</template>
                     <el-menu-item index="articleList">文章列表</el-menu-item>
                     <el-menu-item index="articleCreate">新增文章</el-menu-item>
+                    <el-menu-item index="articleUpdate">编辑文章</el-menu-item>
                 </el-submenu>
                 <el-submenu index="2">
                     <template slot="title"><i class="el-icon-document"></i>文件</template>

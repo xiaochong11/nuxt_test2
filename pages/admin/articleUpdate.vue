@@ -6,7 +6,7 @@
                 <el-input v-model="articleModel.article_title"></el-input>
             </p>
             <p>封面图片：</p>
-                <el-input v-model="articleModel.article_cover_img" placeholder="图片的URL"></el-input>
+            <el-input v-model="articleModel.article_cover_img" placeholder="图片的URL"></el-input>
             <p>文章内容:</p>
             <div class="quill-editor"
                  :content="articleModel.article_content"
@@ -17,7 +17,7 @@
                  v-quill:myQuillEditor="editorOption">
             </div>
             <p style="text-align: center">
-                <el-button type="primary" @click="submit">
+                <el-button type="primary" @click="updateArticle">
                     提交
                 </el-button>
             </p>
@@ -68,6 +68,14 @@
                 this.content = 'i am changed'
             }, 3000)
         },
+        created(){
+            if(!this.$route.query.article_id){
+                this.$router.push({
+                    path:'/admin/articleList'
+                })
+            }
+            this.getArticle();
+        },
         methods: {
             onEditorBlur(editor) {
                 console.log('editor blur!', editor)
@@ -81,11 +89,16 @@
             onEditorChange({ editor, html, text }) {
                 this.articleModel.article_content = html
             },
-            async submit(){
-                let {data} = await axios.post('/api/admin/postArticle',this.articleModel);
+            async getArticle(){
+                let {data} = await axios.get('/api/site/article/getArticle',{
+                    params:{article_id:this.$route.query.article_id}
+                });
+                this.articleModel = data.data;
+            },
+            async updateArticle(){
+                let {data} = await axios.post('/api/admin/updateArticle',this.articleModel);
                 if(data.code === 200){
-                    console.log(200);
-                    bus.$emit('dialogShow','增加成功',()=>{
+                    bus.$emit('dialogShow','编辑成功',()=>{
                         this.$router.push({
                             path:'/admin/articleList',
                         })

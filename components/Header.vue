@@ -12,11 +12,11 @@
                     </span>
                 </li>
             </ul>
-            <div class="user">
-                <span>登录</span>
-                <i class="icon">|</i>
-                <span>注册</span>
-            </div>
+            <!--<div class="user">-->
+                <!--<span>登录</span>-->
+                <!--<i class="icon">|</i>-->
+                <!--<span>注册</span>-->
+            <!--</div>-->
         </nav>
     </header>
 </template>

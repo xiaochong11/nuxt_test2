@@ -17,9 +17,8 @@
   // }
         async asyncData({ query,error}){
             console.log(query);
-            let article_id = query.id
-            let {data} = await axios.get('http:127.0.0.01:3000/api/site/article/getArticle?article_id='+article_id);
-            console.log(data)
+            let article_id = query.article_id;
+            let {data} = await axios.get('/api/site/article/getArticle?article_id='+article_id);
             if(data.data){
                 return {article:data.data};
             }else{
@@ -46,11 +45,16 @@
 <style lang="less">
     .general-article{
         width:100%;
+        padding-top:0;
         article{
-            width:1000px;
+            width:800px;
+            /*background:#fff;*/
+            padding:0 30px;
             margin:0 auto;
+            border-top:1px solid transparent;
             h3{
                 text-align: center;
+
             }
             p{
                 margin:20px 0;

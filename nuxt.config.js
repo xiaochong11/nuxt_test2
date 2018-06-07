@@ -1,4 +1,7 @@
 module.exports = {
+    env: {
+        'mode': process.env.NODE_ENV
+    },
   /*
   ** Headers of the page
   */
@@ -32,7 +35,8 @@ module.exports = {
       {src:'~/plugins/element-ui.js'},
       {src:'~/plugins/quill-editor.js',ssr: false },
       {src:'~/plugins/vue-socketio.js',ssr: false},
-      {src:'~/plugins/barrage.js',ssr: false}
+      {src:'~/plugins/barrage.js',ssr: false},
+      {src:'~/plugins/date-format.js',ssr: true}
   ],
   build: {
     vendor: ['axios','~/plugins/element-ui.js','~/plugins/quill-editor.js','~/plugins/vue-socketio.js','~/plugins/barrage.js'],

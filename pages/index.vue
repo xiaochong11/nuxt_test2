@@ -2,7 +2,7 @@
   <section class="index-page">
       <section class="container">
           <div class="banner">
-              <el-carousel :interval="5000" arrow="always" height="400">
+              <el-carousel :interval="5000" arrow="always" height="360px">
                   <el-carousel-item v-for="(banner,index) in indexObj.bannerList" :key="index" >
                       <img :src="banner.img_url" @click="toLink(banner.link_url)"/>
                   </el-carousel-item>
@@ -21,7 +21,10 @@
                       </ul>
                   </aside>
                   <aside class="right-aside">
-                      <h2>弹幕墙</h2>
+                      <div class="title">
+                        <h2>弹幕墙</h2>
+                        <h2 class="screen" @click="toBulletScreen">我要上墙 ></h2>
+                      </div>
                       <ul id="ul-box">
                           <li v-for="data in dataArr">
                               <span class="username">{{data.username}}</span>
@@ -39,7 +42,7 @@
                                       <a :href="recommand.link_url">{{recommand.title}}</a>
                                   </h3>
                                   <p class="article-info">
-                                      {{recommand.date}} |  小编
+                                      {{new Date(recommand.date).format('yyyy-MM-dd')}} | 直播客
                                   </p>
                                   <div>
                                       <a :href="recommand.link_url">
@@ -119,6 +122,11 @@
             toLink(url){
                 console.log(444);
                 window.location.href = url;
+            },
+            toBulletScreen(){
+                this.$router.push({
+                    path:'/site/bulletScreen'
+                })
             }
         }
 
@@ -240,9 +248,20 @@
                       box-sizing:border-box;
                       width:300px;
                       padding-top:25px;
-                      h2{
-                          font-size:15px;
+                      .title{
+                          display: flex;
+                          justify-content:space-between;
+                          margin:0 10px;
+                          h2{
+                              font-size:15px;
+                          }
+                          .screen{
+                              color:#409EFF;
+                              font-size:13px;
+                              cursor: pointer;
+                          }
                       }
+
                       ul{
                           padding:10px;
                           box-sizing: border-box;

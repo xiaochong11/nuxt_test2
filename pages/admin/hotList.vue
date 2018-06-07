@@ -1,14 +1,17 @@
 <template>
     <left-aside>
         <section class="al-container">
+            <p>
+                <el-button type="primary" @click="add()">新增hot</el-button>
+            </p>
             <el-table
-                    :data="tableData.bannerList"
+                    :data="tableData.hotList"
                     stripe
                     style="width:1000px">
                 <el-table-column
                         prop="id"
                         label="id"
-                        width="80">
+                        width="40">
                 </el-table-column>
                 <el-table-column
                         width="100"
@@ -29,14 +32,6 @@
                         <el-input v-model="scope.row.link_url" @change="updateIndexData(scope.row)"></el-input>
                     </template>
                 </el-table-column>
-
-                <el-table-column
-                        width="100"
-                        label="日期">
-                    <template slot-scope="scope">
-                        <el-input v-model="scope.row.date" @change="updateIndexData(scope.row)"></el-input>
-                    </template>
-                </el-table-column>
                 <el-table-column
                         width="100"
                         label="显示序号">
@@ -52,10 +47,45 @@
                     </template>
                 </el-table-column>
             </el-table>
-            <!--<div>-->
-            <!--<p>更新日期</p>-->
-            <!--<el-input v-model="updateTime" @change="updatePeakTime"></el-input>-->
-            <!--</div>-->
+
+
+            <el-dialog tile="新增hot" :visible.sync="dialogTableVisible">
+                <el-table
+                        :data="newHot"
+                        stripe
+                        style="width:1000px">
+                    <el-table-column
+                            width="100"
+                            label="标题">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.title" @change="updateIndexData(scope.row)"></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            label="封面图片">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.img_url" @change="updateIndexData(scope.row)"></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            label="链接Url">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.link_url" @change="updateIndexData(scope.row)"></el-input>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            width="100"
+                            label="显示序号">
+                        <template slot-scope="scope">
+                            <el-input v-model="scope.row.show_order" @change="updateIndexData(scope.row)"></el-input>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogTableVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="addSubmit">确 定</el-button>
+                </div>
+            </el-dialog>
         </section>
     </left-aside>
 </template>
@@ -70,6 +100,10 @@
         data () {
             return {
                 tableData:[],
+                newHot:[{
+                    type:'hot'
+                }],
+                dialogTableVisible:false
             }
         },
         created(){
@@ -91,6 +125,19 @@
                 let {data} = await axios.post('/api/admin/updateIndexData',{
                     row
                 });
+            },
+            add(){
+                this.dialogTableVisible = true;
+            },
+            async addSubmit(){
+                let {data} = await axios.post('/api/admin/addIndexData',this.newHot[0]);
+                if(data.code===200){
+                    this.newHot =[{
+                        type:'hot'
+                    }];
+                    this.dialogTableVisible = false;
+                    this.getIndexData();
+                }
             }
         }
     }

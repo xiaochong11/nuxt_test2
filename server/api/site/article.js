@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import articleDao from '../../dao/king/index.js';
+import articleDao from '../../dao/article/index.js';
 
 const router = Router();
 router.get('/getArticleList', function (req, res, next) {

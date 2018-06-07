@@ -2,7 +2,11 @@
     <section class="king-page">
         <div class="page">
             <h3>王者荣耀巅峰赛排行榜</h3>
-            <p>更新时间：<span>{{getUpdateDate()}}</span></p>
+            <div class="intro">
+                <p>更新时间：<span>{{getUpdateDate()}}</span></p>
+                <p class="screen">我想发弹幕></p>
+            </div>
+
             <section class="table-sec">
                 <el-table
                         :data="tableData"
@@ -64,26 +68,6 @@
         },
         methods:{
             getUpdateDate(){
-                Date.prototype.format = function(fmt) {
-                    var o = {
-                        "M+" : this.getMonth()+1,                 //月份
-                        "d+" : this.getDate(),                    //日
-                        "h+" : this.getHours(),                   //小时
-                        "m+" : this.getMinutes(),                 //分
-                        "s+" : this.getSeconds(),                 //秒
-                        "q+" : Math.floor((this.getMonth()+3)/3), //季度
-                        "S"  : this.getMilliseconds()             //毫秒
-                    };
-                    if(/(y+)/.test(fmt)) {
-                        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-                    }
-                    for(var k in o) {
-                        if(new RegExp("("+ k +")").test(fmt)){
-                            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-                        }
-                    }
-                    return fmt;
-                }
                 return new Date(this.tableData[0].update_date).format("yyyy-MM-dd hh:mm:ss");
             }
         }
@@ -92,12 +76,21 @@
 <style lang="less">
     .king-page{
         .page{
-            width:560px;
+            width:610px;
             margin:0 auto;
             /*background:#fff;*/
             padding-bottom:50px;
             h3{
                 text-align:center;
+            }
+            .intro{
+                display: flex;
+                justify-content: space-between;
+                .screen{
+                    color:#409EFF;
+                    font-size:13px;
+                    cursor: pointer;
+                }
             }
             .table-sec{
                 background:#fff;

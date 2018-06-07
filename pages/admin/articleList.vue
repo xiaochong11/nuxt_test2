@@ -14,7 +14,7 @@
                         label="文章标题">
                 </el-table-column>
                 <el-table-column
-                        prop="auth_id"
+                        prop="article_auth_id"
                         label="作者ID"
                         width="100">
                 </el-table-column>
@@ -31,7 +31,7 @@
                         width="140">
                     <template slot-scope="scope">
                         <div class="operating">
-                            <span @click="editCourse(scope.row)">编辑</span>
+                            <span @click="editArticle(scope.row)">编辑</span>
                             <!--<span @click="deleteCourse(scope.row)">禁用</span>-->
                         </div>
                     </template>
@@ -61,10 +61,18 @@
         },
         methods: {
             async getArticleList(){
-                let res = await axios.get('/api/admin/getArticleList',{
+                let {data} = await axios.get('/api/admin/getArticleList',{
 
                 });
-                this.articleList = res.data.data;
+                this.articleList = data.data;
+            },
+            async editArticle(row){
+                this.$router.push({
+                    path:'/admin/articleUpdate',
+                    query:{
+                        article_id:row.article_id
+                    }
+                })
             }
         }
     }
