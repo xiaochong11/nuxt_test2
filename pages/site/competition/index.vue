@@ -1,6 +1,9 @@
 <template>
     <section class="competition-page">
         <div class="page">
+            <div>
+                <!--<p>更新时间：{{}}</p>-->
+            </div>
             <div class="os">
                 <button :class="{'active':os==='huya'}" @click="activeOs('huya')">虎牙</button>
                 <button :class="{'active':os==='douyu'}"  @click="activeOs('douyu')">斗鱼</button>
@@ -31,7 +34,7 @@
 </template>
 <script>
     import {osArr} from '../../../conf/index'
-    import axios from 'axios';
+    import axios from '~/plugins/axios';
     export default {
         async asyncData({ query,error}){
             let {data} = await axios.get('/api/site/competition/getCompetition');

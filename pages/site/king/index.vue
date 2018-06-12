@@ -4,7 +4,7 @@
             <h3>王者荣耀巅峰赛排行榜</h3>
             <div class="intro">
                 <p>更新时间：<span>{{getUpdateDate()}}</span></p>
-                <p class="screen">我想发弹幕></p>
+                <p class="screen" @click="toBulletScreen">我想发弹幕></p>
             </div>
 
             <section class="table-sec">
@@ -69,6 +69,11 @@
         methods:{
             getUpdateDate(){
                 return new Date(this.tableData[0].update_date).format("yyyy-MM-dd hh:mm:ss");
+            },
+            toBulletScreen(){
+                this.$router.push({
+                    path:'/site/bulletScreen'
+                })
             }
         }
     }

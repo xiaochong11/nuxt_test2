@@ -10,7 +10,7 @@ module.exports = {
       meta: [
           { charset: 'utf-8' },
           { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-          { hid: 'keywords', name: 'keywords', content: '好玩的弹幕墙,直播新闻，主播汇集，赛事直播，王者荣耀数据缝隙，王者荣耀巅峰赛数据' },
+          { hid: 'keywords', name: 'keywords', content: '好玩的弹幕墙,直播新闻，主播汇集，赛事直播，王者荣耀数据git，王者荣耀巅峰赛数据' },
           { hid: 'description', name: 'description', content: '好玩的弹幕墙,直播新闻，主播汇集，赛事直播，王者荣耀数据缝隙，王者荣耀巅峰赛数据' }
     ],
     link: [

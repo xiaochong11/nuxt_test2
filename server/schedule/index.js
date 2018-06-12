@@ -1,9 +1,19 @@
 import schedule from 'node-schedule';
+import getCompetition from './competition1';
 
 function timed(){
-    schedule.scheduleJob('*/1 * * * *', function(){
-        console.log('The answer to life, the universe, and everything!');
-    });
+    if(process.env.NODE_ENV==='production'){
+        schedule.scheduleJob('00 12 * * *', function(){
+            getCompetition();
+            console.log('competition...');
+        });
+    }else{
+        schedule.scheduleJob('*/1 * * * *', function(){
+            getCompetition();
+            console.log('competition...');
+        });
+    }
+
 }
 
 export {timed};

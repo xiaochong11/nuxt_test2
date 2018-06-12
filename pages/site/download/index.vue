@@ -6,7 +6,7 @@
                     <a :href="item.downUrl" target="_blank">
                         <div class="os-logo" :style="'background-image:url('+item.icon+')'"></div>
                         <div class="to-download">
-                            <h1>{{item.name}}</h1>
+                            <h1>{{item.download_name}}</h1>
                             <div>
                                 <a>进入下载</a>
                             </div>
@@ -47,6 +47,7 @@
                     width:380px;
                     font-size:16px;
                     padding:20px;
+                    padding-right:10px;
                     box-sizing: border-box;
                     border-radius: 10px;
                     cursor: pointer;
@@ -68,7 +69,7 @@
                             margin-left:20px;
                             h1{
                                 font-size:18px;
-                                margin:20px 0;
+                                margin:20px 0 10px;
                             }
                             a{
 

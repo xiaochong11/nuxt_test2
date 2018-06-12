@@ -144,6 +144,6 @@ async function getCompetition(){
     out.write(JSON.stringify(resultArr));
     out.end();
 }
-
-getCompetition();
+export default getCompetition;
+// getCompetition();
 

@@ -11,7 +11,7 @@ if (process.server) {
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
-    console.log(config);
+    //console.log(config);
     if (config.method==="post"){
         //config.data = qs.stringify(config.data);
         config.headers['Content-Type'] = 'application/json';

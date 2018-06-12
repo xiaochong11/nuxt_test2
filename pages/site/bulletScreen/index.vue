@@ -1,8 +1,20 @@
 <template>
     <section class="screen-page">
         <div class="page">
+            <div class="intro">
+                <h3>
+                    <span style="color:#0000f1">寻</span>
+                    <span style="color:#179936">找</span>
+                    <span style="color:#ff9999">彩</span>
+                    <span style="color: #005baf;">色</span>
+                    <span style="color:rgb(255, 136, 0)">弹</span>
+                    <span style="color:#9900ff">幕</span>
+                </h3>
+                <p>弹幕菌祝你早日找到发送彩色弹幕的姿势</p>
+            </div>
+
             <div class="room-core">
-                <div class="room-core-l" ref="cover">
+                <div class="room-core-l" ref="cover" :style="'background-image:url('+screenImg+')'">
 
                 </div>
                 <div class="room-core-r">
@@ -18,7 +30,8 @@
                                 type="textarea"
                                 :rows="2"
                                 placeholder="弹幕墙需要你的火力支援"
-                                v-model="textarea">
+                                v-model="textarea"
+                                @keyup.enter.native="postMessage">
                         </el-input>
                         <div class="send-button" @click="postMessage">
                             发送
@@ -32,10 +45,10 @@
                 </h1>
                 <article>
                     <p>
-                        1.可以为喜欢的主播加油，可以打广告。
+                        1.我们是独立于各个直播平台的。
                     </p>
                     <p>
-                        2.可以喷禁言自己的主播。
+                        2.可以为喜欢的主播加油，可以打广告。可以喷禁言自己的主播。
                     </p>
                     <p>
                         3.下个版本需要登录才能发言，想畅所欲言的抓紧
@@ -49,6 +62,7 @@
     </section>
 </template>
 <script>
+    import axios from '~/plugins/axios';
     export default {
         sockets:{
             connect: function(){
@@ -69,15 +83,13 @@
             return{
                 dataArr:[
                     {
-                        'username':'张学友',
-                        'message':'第1条弹幕'
+                        'username':'弹幕菌',
+                        'message':'发送某些关键词可以得到彩色弹幕哦~'
                     },
-                    {
-                         'username':'张学友',
-                         'message':'第2条弹幕'
-                    }
+
                 ],
-                textarea:""
+                textarea:"",
+                screenImg:''
             }
         },
         watch:{
@@ -94,7 +106,9 @@
         },
         mounted(){
             //console.log(this.$start);
+            this.getScreenImg();
             this.send = this.$start(this.$refs.cover,[0.2,0.5]);
+
         },
         methods:{
             postMessage(){
@@ -108,6 +122,12 @@
                 });
                 this.textarea = '';
 
+            },
+            async getScreenImg(){
+                let {data} = await axios.get('/api/site/screen/getScreenImg');
+                if(data.code===200){
+                    this.screenImg = data.data.img_url;
+                }
             }
         }
     }
@@ -118,6 +138,11 @@
             padding:30px 0;
             width:1200px;
             margin:0 auto;
+            .intro{
+                width:800px;
+                text-align: center;
+            }
+
             .room-core{
                 display: flex;
                 justify-content: space-between;
@@ -125,6 +150,8 @@
                     width:800px;
                     height:600px;
                     background-color: #47494e;
+                    background-size: auto 100%;
+                    background-position: center center;
                     .barrage{
                         font-size:40px;
                     }
@@ -166,6 +193,9 @@
                         width:100%;
                         padding:10px 20px;
                         border-top: 1px solid #eee;
+                        textarea{
+                            height:54px;
+                        }
                         .send-button{
                             width:20%;
                             /*position: absolute;*/

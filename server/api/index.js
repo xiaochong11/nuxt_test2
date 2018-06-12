@@ -7,6 +7,8 @@ import competition from './site/competition';
 import adminCheck from './admin/check';
 import king from './site/king'
 import index from './site/index'
+import screen from './site/screen';
+
 
 const router = Router()
 
@@ -22,5 +24,6 @@ router.use('/site/advice',advice);
 router.use('/site/competition',competition);
 router.use('/site/king',king);
 router.use('/site/index',index);
+router.use('/site/screen',screen);
 
 export default router

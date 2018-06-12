@@ -161,4 +161,4 @@ server.listen(port, host)
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
 
 //定时任务
-//timed();
+timed();

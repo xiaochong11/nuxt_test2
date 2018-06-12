@@ -16,7 +16,7 @@
   //   return { title: data.title }
   // }
         async asyncData({ query,error}){
-            console.log(query);
+//            console.log(query);
             let article_id = query.article_id;
             let {data} = await axios.get('/api/site/article/getArticle?article_id='+article_id);
             if(data.data){
