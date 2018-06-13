@@ -33,7 +33,7 @@
             </div>
             <section class="copyright">
                 <p>
-                    <a href="/site/article/general?article_id=1">免责声明</a>|
+                    <a href="/site/article/general?article_id=1">免责声明 </a>|
                     <a href="/site/article/general?article_id=2">关于我们</a>
                 </p>
                 <p>Copyright 直播客 © 2018</p>
@@ -69,16 +69,20 @@
         width:100%;
         position:absolute;
         bottom:0;
-        background-color: #fff;
-        border-top:1px solid #EDF5F9;
+        /*background-color: #fff;*/
+        background-color: #222222;
+        color:#afaaaa;
+        border-top:1px solid #222222;
         -webkit-box-shadow:0px -2px 5px #f4f6f6;
         margin-top:30px;
         .main-footer{
             width:1200px;
             margin:0 auto;
-            background:#fff;
             padding-top:50px;
             vertical-align: top;
+            h4{
+                color:#fff;
+            }
             >div{
                 display:inline-block;
                 vertical-align: top;
@@ -110,6 +114,9 @@
             .copyright{
                 text-align: center;
                 padding:24px 0;
+                a{
+                    color:#afaaaa
+                }
             }
         }
     }

@@ -101,6 +101,56 @@ export default [
         'icon':'/static/os/yi_icon.jpg',
         'downUrl':'http://www.yizhibo.com/',
         'linkUrl':'http://www.yizhibo.com/'
+    },{
+        'os':'liujianfang',
+        'name':'6间房',
+        'download_name':'6间房(app下载)',
+        'icon':'/static/os/liujianfang_icon.png',
+        'downUrl':'https://www.6.cn/',
+        'linkUrl':'https://v.6.cn/event/liveClient/?t=phone'
+    },{
+        'os':'huajiao',
+        'name':'花椒直播',
+        'download_name':'花椒直播(右上角有下载按钮)',
+        'icon':'/static/os/huajiao_icon.png',
+        'downUrl':'http://www.huajiao.com/',
+        'linkUrl':'https://v.6.cn/event/liveClient/?t=phone'
+    },
+    {
+        'os':'zhanqi',
+        'name':'战旗直播',
+        'download_name':'战旗直播(右上角有下载按钮)',
+        'icon':'/static/os/zhanqi_icon.png',
+        'downUrl':'http://www.zhanqi.tv/',
+        'linkUrl':'http://www.zhanqi.tv/'
+    }, {
+        'os':'huomao',
+        'name':'火猫直播',
+        'download_name':'火猫直播(底部有二维码下载)',
+        'icon':'/static/os/huomao_icon.png',
+        'downUrl':'https://www.huomao.com/',
+        'linkUrl':'https://www.huomao.com/'
+    }, {
+        'os':'shihou',
+        'name':'狮吼直播',
+        'download_name':'狮吼直播(右上角有二维码下载)',
+        'icon':'/static/os/shihou_icon.png',
+        'downUrl':'http://www.shihou.tv/',
+        'linkUrl':'http://www.shihou.tv/'
+    },{
+        'os':'qixiu',
+        'name':'奇秀',
+        'download_name':'奇秀(右上角有下载)',
+        'icon':'/static/os/qixiu_icon.png',
+        'downUrl':'http://x.pps.tv/',
+        'linkUrl':'http://x.pps.tv/'
+    },{
+        'os':'KK',
+        'name':'KK直播',
+        'download_name':'奇秀(右上角有下载)',
+        'icon':'/static/os/KK_icon.png',
+        'downUrl':'http://www.kktv5.com/?channel!70281',
+        'linkUrl':'http://www.kktv5.com/?channel!70281'
     },
 
 
