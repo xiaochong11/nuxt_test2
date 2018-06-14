@@ -30,7 +30,9 @@
     "source-map-support": "^0.4.15",
     "vue-quill-editor": "^3.0.6",
     "vue-socket.io": "^2.1.1-b",
-    "vue2-barrage": "^1.0.8"
+    "vue2-barrage": "^1.0.8",
+    "phantom-pool": "^1.2.2",
+    "phantomjs-prebuilt": "^2.1.4"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -45,7 +47,6 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "less": "^3.0.1",
-    "less-loader": "^4.1.0",
-    "phantom-pool": "^1.2.2"
+    "less-loader": "^4.1.0"
   }
 }
