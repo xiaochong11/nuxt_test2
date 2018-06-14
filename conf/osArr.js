@@ -147,7 +147,7 @@ export default [
     },{
         'os':'KK',
         'name':'KK直播',
-        'download_name':'奇秀(右上角有下载)',
+        'download_name':'KK直播(右上角有下载)',
         'icon':'/static/os/KK_icon.png',
         'downUrl':'http://www.kktv5.com/?channel!70281',
         'linkUrl':'http://www.kktv5.com/?channel!70281'

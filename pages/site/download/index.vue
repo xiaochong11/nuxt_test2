@@ -41,7 +41,6 @@
                 flex-wrap:wrap;
                 justify-content: space-between;
                 li{
-
                     background-color: #fff;
                     margin-bottom:30px;
                     width:380px;
@@ -77,7 +76,9 @@
                         }
                     }
 
-
+                    &:last-child{
+                        /*margin-left:30px;*/
+                    }
                 }
             }
         }
