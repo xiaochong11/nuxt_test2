@@ -22,7 +22,7 @@
             if(data.data){
                 return {article:data.data};
             }else{
-                error({ statusCode: 404, message: 'User not found' })
+                error({ statusCode: 404, message: '页面不翼而飞了' })
             } 
         },
         data(){

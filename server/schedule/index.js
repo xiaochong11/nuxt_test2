@@ -3,7 +3,7 @@ import getCompetition from './competition1';
 
 function timed(){
     if(process.env.NODE_ENV==='production'){
-        schedule.scheduleJob('00 12 * * *', function(){
+        schedule.scheduleJob('*/0 * * * *', function(){
             getCompetition();
             console.log('competition...');
         });

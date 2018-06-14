@@ -42,7 +42,7 @@
             if(data.data){
                 return {competitionList:JSON.parse(data.data),competitionOrigin:JSON.parse(data.data),os:''};
             }else{
-                error({ statusCode: 404, message: 'User not found' })
+                error({ statusCode: 404, message: '暂无数据' })
             }
         },
         data(){
