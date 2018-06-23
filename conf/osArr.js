@@ -32,6 +32,14 @@ export default [
         'linkUrl':'http://www.longzhu.com'
     },
     {
+        'os':'yingke',
+        'name':'映客直播',
+        'download_name':'映客直播',
+        'icon':'/static/os/yingke_icon.png',
+        'downUrl':'http://www.inke.cn/',
+        'linkUrl':'http://www.inke.cn/index.html'
+    },
+    {
         'os':'quanming',
         'name':'全民直播',
         'download_name':'全民直播',
@@ -62,14 +70,6 @@ export default [
         'icon':'/static/os/bilibili_icon.png',
         'downUrl':'https://app.bilibili.com/',
         'linkUrl':'https://live.bilibili.com/'
-    },
-    {
-        'os':'yingke',
-        'name':'映客直播',
-        'download_name':'映客直播',
-        'icon':'/static/os/yingke_icon.png',
-        'downUrl':'http://www.inke.cn/',
-        'linkUrl':'http://www.inke.cn/index.html'
     },
     {
         'os':'kuaishou',
@@ -151,7 +151,31 @@ export default [
         'icon':'/static/os/KK_icon.png',
         'downUrl':'http://www.kktv5.com/?channel!70281',
         'linkUrl':'http://www.kktv5.com/?channel!70281'
+    },{
+        'os':'woxiu',
+        'name':'我秀',
+        'download_name':'我秀(左下角有app下载)',
+        'icon':'/static/os/woxiu_icon.png',
+        'downUrl':'http://www.woxiu.com/',
+        'linkUrl':'http://www.woxiu.com/'
+    },{
+        'os':'dawang',
+        'name':'大王直播',
+        'download_name':'大王直播(右上角有下载)',
+        'icon':'/static/os/dawang_icon.png',
+        'downUrl':'http://www.dawang.tv/',
+        'linkUrl':'http://www.dawang.tv/'
     },
+    {
+        'os':'feiyun',
+        'name':'飞云直播',
+        'download_name':'飞云直播(右上角有下载)',
+        'icon':'/static/os/feiyun_icon.png',
+        'downUrl':'http://www.feiyun.tv/',
+        'linkUrl':'http://www.feiyun.tv/'
+    },
+
+
 
 
 ]

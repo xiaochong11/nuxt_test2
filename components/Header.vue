@@ -1,8 +1,8 @@
 <template>
     <header>
         <nav>
-            <div class="logo">
-                <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="直播客"/>
+            <div class="logo" @click="toIndex">
+                <img src="../assets/img/logo.png" alt="弹幕墙"/>
             </div>
             <ul>
                 <li @click="toNavUrl(nav)" v-for="(nav,index) in navArr">
@@ -39,6 +39,11 @@ export default{
         }
     },
     methods:{
+        toIndex(){
+            this.$router.push({
+                path:'/'
+            })
+        },
         toNavUrl(nav){
             console.log(nav);
             this.$router.push({
@@ -86,9 +91,11 @@ export default{
             .logo{
                 display:inline-block;
                 vertical-align: top;
-                width:120px;
+                width:150px;
                 margin-right:100px;
+                cursor:pointer;
                 img{
+                    width:100%;
                     vertical-align: middle;
                 }
             }

@@ -37,6 +37,15 @@
 <script>
     import axios from '~/plugins/axios'
     export default {
+        head () {
+            return {
+                title:'反馈建议，我们期待你的建议|直播客',
+                meta: [
+                    { hid: 'keywords', name: 'keywords', content: '反馈建议，我们期待你的建议|直播客' },
+                    { hid: 'description', name: 'description', content: '反馈建议，我们期待你的建议|直播客' }
+                ]
+            }
+        },
         data(){
             return{
                 advice:'',

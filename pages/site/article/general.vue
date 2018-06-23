@@ -11,12 +11,17 @@
 <script>
     import axios from '~/plugins/axios'
     export default {
-  //        async asyncData ({ params }) {
-  //   let { data } = await axios.get(`https://my-api/posts/${params.id}`)
-  //   return { title: data.title }
-  // }
+        head () {
+            return {
+                title:this.article.article_title+'，直播界新闻，文章|直播客',
+                meta: [
+                    { hid: 'keywords', name: 'keywords', content: '直播界的新闻，各大直播平台最新的消息' },
+                    { hid: 'description', name: 'description', content: '直播界的新闻，各大直播平台最新的消息' }
+                ]
+            }
+        },
         async asyncData({ query,error}){
-//            console.log(query);
+          console.log(query);
             let article_id = query.article_id;
             let {data} = await axios.get('/api/site/article/getArticle?article_id='+article_id);
             if(data.data){

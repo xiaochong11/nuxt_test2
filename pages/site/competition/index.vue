@@ -36,6 +36,16 @@
     import {osArr} from '../../../conf/index'
     import axios from '~/plugins/axios';
     export default {
+        head () {
+            return {
+                title: '游戏赛事，游戏赛事汇总|直播客',
+                meta: [
+                    {hid: 'keywords', name: 'keywords', content: '各大直播平台游戏赛事，全网游戏赛事汇总'},
+                    {hid: 'description', name: 'description', content: '各大直播平台游戏赛事，全网游戏赛事汇总'},
+                    {hid: 'robots', name:"robots",content:"nofollow"}
+                ]
+            }
+        },
         async asyncData({ query,error}){
             let {data} = await axios.get('/api/site/competition/getCompetition');
             console.log(data)
@@ -60,14 +70,20 @@
                 window.location.href=url;
             },
             activeOs(os){
-                this.os = os;
-                let temp = [];
-                this.competitionOrigin.forEach((arr,index)=>{
-                    if(arr.os === os){
-                        temp.push(arr);
-                    }
-                })
-                this.competitionList = temp;
+                if(this.os === os){
+                    this.os = '';
+                    this.competitionList = this.competitionOrigin
+                }else{
+                    this.os = os;
+                    let temp = [];
+                    this.competitionOrigin.forEach((arr,index)=>{
+                        if(arr.os === os){
+                            temp.push(arr);
+                        }
+                    })
+                    this.competitionList = temp;
+                }
+
             },
             getIcon(os){
                 return osArr.find((arr)=>{

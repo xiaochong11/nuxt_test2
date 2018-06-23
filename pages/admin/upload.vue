@@ -34,7 +34,7 @@
                     headers: { 'Content-Type': 'multipart/form-data' }
                 });
                 if(data.code===200){
-                    bus.$emit('dialogShow',`上传成功,url: ${window.location.protocol+'//'+window.location.hostname+'/uploads/'+data.message}`);
+                    bus.$emit('dialogShow',`上传成功,url: /uploads/'+data.message}`);
                 }
             }
         }

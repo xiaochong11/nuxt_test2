@@ -8,10 +8,10 @@ let indexDao = {
     async getList(req,res,next){
         let params = req.query;
         let IndexQuery={}
-        if(params){
-            IndexQuery=indexTable.select('*');
+        if(Object.keys(params).length === 0){
+            IndexQuery =indexTable.where({deleted:0}).select('*').order('show_order ASC');
         }else{
-            IndexQuery =indexTable.where({deleted:0}).select('*');
+            IndexQuery=indexTable.select('*').order('show_order ASC');
         }
 
         try{
@@ -22,6 +22,13 @@ let indexDao = {
                 recommandList:[]
             };
             if(result){
+                //依照时间过滤
+
+                let nowTime = new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds();
+                result = result.filter((arr,index)=>{
+                    return  arr.start_time === "00:00:00"||(arr.start_time>=nowTime&&arr.end_time<=nowTime)
+                });
+                console.log(result);
                 result.forEach((arr,index)=>{
                     if(arr.type==="banner"){
                         indexObj.bannerList.push(arr)
@@ -70,8 +77,7 @@ let indexDao = {
     },
     async addIndexData(req,res,next){
         let params = req.body;
-        console.log(666);
-        params.date = new Date();
+        params.add_date = new Date();
         let indexQuery = indexTable.insert(params);
         try{
             let result = await executeQuery(indexQuery.sql(),indexQuery.params());

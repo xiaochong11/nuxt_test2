@@ -64,6 +64,15 @@
 <script>
     import axios from '~/plugins/axios';
     export default {
+        head () {
+            return {
+                title:'弹幕墙，好玩的弹幕|直播客',
+                meta: [
+                    { hid: 'keywords', name: 'keywords', content: '弹幕墙，好玩的弹幕，彩色的弹幕，可以为喜欢的主播加油' },
+                    { hid: 'description', name: 'description', content: '弹幕墙，好玩的弹幕，彩色的弹幕，可以为喜欢的主播加油' }
+                ]
+            }
+        },
         sockets:{
             connect: function(){
                 console.log('socket connected')

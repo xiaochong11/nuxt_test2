@@ -15,6 +15,7 @@ import filter from './util/text-censor/index'
 app.set('port', port)
 
 app.use('/static',express.static('static'));
+app.use('/robots.txt',express.static('robots.txt'));
 
 app.use(bodyParser.json({limit: '1mb'}));  //这里指定参数使用 json 格式
 app.use(bodyParser.urlencoded({

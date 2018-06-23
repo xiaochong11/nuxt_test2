@@ -4,7 +4,9 @@
           <div class="banner">
               <el-carousel :interval="5000" arrow="always" height="360px">
                   <el-carousel-item v-for="(banner,index) in indexObj.bannerList" :key="index" >
-                      <img :src="banner.img_url" @click="toLink(banner.link_url)"/>
+                      <a :href="banner.link_url" target="_blank">
+                          <img :src="banner.img_url"/>
+                      </a>
                   </el-carousel-item>
               </el-carousel>
           </div>
@@ -145,10 +147,19 @@
               .el-carousel{
                   width:1200px;
                   margin:0 auto;
+                 a{
+                     display:inline-block;
+                     text-align:center;
+                     //vertical-align:middle;
+                     line-height: 360px;
+                 }
                   img{
+
                       width:100%;
                       height:auto;
                       cursor:pointer;
+                      display: inline-block;
+                      vertical-align:middle;
                   }
               }
           }
