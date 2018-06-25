@@ -8,6 +8,8 @@ import adminCheck from './admin/check';
 import king from './site/king'
 import index from './site/index'
 import screen from './site/screen';
+import anchor from './site/anchor';
+import divDir from './site/live_dir.js';
 
 
 const router = Router()
@@ -25,5 +27,8 @@ router.use('/site/competition',competition);
 router.use('/site/king',king);
 router.use('/site/index',index);
 router.use('/site/screen',screen);
+
+router.use('/site/anchor',anchor);
+router.use('/site/liveDir',divDir);
 
 export default router

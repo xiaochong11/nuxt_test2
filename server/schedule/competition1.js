@@ -126,6 +126,7 @@ async function getCompetition(){
     });
     for(let i=0;i<=douyuCompetitionUrlArr.length-1;i++){
         content = await getInstance(douyuCompetitionUrlArr[i]);
+        pool.drain().then(() => pool.clear());
         $ = cheerio.load(content);
         let obj={
             imgUrl: $('.anchor-pic').find('img').attr('src'),
@@ -140,7 +141,7 @@ async function getCompetition(){
     }
 
     //console.log(resultArr);
-    pool.drain().then(() => pool.clear());
+
     out.write(JSON.stringify(resultArr));
     out.end();
 }

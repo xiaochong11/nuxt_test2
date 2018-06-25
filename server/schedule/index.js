@@ -8,7 +8,7 @@ function timed(){
             console.log('competition...');
         });
     }else{
-        schedule.scheduleJob('*/3 * * * *', function(){
+        schedule.scheduleJob('*/1 * * * *', function(){
             getCompetition();
             console.log('competition...');
         });
