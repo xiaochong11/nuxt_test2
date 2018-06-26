@@ -2,14 +2,13 @@
     <section class="competition-page">
         <div class="page">
             <div class="os">
-                <button :class="{'active':os==='huya'}" @click="activeOs('huya')">虎牙</button>
-                <button :class="{'active':os==='douyu'}"  @click="activeOs('douyu')">斗鱼</button>
+                <button :class="{'active':upperDirCur===dir}" @click="activeUpperDir(dir)" v-for="dir in upperDir">{{dir}}</button>
             </div>
             <div>
                 <!--<p>更新时间：{{}}</p>-->
             </div>
             <ul>
-                <li v-for="(dir,index) in dirList" :key="index" @click="toDir(dir.dir_id,dir.dir_name)">
+                <li v-for="(dir,index) in filter" :key="index" @click="toDir(dir.dir_id,dir.dir_name)">
                     <div>
                         <img :src="dir.cover_img"/>
                     </div>
@@ -38,8 +37,16 @@
         async asyncData({ query,error}){
             let {data} = await axios.get('/api/site/liveDir/getAllDir');
             if(data.data){
+                let upperDir = [];
+                data.data.forEach((arr,index)=>{
+                    if(upperDir.indexOf(arr.upper_dir)<=-1){
+                        upperDir.push(arr.upper_dir);
+                    }
+                });
                 return {
-                    dirList:data.data
+                    upperDir:upperDir,
+                    dirList:data.data,
+                    upperDirCur:''
                 };
             }else{
                 error({ statusCode: 404, message: '暂无数据' })
@@ -53,32 +60,35 @@
             }
 
         },
+        filters:{
+
+        },
+        computed:{
+            filter(){
+                return this.dirList.filter((arr,index)=>{
+                            return this.upperDirCur?arr.upper_dir === this.upperDirCur:true;
+                        })
+
+            },
+        },
         methods:{
             toDir(dir_id,dir_name){
                 console.log(dir_id,dir_name);
                 this.$router.push({
-                    path:'liveDir/dir',
+                    path:'/site/liveDir/dir',
                     query:{
                         dir_id,
                         dir_name
                     }
                 })
             },
-            activeOs(os){
-                if(this.os === os){
-                    this.os = '';
-                    this.competitionList = this.competitionOrigin
-                }else{
-                    this.os = os;
-                    let temp = [];
-                    this.competitionOrigin.forEach((arr,index)=>{
-                        if(arr.os === os){
-                            temp.push(arr);
-                        }
-                    })
-                    this.competitionList = temp;
-                }
 
+            activeUpperDir(upperDir){
+                if(this.upperDirCur === upperDir){
+                    this.upperDirCur = '';
+                }else{
+                    this.upperDirCur = upperDir;
+                }
             },
             getIcon(os){
                 return osArr.find((arr)=>{

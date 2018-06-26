@@ -1,26 +1,47 @@
 <template>
-    <section class="competition-page">
+    <section class="dirAnchor-page">
         <div class="page">
+            <p>当前分类：{{$route.query.dir_name}}</p>
             <div class="os">
-                <button :class="{'active':os==='huya'}" @click="activeOs('huya')">虎牙</button>
-                <button :class="{'active':os==='douyu'}"  @click="activeOs('douyu')">斗鱼</button>
+                <button :class="{'active':os===osActive}" @click="activeOs(os)" v-for="os in osList">{{getName(os)}}</button>
             </div>
-            <div>
-                <!--<p>更新时间：{{}}</p>-->
-            </div>
+            <p>良心推荐</p>
             <ul>
-                <li v-for="(anchor,index) in anchorList" :key="index">
+                <li v-for="(anchor,index) in filter" :key="index" v-if="anchor.label===0">
                     <a :href="anchor.anchor_link" target="_blank">
-                        <div>
+                        <div class="anchor-img">
                             <img :src="anchor.anchor_img"/>
                         </div>
                         <p>
                             {{anchor.anchor_name}}
                         </p>
+                        <p class="nick">
+                            <i class="os-icon" :style="'background-image:url('+getIcon(anchor.anchor_os)+')'">
+                            </i>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+            <p>不良心推荐</p>
+            <ul>
+                <li v-for="(anchor,index) in filter" :key="index" v-if="anchor.label===1">
+                    <a :href="anchor.anchor_link" target="_blank">
+                        <div class="anchor-img">
+                            <img :src="anchor.anchor_img"/>
+                        </div>
+                        <p>
+                            {{anchor.anchor_name}}
+                        </p>
+                        <p class="nick">
+                            <i class="os-icon" :style="'background-image:url('+getIcon(anchor.anchor_os)+')'">
+                            </i>
+                        </p>
                     </a>
                 </li>
             </ul>
         </div>
+
+
     </section>
 </template>
 <script>
@@ -45,35 +66,34 @@
                 }
             });
             if(data.data){
+                let osList = [];
+                data.data.forEach((arr,index)=>{
+                    if(osList.indexOf(arr.anchor_os)<=-1){
+                        osList.push(arr.anchor_os);
+                    }
+                });
                 return {
+                    osList:osList,
+                    osActive:'',
                     anchorList:data.data
                 };
             }else{
                 error({ statusCode: 404, message: '暂无数据' })
             }
         },
-        data(){
-            return{
-                article:{
-                    anchorList:[]
-                }
-            }
-
+        computed:{
+            filter(){
+                return this.anchorList.filter((arr,index)=>{
+                    return this.osActive?arr.anchor_os === this.osActive:true;
+                })
+            },
         },
         methods:{
             activeOs(os){
-                if(this.os === os){
-                    this.os = '';
-                    this.competitionList = this.competitionOrigin
+                if(this.osActive === os){
+                    this.osActive = '';
                 }else{
-                    this.os = os;
-                    let temp = [];
-                    this.competitionOrigin.forEach((arr,index)=>{
-                        if(arr.os === os){
-                            temp.push(arr);
-                        }
-                    })
-                    this.competitionList = temp;
+                    this.osActive = os;
                 }
 
             },
@@ -81,12 +101,17 @@
                 return osArr.find((arr)=>{
                     return arr.os === os
                 }).icon
+            },
+            getName(os){
+                return osArr.find((arr)=>{
+                    return arr.os === os
+                }).name.replace('直播','')
             }
         }
     }
 </script>
 <style lang="less">
-    .competition-page{
+    .dirAnchor-page{
         .page{
             width:1200px;
             margin:0 auto;
@@ -128,13 +153,17 @@
                     &:nth-child(4n){
                         margin-right:0
                     }
-                    img{
-                        width:100%;
-                        border-radius:6px;
-                        height:auto;
-                        max-height:200px;
+                    .anchor-img{
+                        text-align: center;
+                        margin:10px 0;
+                        img{
+                            width:60px;
+                            height:60px;
+                            border-radius:50%;
+                        }
                     }
-                    &>p{
+
+                    p{
                         font-size:14px;
                         word-break:keep-all;
                         white-space:nowrap;
@@ -142,6 +171,14 @@
                         text-overflow:ellipsis;
                         margin:10px 0;
                         text-align: center;
+                    }
+                    .os-icon{
+                        display: inline-block;
+                        vertical-align: middle;
+                        width:20px;
+                        height:20px;
+                        border-radius:50%;
+                        background-size: 100% 100%;
                     }
                 }
             }

@@ -48,7 +48,7 @@
         },
         async asyncData({ query,error}){
             let {data} = await axios.get('/api/site/competition/getCompetition');
-            console.log(data)
+            console.log(data);
             if(data.data){
                 return {competitionList:JSON.parse(data.data),competitionOrigin:JSON.parse(data.data),os:''};
             }else{

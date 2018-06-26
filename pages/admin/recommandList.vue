@@ -43,7 +43,7 @@
                         width="100"
                         label="日期">
                     <template slot-scope="scope">
-                        <el-input v-model="scope.row.date" @change="updateIndexData(scope.row)"></el-input>
+                        <el-input v-model="scope.row.add_date" @change="updateIndexData(scope.row)"></el-input>
                     </template>
                 </el-table-column>
                 <el-table-column

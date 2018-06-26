@@ -6,7 +6,10 @@
                 <el-input v-model="articleModel.article_title"></el-input>
             </p>
             <p>封面图片：</p>
-                <el-input v-model="articleModel.article_cover_img" placeholder="图片的URL"></el-input>
+            <el-input v-model="articleModel.article_cover_img" placeholder="图片的URL"></el-input>
+            <p>文章来源：</p>
+            <el-input v-model="articleModel.article_origin" placeholder="不填默认为原创"></el-input>
+
             <p>文章内容:</p>
             <div class="quill-editor"
                  :content="articleModel.article_content"

@@ -6,7 +6,7 @@
             </div>
             <ul>
                 <li @click="toNavUrl(nav)" v-for="(nav,index) in navArr">
-                    <span :class="curIndex===index?'cur':''">
+                    <span :class="{cur:nav.path!=='/'?curPath.indexOf(nav.path)>-1:curPath===nav.path}">
                         {{nav.name}}
                         <i v-if="nav.hot"></i>
                     </span>
@@ -27,15 +27,12 @@ export default{
     data(){
         return{
             navArr:navArr,
-            curIndex:0,
+            curPath:this.$route.path,
         }
-    },
-    created(){
-        this.activeNav();
     },
     watch:{
         '$route' (to, from) {
-            this.activeNav();
+            this.curPath = this.$route.path;
         }
     },
     methods:{
@@ -49,25 +46,6 @@ export default{
             this.$router.push({
                 path:nav.path
             })
-        },
-        activeNav(){
-            let path = this.$route.path;
-            console.log(path);
-            if(path==='/'||path==='/index'){
-                this.curIndex = 0;
-            }
-            if(path.indexOf('/advice')>=0){
-                this.curIndex = 4;
-            }
-            if(path.indexOf('/rank')>=0){
-                this.curIndex = 3;
-            }
-            if(path.indexOf('/competition')>=0){
-                this.curIndex = 2;
-            }
-            if(path.indexOf('/bulletScreen')>=0){
-                this.curIndex = 1;
-            }
         }
     }
 }

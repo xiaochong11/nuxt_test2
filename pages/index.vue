@@ -40,18 +40,20 @@
                           <h2>今日推荐</h2>
                           <ul>
                               <li v-for="recommand in indexObj.recommandList">
-                                  <h3>
-                                      <a :href="recommand.link_url">{{recommand.title}}</a>
-                                  </h3>
-                                  <p class="article-info">
-                                      {{new Date(recommand.date).format('yyyy-MM-dd')}} | 直播客
-                                  </p>
                                   <div>
                                       <a :href="recommand.link_url">
                                           <img :src="recommand.img_url"/>
                                       </a>
                                   </div>
-                                  <p class="article-summary">{{recommand.abstract}}</p>
+                                  <div class="recommand-info">
+                                      <h3>
+                                          <a :href="recommand.link_url">{{recommand.title}}</a>
+                                      </h3>
+                                      <p class="article-info">
+                                          {{new Date(recommand.add_date).format('yyyy-MM-dd')}} | 直播客
+                                      </p>
+                                      <p class="article-summary">{{recommand.abstract}}</p>
+                                  </div>
                               </li>
                           </ul>
                       </section>
@@ -66,14 +68,14 @@
 <script>
     import axios from '~/plugins/axios';
     export default {
-        head () {
-            return {
-                title:'直播客|打造直播乐园',
+//        head () {
+//            return {
+//                title:'直播客|打造直播乐园',
 //                meta: [
 //                    { hid: 'description', name: 'description', content: 'My custom description' }
 //                ]
-            }
-        },
+//            }
+//        },
         async asyncData({ query,error}){
             let {data} = await axios.get('/api/site/index/getList');
             if(data.data){
@@ -95,12 +97,8 @@
                 indexObj:{},
                 dataArr:[
                     {
-                        'username':'张学友',
-                        'message':'第1条弹幕'
-                    },
-                    {
-                        'username':'张学友',
-                        'message':'第2条弹幕'
+                        'username':'弹幕菌',
+                        'message':'发送某些关键词可以得到彩色弹幕哦~'
                     }
                 ],
             }
@@ -221,14 +219,19 @@
                               font-size:15px;
                               border-bottom:1px solid #eee;
                               padding-bottom:10px;
-                              margin-bottom:25px;
                           }
                           ul{
                               li{
                                   /*margin-bottom:25px;*/
                                   padding-bottom:30px;
                                   border-bottom:1px solid #eee;
+                                  display: flex;
+                                  padding-top:30px;
+                                  .recommand-info{
+                                      margin-left:20px;
+                                  }
                                   h3{
+                                      margin:0;
                                       a{
                                           color:#0da4d3;
                                           &:hover{
@@ -238,10 +241,11 @@
                                       }
                                   }
                                   img{
-                                      width:100%;
+                                      width:200px;
+                                      height:130px;
                                   }
                                   p{
-                                      margin:15px 0;
+                                      margin:12px 0;
                                   }
                                   p.article-info{
                                       font-size:12px;

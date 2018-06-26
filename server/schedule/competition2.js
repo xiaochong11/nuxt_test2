@@ -13,11 +13,11 @@ const douyuCompetitionUrlArr=[
 
     'https://www.douyu.com/t/2018kplspring',
     //175电竞
-    'https://www.douyu.com/2660926',
-    //QQ游戏街机
-    'https://www.douyu.com/156332',
-    //英雄联盟赛事活动
-    'https://www.douyu.com/673320',
+    // 'https://www.douyu.com/2660926',
+    // //QQ游戏街机
+    // 'https://www.douyu.com/156332',
+    // //英雄联盟赛事活动
+    // 'https://www.douyu.com/673320',
 ];
 let resultArr = [];
 
@@ -105,7 +105,6 @@ async function getInstance(url){
 }
 
 async function getCompetition(){
-    console.log('getCompetition...');
     let content;
     let $;
     content = await getInstance(huyaComPetitionUrl);
@@ -127,7 +126,6 @@ async function getCompetition(){
     });
     for(let i=0;i<=douyuCompetitionUrlArr.length-1;i++){
         content = await getInstance(douyuCompetitionUrlArr[i]);
-        pool.drain().then(() => pool.clear());
         $ = cheerio.load(content);
         let obj={
             imgUrl: $('.anchor-pic').find('img').attr('src'),
@@ -142,10 +140,9 @@ async function getCompetition(){
     }
 
     //console.log(resultArr);
-
+    pool.drain().then(() => pool.clear());
     out.write(JSON.stringify(resultArr));
     out.end();
 }
-// export default getCompetition;
-getCompetition();
 
+getCompetition();

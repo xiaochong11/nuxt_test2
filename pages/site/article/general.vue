@@ -2,6 +2,10 @@
     <section class="general-article">
        <article>
            <h3>{{article.article_title}}</h3>
+           <p class="article-info">
+               <span>{{new Date(article.article_create_date).format('yyyy-MM-dd')}}</span>
+               <span> | {{article.article_origin||'直播客'}}</span>
+           </p>
            <section v-html="article.article_content">
 
            </section>
@@ -61,11 +65,15 @@
                 text-align: center;
 
             }
+            p.article-info{
+                color:#8590a6;
+                font-size:14px;
+            }
             p{
                 margin:20px 0;
             }
             img{
-                width:100%;
+               text-align: center;
             }
             audio{
                 width:100%;
