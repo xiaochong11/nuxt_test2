@@ -9,7 +9,7 @@ function timed(){
         });
     }else{
         schedule.scheduleJob('*/1 * * * *', function(){
-            getCompetition();
+            // getCompetition();
             console.log('competition...');
         });
     }

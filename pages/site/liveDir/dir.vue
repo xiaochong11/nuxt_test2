@@ -1,7 +1,11 @@
 <template>
     <section class="dirAnchor-page">
         <div class="page">
-            <p>当前分类：{{$route.query.dir_name}}</p>
+            <p class="location">
+                <span>当前位置：</span>
+                <span class="dir" @click="toDir">主播推荐/</span>
+                <span>{{$route.query.dir_name}}</span>
+            </p>
             <div class="os">
                 <button :class="{'active':os===osActive}" @click="activeOs(os)" v-for="os in osList">{{getName(os)}}</button>
             </div>
@@ -12,32 +16,18 @@
                         <div class="anchor-img">
                             <img :src="anchor.anchor_img"/>
                         </div>
-                        <p>
-                            {{anchor.anchor_name}}
-                        </p>
                         <p class="nick">
                             <i class="os-icon" :style="'background-image:url('+getIcon(anchor.anchor_os)+')'">
                             </i>
+                            <span>{{anchor.anchor_name}}</span>
                         </p>
+                        <div class="anchor-intro">{{anchor.anchor_intro}}</div>
                     </a>
                 </li>
             </ul>
             <p>不良心推荐</p>
             <ul>
-                <li v-for="(anchor,index) in filter" :key="index" v-if="anchor.label===1">
-                    <a :href="anchor.anchor_link" target="_blank">
-                        <div class="anchor-img">
-                            <img :src="anchor.anchor_img"/>
-                        </div>
-                        <p>
-                            {{anchor.anchor_name}}
-                        </p>
-                        <p class="nick">
-                            <i class="os-icon" :style="'background-image:url('+getIcon(anchor.anchor_os)+')'">
-                            </i>
-                        </p>
-                    </a>
-                </li>
+
             </ul>
         </div>
 
@@ -49,14 +39,14 @@
     import axios from '~/plugins/axios';
     export default {
         head () {
-//            return {
-//                title: this.$route.query.name+',主播推荐|直播客',
-//                meta: [
-//                    {hid: 'keywords', name: 'keywords', content: this.$route.query.name+',主播推荐|直播客'},
-//                    {hid: 'description', name: 'description', content: this.$route.query.name+',主播推荐|直播客'},
-//                    {hid: 'robots', name:"robots",content:"nofollow"}
-//                ]
-//            }
+            return {
+                title: this.$route.query.dir_name+'|直播客',
+                meta: [
+                    {hid: 'keywords', name: 'keywords', content: this.$route.query.dir_name+'|直播客'},
+                    {hid: 'description', name: 'description', content:this.$route.query.dir_name+'栏目人气主播，为喜欢的主播打call'},
+                    {hid: 'robots', name:"robots",content:"nofollow"}
+                ]
+            }
         },
         async asyncData({ query,error}){
             console.log('/dir:');
@@ -106,6 +96,11 @@
                 return osArr.find((arr)=>{
                     return arr.os === os
                 }).name.replace('直播','')
+            },
+            toDir(){
+               this.$router.push({
+                   path:'/site/liveDir',
+               })
             }
         }
     }
@@ -115,7 +110,16 @@
         .page{
             width:1200px;
             margin:0 auto;
-            padding-top:30px;
+            padding-top:10px;
+            .location{
+                font-size:14px;
+                .dir{
+                    cursor:pointer;
+                    &:hover{
+                        color:rgb(0, 0, 238);
+                    }
+                }
+            }
             .os{
                 margin:15px 0;
                 button{
@@ -144,21 +148,26 @@
                 font-size:0;
                 li{
                     display: inline-block;
-                    width:146px;
+                    width:160px;
                     cursor:pointer;
                     background-color:#fff;
-                    margin-right:26px;
+                    margin-right:40px;
                     margin-bottom:30px;
                     border-radius:6px;
-                    &:nth-child(4n){
+                    &:nth-child(6n){
                         margin-right:0
+                    }
+                    a{
+                        &:hover{
+                            color:#000;
+                        }
                     }
                     .anchor-img{
                         text-align: center;
                         margin:10px 0;
                         img{
-                            width:60px;
-                            height:60px;
+                            width:86px;
+                            height:86px;
                             border-radius:50%;
                         }
                     }
@@ -179,6 +188,15 @@
                         height:20px;
                         border-radius:50%;
                         background-size: 100% 100%;
+                        margin-right:10px;
+                    }
+                    .anchor-intro{
+                        color:#999;
+                        height:32px;
+                        font-size:12px;
+                        line-height: 16px;
+                        text-align: center;
+                        overflow: hidden;
                     }
                 }
             }

@@ -23,7 +23,7 @@ html, body
 }
 
 #__layout>div>section{
-
+  min-width:1200px;
 }
 
 /*a, a:hover, a:focus, a:visited*/

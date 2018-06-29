@@ -12,8 +12,9 @@ let anchorDao = {
         if(!params.all){
             anchorQuery = anchorTable
                                     .where({deleted:0,anchor_dir_id:params.dir_id})
-                                    .select('anchor_info.*,count(anchor_comment.comment_id) AS comment_count')
+                                    .select('anchor_info.*,count(anchor_comment.anchor_id) AS comment_count')
                                     .order('show_order ASC')
+                                    .group('anchor_info.anchor_id')
                                     .join('left JOIN anchor_comment ON anchor_info.anchor_id = anchor_comment.anchor_id');
         }else{
             anchorQuery=anchorTable.select('*').order('show_order ASC');

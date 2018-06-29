@@ -13,6 +13,4 @@ dist
 # Backpack build
 build
 
-
-uploads/*
-data/*
+/server/data/*

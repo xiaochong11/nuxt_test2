@@ -60,6 +60,7 @@ export default{
         position:sticky;
         top:0;
         z-index:1000;
+        min-width:1200px;
         nav{
             position: relative;
             width:1200px;

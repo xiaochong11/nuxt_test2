@@ -1,5 +1,5 @@
 <template>
-    <div id="footer-sec">
+    <footer id="footer-sec">
         <div class="main-footer">
             <div>
                 <h4 @click="toAboutUs">联系我们</h4>
@@ -27,7 +27,7 @@
                 <!--<img src="http://www.iresearch.tv/wp-content/themes/urionz/static/imgs/zbgc.png"/>-->
             </div>
         </div>
-        <footer>
+        <div class="footer-bottom">
             <div>
 
             </div>
@@ -44,8 +44,8 @@
                 <!--</script>-->
                 <script src="https://s13.cnzz.com/z_stat.php?id=1273915397&web_id=1273915397" language="JavaScript"></script>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
 </template>
 <script>
     import {osArr} from '../conf/index';
@@ -68,6 +68,7 @@
 <style lang="less">
     #footer-sec{
         width:100%;
+        min-width: 1200px;
         position:absolute;
         bottom:0;
         /*background-color: #fff;*/
@@ -79,10 +80,11 @@
         .main-footer{
             width:1200px;
             margin:0 auto;
-            padding-top:50px;
+            padding-top:10px;
             vertical-align: top;
             h4{
                 color:#fff;
+                margin:15px 0;
             }
             >div{
                 display:inline-block;
@@ -107,7 +109,7 @@
             }
 
         }
-        footer{
+        .footer-bottom{
             width:100%;
             a{
 

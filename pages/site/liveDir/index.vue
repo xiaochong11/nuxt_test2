@@ -1,5 +1,5 @@
 <template>
-    <section class="competition-page">
+    <section class="dirIndex-page">
         <div class="page">
             <div class="os">
                 <button :class="{'active':upperDirCur===dir}" @click="activeUpperDir(dir)" v-for="dir in upperDir">{{dir}}</button>
@@ -26,10 +26,10 @@
     export default {
         head () {
             return {
-                title: '直播分类，直播推荐，主播推荐|直播客',
+                title: '直播分类，人气主播，全部直播，直播推荐，主播推荐|直播客',
                 meta: [
-                    {hid: 'keywords', name: 'keywords', content: '直播分类，直播推荐，主播推荐'},
-                    {hid: 'description', name: 'description', content: '直播分类，直播推荐，主播推荐'},
+                    {hid: 'keywords', name: 'keywords', content: '直播分类，人气主播，全部直播，直播推荐，主播推荐'},
+                    {hid: 'description', name: 'description', content: '提供最全的直播分类，推荐最好看的直播内容，为喜欢的主播打call'},
                     {hid: 'robots', name:"robots",content:"nofollow"}
                 ]
             }
@@ -99,7 +99,7 @@
     }
 </script>
 <style lang="less">
-    .competition-page{
+    .dirIndex-page{
         .page{
             width:1200px;
             margin:0 auto;
@@ -138,9 +138,9 @@
                     margin-right:26px;
                     margin-bottom:30px;
                     border-radius:6px;
-                    &:nth-child(4n){
-                        margin-right:0
-                    }
+                    /*&:nth-child(4n){*/
+                        /*margin-right:0*/
+                    /*}*/
                     img{
                         width:100%;
                         border-radius:6px;
