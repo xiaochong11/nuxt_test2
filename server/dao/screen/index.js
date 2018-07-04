@@ -18,15 +18,15 @@ let indexDao = {
         try{
             let result = await executeQuery(screenQuery.sql(),screenQuery.params());
 
-            if(result[0]){
+            if(Object.keys(params).length === 0) {
                 res.json({
-                    code:200,
-                    data:result[0]
+                    code: 200,
+                    data: result[0]
                 })
             }else{
                 res.json({
-                    code:500,
-                    data:'查询结果为空'
+                    code: 200,
+                    data: result
                 })
             }
         }catch(err){
@@ -36,7 +36,7 @@ let indexDao = {
             })
         }
     },
-    async updateIndexData(req,res,next){
+    async updateScreenImg(req,res,next){
         let params = req.body;
         console.log(params);
         let screenQuery = screenTable.where({id:params.row.id}).update(params.row);
@@ -53,9 +53,25 @@ let indexDao = {
             })
         }
     },
-    async addIndexData(req,res,next){
+    async deleteScreenImg(req,res,next){
         let params = req.body;
-        console.log(666);
+        console.log(params);
+        let screenQuery = screenTable.where({id:params.row.id}).delete();
+        try{
+            let result = await executeQuery(screenQuery.sql(),screenQuery.params());
+            res.json({
+                code:200,
+                data:'OK'
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+    },
+    async addScreenImg(req,res,next){
+        let params = req.body;
         params.date = new Date();
         let screenQuery = screenTable.insert(params);
         try{

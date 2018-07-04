@@ -47,7 +47,24 @@ let anchorDao = {
             })
         }
     },
-
+    async upadteAnchorTimes(req,res,next) {
+        let params = req.query;
+        console.log(params.anchor_id);
+        let anchorQuery = anchorTable.where({anchor_id:params.anchor_id}).update({anchor_times:mohair.raw('anchor_times+1')});
+        console.log('sss:'+anchorQuery.sql())
+        try{
+            let result = await executeQuery(anchorQuery.sql(),anchorQuery.params());
+            res.json({
+                code:200,
+                data:'OK'
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+    },
     async getAnchorComment(req,res,next) {
         let params = req.query;
         let anchorCommentQuery = anchorCommentTable.where({anchor_id:params.anchor_id}).select();

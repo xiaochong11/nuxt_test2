@@ -29,6 +29,10 @@
                     <template slot="title"><i class="el-icon-document"></i>王者荣耀</template>
                     <el-menu-item index="KingPeak">巅峰赛数据</el-menu-item>
                 </el-submenu>
+                <el-submenu index="4">
+                    <template slot="title"><i class="el-icon-document"></i>弹幕墙</template>
+                    <el-menu-item index="screenImgList">弹幕墙背景</el-menu-item>
+                </el-submenu>
 
                 <!--<el-menu-item index="loginInfo"><i class="el-icon-menu"></i>登录信息</el-menu-item>-->
             </el-menu>

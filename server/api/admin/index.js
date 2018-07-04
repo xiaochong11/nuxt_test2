@@ -4,6 +4,7 @@ import uploadDao from '../../dao/upload/index.js';
 import articleDao from '../../dao/article/index';
 import kingDao from '../../dao/king/index';
 import indexDao from '../../dao/index/index';
+import screenDao from '../../dao/screen/index';
 
 const router = Router();
 
@@ -33,6 +34,8 @@ router.post('/updatePeakData', function (req, res, next) {
 router.post('/updatePeakTime', function (req, res, next) {
     kingDao.updatePeakTime(req,res,next);
 });
+
+
 router.get('/getIndexData', function (req, res, next) {
     indexDao.getList(req,res,next);
 });
@@ -45,7 +48,18 @@ router.post('/addIndexData', function (req, res, next) {
 });
 
 
-
+router.get('/getScreenImg', function (req, res, next) {
+    screenDao.getList(req,res,next);
+});
+router.post('/addScreenImg', function (req, res, next) {
+    screenDao.addScreenImg(req,res,next);
+});
+router.post('/updateScreenImg', function (req, res, next) {
+    screenDao.updateScreenImg(req,res,next);
+});
+router.post('/deleteScreenImg', function (req, res, next) {
+    screenDao.deleteScreenImg(req,res,next);
+});
 
 
 //文件上传服务

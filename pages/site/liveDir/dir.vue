@@ -11,7 +11,7 @@
             </div>
             <p>良心推荐</p>
             <ul>
-                <li v-for="(anchor,index) in filter" :key="index" v-if="anchor.label===0">
+                <li v-for="(anchor,index) in filter" :key="index" v-if="anchor.anchor_label===0"   @mouseenter="enter(index)" @mouseleave="leave" @click="updateTimes(anchor.anchor_id)">
                     <a :href="anchor.anchor_link" target="_blank">
                         <div class="anchor-img">
                             <img :src="anchor.anchor_img"/>
@@ -23,6 +23,10 @@
                         </p>
                         <div class="anchor-intro">{{anchor.anchor_intro}}</div>
                     </a>
+                    <div v-show="curIndex === index" class="li-footer" @click.self="toComment(anchor.anchor_id)">
+                        <span>留言数：</span>
+                        <span class="label">1111</span>
+                    </div>
                 </li>
             </ul>
             <p>不良心推荐</p>
@@ -47,6 +51,12 @@
                     {hid: 'robots', name:"robots",content:"nofollow"}
                 ]
             }
+        },
+        data(){
+            return{
+                curIndex:-1
+            }
+
         },
         async asyncData({ query,error}){
             console.log('/dir:');
@@ -101,6 +111,27 @@
                this.$router.push({
                    path:'/site/liveDir',
                })
+            },
+            enter(index){
+                console.log('enter');
+                this.curIndex = index;
+            },
+            leave(){
+
+            },
+            updateTimes(anchor_id){
+                console.log('update');
+                axios.get('/api/site/anchor/upadteAnchorTimes',{
+                    params:{
+                        anchor_id:anchor_id
+                    }
+                })
+            },
+            toComment(anchor_id){
+                console.log('to...');
+                this.$router.push({
+                    path:'/site/liveDir/anchorMessage'
+                })
             }
         }
     }
@@ -197,6 +228,18 @@
                         line-height: 16px;
                         text-align: center;
                         overflow: hidden;
+                    }
+                    .li-footer{
+                        font-size:12px;
+                        margin:5px 0;
+                        text-align: center;
+                        &:hover{
+                            color:#00B7FF;
+                        }
+                        .label{
+
+                            /*padding:5px;*/
+                        }
                     }
                 }
             }
