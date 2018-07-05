@@ -68,14 +68,14 @@
 <script>
     import axios from '~/plugins/axios';
     export default {
-//        head () {
-//            return {
-//                title:'直播客|打造直播乐园',
-//                meta: [
-//                    { hid: 'description', name: 'description', content: 'My custom description' }
-//                ]
-//            }
-//        },
+        head () {
+            return {
+                meta: [
+                    {hid: 'robots', name:"robots",content:"nofollow"},
+                    {hid:'baidu',name:'baidu-site-verification',content:'f5qOxcTveU'}
+                ]
+            }
+        },
         async asyncData({ query,error}){
             let {data} = await axios.get('/api/site/index/getList');
             if(data.data){
