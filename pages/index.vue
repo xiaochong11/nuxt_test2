@@ -72,7 +72,6 @@
             return {
                 meta: [
                     {hid: 'robots', name:"robots",content:"nofollow"},
-                    {hid:'baidu',name:'baidu-site-verification',content:'f5qOxcTveU'}
                 ]
             }
         },

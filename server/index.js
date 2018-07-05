@@ -16,6 +16,7 @@ app.set('port', port)
 
 app.use('/static',express.static('static'));
 app.use('/robots.txt',express.static('robots.txt'));
+app.use('/baidu_verify_f5qOxcTveU.html',express.static('baidu_verify_f5qOxcTveU.html'));
 
 app.use(bodyParser.json({limit: '1mb'}));  //这里指定参数使用 json 格式
 app.use(bodyParser.urlencoded({
