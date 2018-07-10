@@ -102,7 +102,7 @@
                    {order_id:7,nickname:'未央的小橙子',score:1862},
                    {order_id:8,nickname:'宇晨—心向佛',score:1858},
                    {order_id:9,nickname:'斗鱼不二KKKK',score:1858},
-                   {order_id:,nickname:'虎牙、浪子画',score:1854},
+                   {order_id:10,nickname:'虎牙、浪子画',score:1854},
                ]
             }
         },
