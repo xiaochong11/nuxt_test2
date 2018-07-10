@@ -1,6 +1,8 @@
 import mohair from 'mohair';
 import executeQuery from '../base/index';
 
+import filter from '../../util/text-censor';
+
 let anchorTable = mohair.table('anchor_info');
 let anchorCommentTable =  mohair.table('anchor_comment');
 
@@ -67,24 +69,50 @@ let anchorDao = {
     },
     async getAnchorComment(req,res,next) {
         let params = req.query;
+        let anchorQuery = anchorTable.where({anchor_id:params.anchor_id}).select();
         let anchorCommentQuery = anchorCommentTable.where({anchor_id:params.anchor_id}).select();
         try {
-            let result = await executeQuery(anchorCommentQuery.sql(), anchorCommentQuery.params());
+            let anchorInfo = await executeQuery(anchorQuery.sql(), anchorQuery.params());
+
+            let commentList = await executeQuery(anchorCommentQuery.sql(), anchorCommentQuery.params());
             res.json({
-                code:200,
-                data:result
+                code: 200,
+                data: {
+                    anchorInfo: anchorInfo[0],
+                    commentList
+                }
             })
         }catch(err){
             res.json({
-                code:500,
-                data:err
+                code: 500,
+                data: err
             })
         }
+
+        // let anchorQuery = anchorTable
+        //     .where({deleted:0,'anchor_info.anchor_id':params.anchor_id})
+        //     .select('anchor_info.*,anchor_comment.*')
+        //     .group('anchor_info.anchor_id')
+        //     .join('left JOIN anchor_comment ON anchor_info.anchor_id = anchor_comment.anchor_id');
+        // try{
+        //     let result = await executeQuery(anchorQuery.sql(), anchorQuery.params());
+        //     res.json({
+        //         code: 200,
+        //         data: result
+        //     })
+        // }catch(err){
+        //     res.json({
+        //         code:500,
+        //         data:err
+        //     })
+        // }
     },
 
     async postAnchorComment(req,res,next) {
-        let params = req.query;
+        let params = req.body;
         params.comment_date = new Date();
+        params.content = filter(params.content);
+        console.log(params);
         let anchorCommentQuery = anchorCommentTable.insert(params);
         try {
             let result = await executeQuery(anchorCommentQuery.sql(), anchorCommentQuery.params());

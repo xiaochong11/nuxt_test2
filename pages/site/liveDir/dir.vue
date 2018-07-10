@@ -11,8 +11,8 @@
             </div>
             <p>良心推荐</p>
             <ul>
-                <li v-for="(anchor,index) in filter" :key="index" v-if="anchor.anchor_label===0"   @mouseenter="enter(index)" @mouseleave="leave" @click="updateTimes(anchor.anchor_id)">
-                    <a :href="anchor.anchor_link" target="_blank">
+                <li v-for="(anchor,index) in filter" :key="index" v-if="anchor.label===0"   @mouseenter="enter(index)" @mouseleave="leave" :class="{'cur-li':curIndex === index}">
+                    <a :href="anchor.anchor_link" target="_blank" @click="updateTimes(anchor.anchor_id)">
                         <div class="anchor-img">
                             <img :src="anchor.anchor_img"/>
                         </div>
@@ -23,9 +23,9 @@
                         </p>
                         <div class="anchor-intro">{{anchor.anchor_intro}}</div>
                     </a>
-                    <div v-show="curIndex === index" class="li-footer" @click.self="toComment(anchor.anchor_id)">
+                    <div v-show="curIndex === index" class="li-footer" @click="toComment(anchor)">
                         <span>留言数：</span>
-                        <span class="label">1111</span>
+                        <span class="label">{{anchor.comment_count}}</span>
                     </div>
                 </li>
             </ul>
@@ -117,7 +117,7 @@
                 this.curIndex = index;
             },
             leave(){
-
+                this.curIndex = -1;
             },
             updateTimes(anchor_id){
                 console.log('update');
@@ -127,10 +127,14 @@
                     }
                 })
             },
-            toComment(anchor_id){
+            toComment(anchor){
                 console.log('to...');
                 this.$router.push({
-                    path:'/site/liveDir/anchorMessage'
+                    path:'/site/liveDir/anchorMessage',
+                    query:{
+                        anchorName:anchor.anchor_name,
+                        anchorId:anchor.anchor_id
+                    }
                 })
             }
         }
@@ -177,16 +181,26 @@
             }
             ul{
                 font-size:0;
+                padding:20px 0;
+                display: flex;
+                flex-wrap: wrap;
+
                 li{
-                    display: inline-block;
+                    /*display: inline-block;*/
                     width:160px;
                     cursor:pointer;
                     background-color:#fff;
                     margin-right:40px;
                     margin-bottom:30px;
                     border-radius:6px;
+                    height:169px;
                     &:nth-child(6n){
                         margin-right:0
+                    }
+                    &.cur-li{
+                        height:196px;
+                        margin-top:-15px;
+                        margin-bottom:0px;
                     }
                     a{
                         &:hover{

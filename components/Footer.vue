@@ -5,6 +5,7 @@
                 <h4 @click="toAboutUs">联系我们</h4>
                 <!--<p>广告合作&nbsp;&nbsp;&nbsp;&nbsp;166303307@qq.com</p>-->
                 <p>商务合作&nbsp;&nbsp;&nbsp;&nbsp;zhiboke@foxmail.com</p>
+                <p>广告合作&nbsp;&nbsp;&nbsp;&nbsp;微信：xiaochong_ha</p>
                 <p>
                     <!--<router-link :to="{path:'/site/article/general',query:{id:8}}">-->
                         <!--常见问题解答-->

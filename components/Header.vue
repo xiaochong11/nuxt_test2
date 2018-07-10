@@ -12,11 +12,11 @@
                     </span>
                 </li>
             </ul>
-            <!--<div class="user">-->
-                <!--<span>登录</span>-->
-                <!--<i class="icon">|</i>-->
-                <!--<span>注册</span>-->
-            <!--</div>-->
+            <div class="user">
+                <span @click="toLogin">登录</span>
+                <i class="icon">|</i>
+                <span>注册</span>
+            </div>
         </nav>
     </header>
 </template>
@@ -45,6 +45,11 @@ export default{
             console.log(nav);
             this.$router.push({
                 path:nav.path
+            })
+        },
+        toLogin(){
+            this.$router.push({
+                path:'/user/login'
             })
         }
     }

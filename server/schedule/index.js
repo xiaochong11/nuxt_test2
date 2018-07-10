@@ -8,10 +8,10 @@ function timed(){
             console.log('competition...');
         });
     }else{
-        schedule.scheduleJob('*/1 * * * *', function(){
-            // getCompetition();
-            console.log('competition...');
-        });
+        // schedule.scheduleJob('*/1 * * * *', function(){
+        //     // getCompetition();
+        //     console.log('competition...');
+        // });
     }
 
 }

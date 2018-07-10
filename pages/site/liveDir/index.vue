@@ -132,7 +132,7 @@
                 font-size:0;
                 li{
                     display: inline-block;
-                    width:146px;
+                    width:145px;
                     cursor:pointer;
                     background-color:#fff;
                     margin-right:26px;
