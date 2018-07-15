@@ -21,8 +21,8 @@
                             </i>
                             <span>{{anchor.anchor_name}}</span>
                         </p>
-                        <div class="anchor-intro">{{anchor.anchor_intro}}</div>
                     </a>
+                    <div class="anchor-intro" @click="toComment(anchor)">{{anchor.anchor_intro}}</div>
                     <div v-show="curIndex === index" class="li-footer" @click="toComment(anchor)">
                         <span>留言数：</span>
                         <span class="label">{{anchor.comment_count}}</span>
@@ -35,7 +35,47 @@
             </ul>
         </div>
 
+        <div class="recommend-tip" @click="recommend">
+            <span>我要推荐</span>
+        </div>
 
+        <el-dialog
+                title="推荐主播"
+                :visible.sync="dialogVisible"
+                center
+        >
+            <el-form ref="form" :model="anchor" label-width="80px">
+                <el-form-item label="主播名称">
+                    <el-input
+                            placeholder="主播名称"
+                            v-model="anchor.anchor_name">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="所在平台">
+                    <el-select v-model="anchor.anchor_os" placeholder="请选择">
+                        <el-option
+                                v-for="(item,index) in osArr"
+                                :key="index"
+                                :label="item.name"
+                                :value="item.os">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="主播介绍">
+                    <el-input
+                            type="textarea"
+                            :rows="5"
+                            placeholder="主播介绍"
+                            v-model="anchor.anchor_intro">
+                    </el-input>
+                </el-form-item>
+
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="addAnchorSure">确 定</el-button>
+            </span>
+        </el-dialog>
     </section>
 </template>
 <script>
@@ -44,20 +84,15 @@
     export default {
         head () {
             return {
-                title: this.$route.query.dir_name+'|直播客',
+                title: this.$route.query.dir_name+'主播推荐，主播汇集|直播客',
                 meta: [
-                    {hid: 'keywords', name: 'keywords', content: this.$route.query.dir_name+'|直播客'},
-                    {hid: 'description', name: 'description', content:this.$route.query.dir_name+'栏目人气主播，为喜欢的主播打call'},
+                    {hid: 'keywords', name: 'keywords', content: this.$route.query.dir_name+'主播推荐，主播汇集，主播社区，主播交流社区'},
+                    {hid: 'description', name: 'description', content:this.$route.query.dir_name+'，主播交流社区，栏目人气主播，为喜欢的主播打call'},
                     {hid: 'robots', name:"robots",content:"nofollow"}
                 ]
             }
         },
-        data(){
-            return{
-                curIndex:-1
-            }
 
-        },
         async asyncData({ query,error}){
             console.log('/dir:');
             let {data} = await axios.get('/api/site/anchor/getDirAnchor',{
@@ -81,6 +116,17 @@
                 error({ statusCode: 404, message: '暂无数据' })
             }
         },
+        data(){
+            return{
+                curIndex:-1,
+                dialogVisible:false,
+                osArr:osArr,
+                anchor:{
+
+                }
+            }
+
+        },
         computed:{
             filter(){
                 return this.anchorList.filter((arr,index)=>{
@@ -89,6 +135,25 @@
             },
         },
         methods:{
+            recommend(){
+                this.dialogVisible = true;
+            },
+            async addAnchorSure(){
+                this.dialogVisible = true;
+                this.anchor.recommend_auth_id = 0;
+                this.anchor.deleted = 1;
+                let {data} = await axios.post('/api/site/anchor/addAnchor',this.anchor);
+                this.anchor = {};
+                if(data.code === 200){
+                    window.bus.$emit('dialogShow','推荐成功，我们稍后会审核',()=>{
+                        this.dialogVisible = false;
+                    })
+                }else{
+                    window.bus.$emit('dialogShow','推荐失败，请稍后再试',()=>{
+                        this.dialogVisible = false;
+                    })
+                }
+            },
             activeOs(os){
                 if(this.osActive === os){
                     this.osActive = '';
@@ -142,6 +207,22 @@
 </script>
 <style lang="less">
     .dirAnchor-page{
+        .el-select {
+            width: 100%;
+        }
+
+        .recommend-tip{
+            position: fixed;
+            right:0;
+            top:50%;
+            width:80px;
+            height:50px;
+            line-height: 50px;
+            text-align: center;
+            color:#fff;
+            background-color: #00B7FF;
+            cursor: pointer;
+        }
         .page{
             width:1200px;
             margin:0 auto;
@@ -242,6 +323,9 @@
                         line-height: 16px;
                         text-align: center;
                         overflow: hidden;
+                        &:hover{
+                            color:#00B7FF;
+                        }
                     }
                     .li-footer{
                         font-size:12px;

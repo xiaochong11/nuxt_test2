@@ -49,6 +49,24 @@ let anchorDao = {
             })
         }
     },
+    async addAnchor(req,res,next){
+        let params = req.body;
+        params.add_date = new Date();
+        let anchorQuery = anchorTable.insert(params);
+
+        try{
+            let result = await executeQuery(anchorQuery.sql(),anchorQuery.params());
+            res.json({
+                code:200,
+                data:'OK'
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+    },
     async upadteAnchorTimes(req,res,next) {
         let params = req.query;
         console.log(params.anchor_id);
@@ -69,8 +87,10 @@ let anchorDao = {
     },
     async getAnchorComment(req,res,next) {
         let params = req.query;
+        let offset = params.page*3;
         let anchorQuery = anchorTable.where({anchor_id:params.anchor_id}).select();
-        let anchorCommentQuery = anchorCommentTable.where({anchor_id:params.anchor_id}).select();
+
+        let anchorCommentQuery = anchorCommentTable.where({anchor_id:params.anchor_id}).order('comment_up desc,comment_id asc').limit(3).offset(offset).select();
         try {
             let anchorInfo = await executeQuery(anchorQuery.sql(), anchorQuery.params());
 
@@ -111,7 +131,7 @@ let anchorDao = {
     async postAnchorComment(req,res,next) {
         let params = req.body;
         params.comment_date = new Date();
-        params.content = filter(params.content);
+        params.content = filter(params.content,60).replace('\n','<br/>');
         console.log(params);
         let anchorCommentQuery = anchorCommentTable.insert(params);
         try {
@@ -127,7 +147,31 @@ let anchorDao = {
             })
         }
     },
+    async updateCommentTimes(req,res,next){
+        let params = req.query;
+        console.log('update');
+        let anchorCommentQuery;
+        if(params.item === 'up'){
+            console.log('up');
+            anchorCommentQuery= anchorCommentTable.where({comment_id:params.comment_id}).update({comment_up:mohair.raw('comment_up+1')});
+        }else if(params.item === 'down'){
+           anchorCommentQuery = anchorCommentTable.where({comment_id:params.comment_id}).update({comment_down:mohair.raw('comment_down+1')});
+        }
 
+        try{
+            let result = await executeQuery(anchorCommentQuery.sql(),anchorCommentQuery.params());
+            res.json({
+                code:200,
+                data:'OK'
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+
+    },
     async updateAnchor(req,res,next){
         let params = req.body;
         console.log(params);

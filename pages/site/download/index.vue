@@ -23,10 +23,10 @@
     export default {
         head () {
             return {
-                title:'各大直播app下载|直播客',
+                title:'直播工具下载，直播app下载|直播客',
                 meta: [
-                    { hid: 'keywords', name: 'keywords', content: '直播客提供各大直播app下载，各大直播平台app下载汇总' },
-                    { hid: 'description', name: 'description', content: '直播客提供各大直播app下载，各大直播平台app下载汇总'},
+                    { hid: 'keywords', name: 'keywords', content: '直播工具下载、各大直播app下载，直播下载汇总' },
+                    { hid: 'description', name: 'description', content: '直播客提供直播工具下载、直播app下载，各大直播平台app下载汇总'},
                     {hid: 'robots', name:"robots",content:"nofollow"}
                 ]
             }

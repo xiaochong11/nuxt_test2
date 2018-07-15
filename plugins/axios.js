@@ -16,6 +16,7 @@ axios.interceptors.request.use(function (config) {
         //config.data = qs.stringify(config.data);
         config.headers['Content-Type'] = 'application/json';
     }
+
     if(config.url.indexOf('/admin/')>-1&&config.url.indexOf('/admin/login')<=-1){
         config.headers['token'] = store.getItem('token');
     }

@@ -36,33 +36,38 @@
             <section class="history-sec">
                 <h3>王者荣耀s11赛季巅峰赛排行榜</h3>
                 <div class="intro">
-                    <p>更新时间：<span>{{getUpdateDate()}}</span>(苹果微信区)</p>
-                    <p class="screen" @click="toBulletScreen">我想发弹幕></p>
+                    <p>最后更新时间：<span>{{getUpdateDate()}}</span>(苹果微信区)</p>
                 </div>
-
-                <section class="table-sec">
-                    <el-table
-                            :data="s11Data"
-                            stripe
-                            style="width:500px">
-                        <el-table-column
-                                prop="order_id"
-                                label="排名"
-                                width="100">
-                        </el-table-column>
-                        <el-table-column
-                                label="昵称">
-                            <template  slot-scope="scope">
-                                <el-tag size="medium">{{ scope.row.nickname }}</el-tag>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                                prop="score"
-                                width="120"
-                                label="积分">
-                        </el-table-column>
-                    </el-table>
-                </section>
+                <el-collapse v-model="activeNames" @change="handleChange">
+                    <el-collapse-item title="一致性 Consistency" name="1">
+                        <template slot="title">
+                            <p style="text-align:center">查看详细数据</p>
+                        </template>
+                        <section class="table-sec">
+                            <el-table
+                                    :data="s11Data"
+                                    stripe
+                                    style="width:500px">
+                                <el-table-column
+                                        prop="order_id"
+                                        label="排名"
+                                        width="100">
+                                </el-table-column>
+                                <el-table-column
+                                        label="昵称">
+                                    <template  slot-scope="scope">
+                                        <el-tag size="medium">{{ scope.row.nickname }}</el-tag>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="score"
+                                        width="120"
+                                        label="积分">
+                                </el-table-column>
+                            </el-table>
+                        </section>
+                    </el-collapse-item>
+                </el-collapse>
             </section>
         </div>
     </section>
@@ -72,10 +77,10 @@
     export default {
         head () {
             return {
-                title:'王者荣耀巅峰赛排行榜单，巅峰赛数据|直播客',
+                title:'王者荣耀巅峰赛最新排名，最新巅峰赛数据|直播客',
                 meta:[
-                    { hid: 'keywords', name: 'keywords', content: '王者巅峰赛，王者巅峰赛排名，王者巅峰赛数据' },
-                    { hid: 'description', name: 'description', content: '直播客提供王者巅峰赛排行榜,每日更新巅峰赛数据'}
+                    { hid: 'keywords', name: 'keywords', content: '王者巅峰赛，王者巅峰赛最新排名，巅峰赛演员，王者巅峰赛最新数据，王者荣耀数据' },
+                    { hid: 'description', name: 'description', content: '直播客提供王者巅峰赛最新排名,每日更新巅峰赛数据'}
                 ]
 
             }

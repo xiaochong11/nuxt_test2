@@ -6,16 +6,16 @@
             </div>
             <ul>
                 <li @click="toNavUrl(nav)" v-for="(nav,index) in navArr">
-                    <span :class="{cur:nav.path!=='/'?curPath.indexOf(nav.path)>-1:curPath===nav.path}">
+                    <span :class="{cur:compute(nav)}">
                         {{nav.name}}
                         <i v-if="nav.hot"></i>
                     </span>
                 </li>
             </ul>
             <div class="user">
-                <span @click="toLogin">登录</span>
-                <i class="icon">|</i>
-                <span>注册</span>
+                <!--<span @click="toLogin">登录</span>-->
+                <!--<i class="icon">|</i>-->
+                <!--<span>注册</span>-->
             </div>
         </nav>
     </header>
@@ -51,6 +51,15 @@ export default{
             this.$router.push({
                 path:'/user/login'
             })
+        },
+        compute(nav){
+            if(this.curPath.indexOf('Dir')>-1){
+                if(this.$route.query.dir_id === 1){
+                    return true;
+                }
+
+            }
+            return nav.path!=='/'?this.curPath.indexOf(nav.path)>-1:this.curPath===nav.path
         }
     }
 }
@@ -76,7 +85,7 @@ export default{
                 display:inline-block;
                 vertical-align: top;
                 width:150px;
-                margin-right:100px;
+                margin-right:30px;
                 cursor:pointer;
                 img{
                     width:100%;

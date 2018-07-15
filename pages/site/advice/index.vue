@@ -39,10 +39,10 @@
     export default {
         head () {
             return {
-                title:'反馈建议，我们期待你的建议|直播客',
+                title:'网站内容的反馈建议，我们期待你的建议|直播客',
                 meta: [
-                    { hid: 'keywords', name: 'keywords', content: '反馈建议，我们期待你的建议|直播客' },
-                    { hid: 'description', name: 'description', content: '反馈建议，我们期待你的建议|直播客' }
+                    { hid: 'keywords', name: 'keywords', content: '网站内容的反馈建议，我们期待你的建议|直播客' },
+                    { hid: 'description', name: 'description', content: '网站内容的反馈建议，我们期待你的建议|直播客' }
                 ]
             }
         },
