@@ -90,7 +90,7 @@ let anchorDao = {
         let offset = params.page*3;
         let anchorQuery = anchorTable.where({anchor_id:params.anchor_id}).select();
 
-        let anchorCommentQuery = anchorCommentTable.where({anchor_id:params.anchor_id}).order('comment_up desc,comment_id asc').limit(3).offset(offset).select();
+        let anchorCommentQuery = anchorCommentTable.where({anchor_id:params.anchor_id}).order('comment_up desc,comment_id desc').limit(3).offset(offset).select();
         try {
             let anchorInfo = await executeQuery(anchorQuery.sql(), anchorQuery.params());
 

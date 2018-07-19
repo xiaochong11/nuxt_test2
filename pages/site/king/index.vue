@@ -77,7 +77,7 @@
     export default {
         head () {
             return {
-                title:'王者荣耀巅峰赛最新排名，最新巅峰赛数据|直播客',
+                title:'王者荣耀巅峰赛最新排名，巅峰赛实时数据|直播客',
                 meta:[
                     { hid: 'keywords', name: 'keywords', content: '王者巅峰赛，王者巅峰赛最新排名，巅峰赛演员，王者巅峰赛最新数据，王者荣耀数据' },
                     { hid: 'description', name: 'description', content: '直播客提供王者巅峰赛最新排名,每日更新巅峰赛数据'}

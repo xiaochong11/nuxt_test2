@@ -26,10 +26,10 @@
     export default {
         head () {
             return {
-                title: '主播推广，主播学习资源，直播类别，人气主播，直播推荐，主播推荐|直播客',
+                title: '主播资料大全，技术实力主播，好玩的直播推荐|直播客',
                 meta: [
-                    {hid: 'keywords', name: 'keywords', content: '主播推广，主播学习资源，直播类别，人气主播，直播推荐，主播推荐'},
-                    {hid: 'description', name: 'description', content: '提供最全的直播分类，推荐最好看的直播内容，为喜欢的主播打call'},
+                    {hid: 'keywords', name: 'keywords', content: '网络主播，主播资料大全,主播百科，主播推广评价，人气主播，好玩的直播推荐'},
+                    {hid: 'description', name: 'description', content: '提供最全的直播分类，最好玩的直播，为喜欢的主播打call'},
                     {hid: 'robots', name:"robots",content:"nofollow"}
                 ]
             }

@@ -78,9 +78,9 @@
     export default {
         head () {
             return {
-                title: this.commentData.anchorInfo.anchor_name+'|直播客',
+                title:`${this.commentData.anchorInfo.anchor_name},${this.commentData.anchorInfo.anchor_name}个人资料|直播客` ,
                 meta: [
-                    {hid: 'keywords', name: 'keywords', content: this.commentData.anchorInfo.anchor_name+'的评价，主播评价社区，主播交流社区'},
+                    {hid: 'keywords', name: 'keywords', content: `${this.commentData.anchorInfo.anchor_name},${this.commentData.anchorInfo.anchor_name}个人资料,${this.commentData.anchorInfo.anchor_name}的评价，主播评价社区，主播交流社区`},
                     {hid: 'description', name: 'description', content:this.commentData.anchorInfo.anchor_name+'，主播评价社区,主播交流社区，为喜欢的主播打call'},
                     {hid: 'robots', name:"robots",content:"nofollow"}
                 ]

@@ -84,9 +84,9 @@
     export default {
         head () {
             return {
-                title: this.$route.query.dir_name+'主播推荐，主播汇集|直播客',
+                title: `${this.$route.query.dir_name}主播，${this.$route.query.dir_name}技术主播、实力主播排名、主播社区|直播客`,
                 meta: [
-                    {hid: 'keywords', name: 'keywords', content: this.$route.query.dir_name+'主播推荐，主播汇集，主播社区，主播交流社区'},
+                    {hid: 'keywords', name: 'keywords', content: `${this.$route.query.dir_name}主播，${this.$route.query.dir_name}技术实力主播、${this.$route.query.dir_name}主播社区，${this.$route.query.dir_name}主播交流社区}`},
                     {hid: 'description', name: 'description', content:this.$route.query.dir_name+'，主播交流社区，栏目人气主播，为喜欢的主播打call'},
                     {hid: 'robots', name:"robots",content:"nofollow"}
                 ]

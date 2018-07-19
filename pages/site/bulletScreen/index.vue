@@ -66,10 +66,10 @@
     export default {
         head () {
             return {
-                title:'弹幕墙，直播界最好玩的弹幕汇集|直播客',
+                title:'彩色弹幕，弹幕墙，直播弹幕|直播客',
                 meta: [
-                    { hid: 'keywords', name: 'keywords', content: '弹幕墙，直播界最好玩的弹幕汇集，自由的弹幕发送，彩色的弹幕，可以为喜欢的主播加油' },
-                    { hid: 'description', name: 'description', content: '弹幕墙，直播界最好玩的弹幕汇集，自由的弹幕发送，彩色的弹幕，可以为喜欢的主播加油' }
+                    { hid: 'keywords', name: 'keywords', content: '彩色弹幕，自由弹幕，弹幕墙，直播弹幕' },
+                    { hid: 'description', name: 'description', content: '彩色弹幕，弹幕墙，直播弹幕汇集，自由的弹幕发送，彩色的弹幕，可以为喜欢的主播加油' }
                 ]
             }
         },
