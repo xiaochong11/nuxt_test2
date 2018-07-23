@@ -53,9 +53,12 @@ export default{
             })
         },
         compute(nav){
-            if(this.curPath.indexOf('Dir')>-1){
-                if(this.$route.query.dir_id === 1){
+            if(this.curPath.indexOf('liveDir')>-1&&this.$route.query.dir_id ===1){
+                console.log(nav.path);
+                if(nav.path === '/site/liveDir/dir?dir_id=1&dir_name=王者荣耀'){
                     return true;
+                }else{
+                    return false;
                 }
 
             }

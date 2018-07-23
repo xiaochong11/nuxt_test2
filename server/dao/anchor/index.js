@@ -49,6 +49,52 @@ let anchorDao = {
             })
         }
     },
+
+    async getSearchAnchor(req,res,next){
+        let params = req.query;
+        console.log(params);
+        let anchorQuery={}
+        if(!params.all){
+            anchorQuery = anchorTable
+                .where({deleted:0})
+                // .where('anchor_name LIKE',`%${params.searchItem}%`)
+                .where('anchor_name LIKE ?',`%${params.searchItem}%`)
+                .select('anchor_info.*,count(anchor_comment.anchor_id) AS comment_count')
+                .order('show_order ASC')
+                .group('anchor_info.anchor_id')
+                .join('left JOIN anchor_comment ON anchor_info.anchor_id = anchor_comment.anchor_id');
+        }else{
+            anchorQuery=anchorTable.select('*').order('show_order ASC');
+        }
+        console.log(anchorQuery.sql());
+        try{
+            let result = await executeQuery(anchorQuery.sql(),anchorQuery.params());
+            console.log(result);
+            if(result){
+                //依照时间过滤
+                // let nowTime = new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds();
+                // result = result.filter((arr,index)=>{
+                //     return  arr.start_time === "00:00:00"||(arr.start_time>=nowTime&&arr.end_time<=nowTime)
+                // });
+                res.json({
+                    code:200,
+                    data:result
+                })
+            }else{
+                res.json({
+                    code:500,
+                    data:'查询结果为空'
+                })
+            }
+
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+    },
+
     async addAnchor(req,res,next){
         let params = req.body;
         params.add_date = new Date();
@@ -87,10 +133,22 @@ let anchorDao = {
     },
     async getAnchorComment(req,res,next) {
         let params = req.query;
-        let offset = params.page*3;
-        let anchorQuery = anchorTable.where({anchor_id:params.anchor_id}).select();
+        let limit = 3;
+        let offset = params.page*limit;
+        let anchorQuery = anchorTable
+                            .where({deleted:0,'anchor_info.anchor_id':params.anchor_id})
+                            .select('anchor_info.*,avg(anchor_comment.rate) AS rateAvg')
+                            .group('anchor_info.anchor_id')
+                            .join('left JOIN anchor_comment ON anchor_info.anchor_id = anchor_comment.anchor_id');
 
-        let anchorCommentQuery = anchorCommentTable.where({anchor_id:params.anchor_id}).order('comment_up desc,comment_id desc').limit(3).offset(offset).select();
+        let anchorCommentQuery = anchorCommentTable
+                                .where({anchor_id:params.anchor_id})
+                                .order('comment_up desc,comment_id desc')
+                                .limit(limit)
+                                .offset(offset)
+                                .select("*");
+
+        console.log(anchorCommentQuery.sql());
         try {
             let anchorInfo = await executeQuery(anchorQuery.sql(), anchorQuery.params());
 

@@ -10,6 +10,31 @@
                   </el-carousel-item>
               </el-carousel>
           </div>
+          <section class="box">
+              <ul>
+                  <li @click="toLink('/site/liveDir/dir?dir_id=1&dir_name=王者荣耀')">
+                      <h1>王者主播推荐</h1>
+                      <p>精挑细选的主播</p>
+                  </li>
+                  <li  @click="toLink('/site/king')">
+                      <h1>巅峰赛数据</h1>
+                      <p>最新的王者巅峰赛排名</p>
+                  </li>
+                  <li  @click="toLink('/site/bulletScreen')">
+                      <h1>弹幕墙</h1>
+                      <p>最好玩的弹幕</p>
+                  </li>
+              </ul>
+          </section>
+          <section class="search">
+              <div>
+                  <div class="form">
+                      <input type="text" v-model="searchModel"/>
+                      <el-button type="primary" @click="searchAnchor">搜索</el-button>
+                  </div>
+                  <p>搜搜喜欢的主播，为他加油</p>
+              </div>
+          </section>
           <section class="main">
               <div class="main-container">
                   <aside class="left-aside">
@@ -100,6 +125,7 @@
                         'message':'发送某些关键词可以得到彩色弹幕哦~'
                     }
                 ],
+                searchModel:''
             }
         },
         mounted(){
@@ -126,6 +152,19 @@
                 this.$router.push({
                     path:'/site/bulletScreen'
                 })
+            },
+            toPath(to){
+                this.$router.push({
+                    path:to
+                })
+            },
+            searchAnchor(){
+                this.$router.push({
+                    path:'/site/liveDir/search',
+                    query:{
+                        searchItem:this.searchModel
+                    }
+                })
             }
         }
 
@@ -140,7 +179,7 @@
           padding-bottom:0;
           .banner{
               background:#f7f7f7;
-              padding:45px 0 40px;
+              padding-top:40px;
               .el-carousel{
                   width:1200px;
                   margin:0 auto;
@@ -157,6 +196,70 @@
                       cursor:pointer;
                       display: inline-block;
                       vertical-align:middle;
+                  }
+              }
+          }
+          .box{
+              background:#f7f7f7;
+              margin-bottom:40px;
+              ul{
+                  width:1200px;
+                  margin:0 auto;
+                  background: #ffffff;
+                  overflow:hidden;
+                  display: flex;
+                  li{
+                      padding:40px 0;
+                      width:33.33%;
+                      text-align: center;
+
+                      h1{
+                          font-size: 18px;
+                          font-weight: normal;
+                          color: #333333;
+                          margin: 5px 0;
+                          &:hover{
+                              cursor:pointer;
+                              color:#00B7FF;
+                          }
+                      }
+                      p{
+                          color: #999999;
+                          font-size: 14px;
+                          &:hover{
+                              cursor:pointer;
+                          }
+                      }
+
+                  }
+              }
+          }
+          .search{
+              background:#f7f7f7;
+              margin-bottom:40px;
+              &>div{
+                  width:1200px;
+                  margin:0 auto;
+                  background: #ffffff;
+                  overflow:hidden;
+                  padding:15px 0;
+                  text-align: center;
+                  .form{
+                      input{
+                          border: 1px solid #dcdfe6;
+                          width: 520px;
+                          height: 40px;
+                          box-sizing: border-box;
+                          vertical-align: top;
+                          border-left: 1px solid #E6E6E6;
+                          padding-left: 10px;
+                          color: #666666;
+                      }
+                  }
+                  p{
+                      font-size:12px;
+                      color:#999999;
+                      margin-bottom:0;
                   }
               }
           }

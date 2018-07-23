@@ -7,6 +7,11 @@ const router = Router();
 router.get('/getDirAnchor', function (req, res, next) {
     anchorDao.getDirAnchor(req,res,next);
 });
+
+router.get('/getSearchAnchor', function (req, res, next) {
+    anchorDao.getSearchAnchor(req,res,next);
+});
+
 router.post('/addAnchor', function (req, res, next) {
     anchorDao.addAnchor(req,res,next);
 });

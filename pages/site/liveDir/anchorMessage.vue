@@ -8,6 +8,10 @@
                     </i>
                     {{commentData.anchorInfo.anchor_name}}
                 </p>
+                <p>
+                    <el-rate v-model="commentData.anchorInfo.rateAvg" disabled show-score>
+                    </el-rate >
+                </p>
             </div>
             <el-button type="primary" @click="addComment">添加短评</el-button>
         </div>
@@ -53,17 +57,27 @@
             <p class="footer-tip">{{footerText}}</p>
         </div>
         <el-dialog
-                title="留言"
+                title="评价主播"
                 :visible.sync="dialogVisible"
                 center
                 width="30%"
         >
-            <el-input
-                    type="textarea"
-                    :rows="5"
-                    placeholder="短评支持换行，最多2行，字数最多60字"
-                    v-model="message">
-            </el-input>
+            <el-form ref="form" :model="model" label-width="80px">
+                <el-form-item label="评分">
+                    <el-rate
+                            v-model="model.rate"
+                            :colors="rateColor">
+                    </el-rate>
+                </el-form-item>
+                <el-form-item label="短评内容">
+                    <el-input
+                            type="textarea"
+                            :rows="5"
+                            placeholder="短评支持换行，最多2行，字数最多60字"
+                            v-model="model.content">
+                    </el-input>
+                </el-form-item>
+            </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
                 <el-button type="primary" @click="addCommentSure">确 定</el-button>
@@ -72,7 +86,7 @@
     </section>
 </template>
 <script>
-    import {osArr} from '../../../conf/index'
+    import {osArr,plat} from '../../../conf/index'
     import axios from '~/plugins/axios';
     import $ from 'jquery';
     export default {
@@ -94,6 +108,7 @@
                 }
             });
             if(data.data){
+                data.data.anchorInfo.rateAvg =  (data.data.anchorInfo.rateAvg).toFixed(1);
                 return{
                     commentData:data.data
                 }
@@ -104,10 +119,15 @@
         data(){
             return{
                 dialogVisible:false,
-                message:'',
                 page:0,
                 footerText:'',
-                isScroll:false
+                isScroll:false,
+                rateColor:['#99A9BF', '#F7BA2A', '#FF9900'],
+                model:{
+                    anchor_id:this.$route.query.anchorId,
+                    rate:5,
+                    content:''
+                }
             }
         },
         beforeMount () {
@@ -168,10 +188,7 @@
                 });
             },
             async addCommentSure(){
-               let {data} =  await  axios.post('/api/site/anchor/postAnchorComment',{
-                   content:this.message,
-                   anchor_id:this.$route.query.anchorId
-               });
+               let {data} =  await  axios.post('/api/site/anchor/postAnchorComment',this.model);
                if(data.code === 200){
                    this.dialogVisible = false;
                     window.bus.$emit('dialogShow','留言成功',()=>{
@@ -202,30 +219,38 @@
                 $(window).unbind('scroll');
                 $(window).bind("scroll",()=>{
                     let scrollTop = $(document).scrollTop();
-                    let windowTop = $(window).height();
-                    let documentTop = $(document).height();
+
+                    let documentHeight = $(document).height();
+                    let windowHeight = $(window).height();
+
 
                     //console.log(documentTop - windowTop,scrollTop);
-                    if(scrollTop + windowTop > documentTop-100 && !this.end){
-
-                        this.end = true;
-                        this.page++;
-                        this.getServerData(this.page);
+                    if(plat.isMobile()){//移动平台
+                        if(documentHeight-windowHeight <= scrollTop && !this.end){
+                            this.end = true;
+                            this.page++;
+                            this.getServerData(this.page);
+                        }
+                    }else{//pc平台
+                        if(documentHeight -windowHeight>=scrollTop&&!this.end){
+                            this.end = true;
+                            this.page++;
+                            this.getServerData(this.page);
+                        }
                     }
+
                 });
             }
         }
     }
 </script>
 <style lang="less">
-    #__nuxt {
-        & > *:nth-child(3) {
-            display: none;
-        }
-    }
     .message-page{
         width:1200px;
         margin:0 auto;
+        .el-rate{
+            line-height: 45px!important;
+        }
         .anchor-info{
             display: flex;
             justify-content:space-between;
