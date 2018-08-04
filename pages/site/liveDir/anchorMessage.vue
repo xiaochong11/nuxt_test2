@@ -51,7 +51,7 @@
             </ul>
             <div v-if="commentData.commentList.length===0">
                 <p style="text-align: center;margin-top:200px;">
-                    该主笔暂时没有评价
+                    该主播暂时没有评价
                 </p>
             </div>
             <p class="footer-tip">{{footerText}}</p>
@@ -108,7 +108,10 @@
                 }
             });
             if(data.data){
-                data.data.anchorInfo.rateAvg =  (data.data.anchorInfo.rateAvg).toFixed(1);
+                if( data.data.anchorInfo.rateAvg){
+                    data.data.anchorInfo.rateAvg=  (data.data.anchorInfo.rateAvg).toFixed(1);
+                }
+
                 return{
                     commentData:data.data
                 }
