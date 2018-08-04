@@ -38,10 +38,10 @@
                 <div class="intro">
                     <p>最后更新时间：<span>{{getUpdateDate()}}</span>(苹果微信区)</p>
                 </div>
-                <el-collapse v-model="activeNames" @change="handleChange">
+                <el-collapse>
                     <el-collapse-item title="一致性 Consistency" name="1">
                         <template slot="title">
-                            <p style="text-align:center">查看详细数据</p>
+                            <p style="text-align:center">点击查看</p>
                         </template>
                         <section class="table-sec">
                             <el-table

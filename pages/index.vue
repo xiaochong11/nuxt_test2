@@ -33,6 +33,14 @@
                       <el-button type="primary" @click="searchAnchor">搜索</el-button>
                   </div>
                   <p>搜搜喜欢的主播，为他加油</p>
+                  <div>
+                      <!--<span>支持平台：</span>-->
+                      <ul>
+                          <li v-for="os in osArr">
+                              <img :src="os.icon"/>
+                          </li>
+                      </ul>
+                  </div>
               </div>
           </section>
           <section class="main">
@@ -92,6 +100,7 @@
 
 <script>
     import axios from '~/plugins/axios';
+    import {osArr} from '../conf/index';
     export default {
         head () {
             return {
@@ -125,7 +134,8 @@
                         'message':'发送某些关键词可以得到彩色弹幕哦~'
                     }
                 ],
-                searchModel:''
+                searchModel:'',
+                osArr:osArr
             }
         },
         mounted(){
@@ -259,7 +269,20 @@
                   p{
                       font-size:12px;
                       color:#999999;
-                      margin-bottom:0;
+                  }
+              }
+
+              ul{
+                  display: flex;
+                  width:900px;
+                  margin:0 auto;
+                  overflow: hidden;
+                  li{
+                      margin:0 5px;
+                      img{
+                          width:26px;
+                          height:auto;
+                      }
                   }
               }
           }
