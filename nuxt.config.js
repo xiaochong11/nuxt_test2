@@ -9,7 +9,7 @@ module.exports = {
       title: '直播客|打造直播乐园',
       meta: [
           { charset: 'utf-8' },
-          { name: 'viewport', content: 'width=device-width' },
+          { name: 'viewport', content: 'width=1200' },
           { hid: 'keywords', name: 'keywords', content: '彩色弹幕，好玩的直播间，主播评价推广，技术实力主播，直播新闻，直播界能量，直播工具下载，弹幕墙，赛事直播，王者荣耀数据，王者荣耀巅峰赛数据' },
           { hid: 'description', name: 'description', content: '直播客为你推荐好玩的直播，主播资料大全，技术实力主播，汇集直播界能量，提供直播新闻、彩色弹幕、好玩的弹幕墙、赛事直播、王者荣耀巅峰赛数据' }
     ],

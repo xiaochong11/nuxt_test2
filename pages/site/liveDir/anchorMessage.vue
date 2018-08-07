@@ -13,7 +13,7 @@
                     </el-rate >
                 </p>
             </div>
-            <el-button type="primary" @click="addComment">添加短评</el-button>
+            <span type="primary" @click="addComment" class="add-comment">添加短评</span>
         </div>
         <div>
             <ul>
@@ -279,6 +279,18 @@
                         margin-right:5px;
                     }
                 }
+            }
+            .add-comment{
+                position: fixed;
+                right:0;
+                top:50%;
+                width:80px;
+                height:50px;
+                line-height: 50px;
+                text-align: center;
+                color:#fff;
+                background-color: #00B7FF;
+                cursor: pointer;
             }
         }
         ul{
