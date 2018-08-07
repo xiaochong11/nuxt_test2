@@ -21,8 +21,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://www.25vv.cn" style="color:#afaaaa">
-                            VV手游
+                        <a href="http://www.25vv.cn" title="VV手游">
+                            <img src="/static/uploads/vv.png" style="border-radius: 3px"/>
                         </a>
                     </li>
                 </ul>
@@ -49,6 +49,11 @@
                     <!--var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273915397'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1273915397' type='text/javascript'%3E%3C/script%3E"));-->
                 <!--</script>-->
                 <script src="https://s13.cnzz.com/z_stat.php?id=1273915397&web_id=1273915397" language="JavaScript"></script>
+                <script>(function(){
+                    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?d67faceb4668c8fc8fc50f85743ca46b":"https://jspassport.ssl.qhimg.com/11.0.1.js?d67faceb4668c8fc8fc50f85743ca46b";
+                    document.write('<script src="' + src + '" id="sozz"><\/script>');
+                })();
+                </script>
             </div>
         </div>
     </footer>

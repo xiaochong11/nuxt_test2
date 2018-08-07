@@ -5,3 +5,13 @@
 先做一张banner和一张推荐图，文字内容：广告位出售（招商）
 3.弹幕墙的背景图：
 pc端：800*600 由于整个页面是白色背景，所以这张背景图不适合浅色背景。
+
+
+http://www.zhiboke.site/
+http://www.zhiboke.site/site/liveDir
+http://www.zhiboke.site/site/liveDir/dir?dir_id=1&dir_name=%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80
+http://www.zhiboke.site/site/bulletScreen
+http://www.zhiboke.site/site/king
+http://www.zhiboke.site/site/advice
+http://www.zhiboke.site/site/download
+http://www.zhiboke.site/site/article/general?article_id=2
