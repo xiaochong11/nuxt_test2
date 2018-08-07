@@ -21,7 +21,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://hao.360.cn/" target="_blank"><img src="http://p8.qhimg.com/d/inn/ff2ee078/zodiac/logo_def.png" style="width:80px;"/></a>
+                        <!--<a href="http://hao.360.cn/" target="_blank"><img src="http://p8.qhimg.com/d/inn/ff2ee078/zodiac/logo_def.png" style="width:80px;"/></a>-->
                     </li>
                 </ul>
             </div>
