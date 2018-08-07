@@ -20,6 +20,9 @@
                             <img :src="link.icon"/>
                         </a>
                     </li>
+                    <li>
+                        <a href="http://hao.360.cn/" target="_blank" >360导航</a>
+                    </li>
                 </ul>
             </div>
             <div>
