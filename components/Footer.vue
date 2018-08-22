@@ -21,8 +21,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://www.25vv.cn" title="VV手游">
+                        <a href="http://www.25vv.cn" title="VV手游" target="_blank">
                             <img src="/static/uploads/vv.png" style="border-radius: 3px"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.app7752.com" title="网上赚钱" style="color:#afaaaa" target="_blank">
+                            网上赚钱
                         </a>
                     </li>
                 </ul>

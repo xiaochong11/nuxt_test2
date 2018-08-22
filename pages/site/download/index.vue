@@ -2,6 +2,17 @@
     <section class="download-page">
         <div class="page">
             <ul>
+                <li>
+                    <a href="http://www.xiaohulu.com/kaibo/" target="_blank">
+                        <div class="os-logo" style="background-image:url('https://www.xiaohulu.com/skin171206/img/logo.png') "></div>
+                        <div class="to-download">
+                            <h1>主播工具：小葫芦</h1>
+                            <div>
+                                <a>进入下载</a>
+                            </div>
+                        </div>
+                    </a>
+                </li>
                 <li v-for="item in osArr">
                     <a :href="item.downUrl" target="_blank">
                         <div class="os-logo" :style="'background-image:url('+item.icon+')'"></div>

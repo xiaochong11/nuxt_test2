@@ -14,7 +14,7 @@
               <ul>
                   <li @click="toLink('/site/liveDir/dir?dir_id=1&dir_name=王者荣耀')">
                       <h1>王者主播推荐</h1>
-                      <p>精挑细选的主播</p>
+                      <p>推荐最有趣的主播</p>
                   </li>
                   <li  @click="toLink('/site/king')">
                       <h1>巅峰赛数据</h1>

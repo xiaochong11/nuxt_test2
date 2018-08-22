@@ -73,7 +73,8 @@
                 margin:20px 0;
             }
             img{
-               text-align: center;
+                max-width:800px;
+                text-align: center;
             }
             audio{
                 width:100%;
