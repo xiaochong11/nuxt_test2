@@ -166,14 +166,14 @@ export default [
         'downUrl':'http://www.dawang.tv/',
         'linkUrl':'http://www.dawang.tv/'
     },
-    {
-        'os':'feiyun',
-        'name':'飞云直播',
-        'download_name':'飞云直播(右上角有下载)',
-        'icon':'/static/os/feiyun_icon.png',
-        'downUrl':'http://www.feiyun.tv/',
-        'linkUrl':'http://www.feiyun.tv/'
-    },
+    // {
+    //     'os':'feiyun',
+    //     'name':'飞云直播',
+    //     'download_name':'飞云直播(右上角有下载)',
+    //     'icon':'/static/os/feiyun_icon.png',
+    //     'downUrl':'http://www.feiyun.tv/',
+    //     'linkUrl':'http://www.feiyun.tv/'
+    // },
 
 
 

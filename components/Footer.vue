@@ -26,6 +26,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="http://www.xingzhijing.com" title="星之境游戏" target="_blank">
+                            <img src="/static/uploads/xingzhijing.png" style="border-radius: 3px"/>
+                        </a>
+                    </li>
+                    <li>
                         <a href="http://www.app7752.com" title="网上赚钱" style="color:#afaaaa" target="_blank">
                             网上赚钱
                         </a>

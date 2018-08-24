@@ -109,12 +109,16 @@
                 }
             });
             if(data.data){
+
                 let osList = [];
-                data.data.forEach((arr,index)=>{
-                    if(osList.indexOf(arr.anchor_os)<=-1){
-                        osList.push(arr.anchor_os);
-                    }
-                });
+                if(data.data.length){
+                    data.data.forEach((arr,index)=>{
+                        if(osList.indexOf(arr.anchor_os)<=-1){
+                            osList.push(arr.anchor_os);
+                        }
+                    });
+                }
+
                 return {
                     osList:osList,
                     osActive:'',

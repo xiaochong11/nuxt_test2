@@ -13,9 +13,9 @@ import filter from './util/text-censor/index'
 
 
 app.set('port', port)
-
+//express.static 函数提供的路径相对于您在其中启动 node 进程的目录。
 app.use('/static',express.static('static'));
-app.use(express.static('./'));
+app.use(express.static('./')); //./这是命令运行的位置
 
 app.use(bodyParser.json({limit: '1mb'}));  //这里指定参数使用 json 格式
 app.use(bodyParser.urlencoded({

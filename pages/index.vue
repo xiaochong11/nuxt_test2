@@ -13,15 +13,24 @@
           <section class="box">
               <ul>
                   <li @click="toLink('/site/liveDir/dir?dir_id=1&dir_name=王者荣耀')">
-                      <h1>王者主播推荐</h1>
+                      <h1>
+                          <i class="iconfont icon-zhubo"></i>
+                          <span>主播推荐</span>
+                      </h1>
                       <p>推荐最有趣的主播</p>
                   </li>
                   <li  @click="toLink('/site/king')">
-                      <h1>巅峰赛数据</h1>
+                      <h1>
+                          <i class="iconfont icon-shuju"></i>
+                          <span>巅峰赛数据</span>
+                      </h1>
                       <p>最新的王者巅峰赛排名</p>
                   </li>
                   <li  @click="toLink('/site/bulletScreen')">
-                      <h1>弹幕墙</h1>
+                      <h1>
+                          <i class="iconfont icon-danmu"></i>
+                          <span>弹幕墙</span>
+                      </h1>
                       <p>最好玩的弹幕</p>
                   </li>
               </ul>
@@ -169,6 +178,10 @@
                 })
             },
             searchAnchor(){
+                if(!this.searchModel){
+//                    bus.$emit('dialogShow','请输入内容')
+                    return;
+                }
                 this.$router.push({
                     path:'/site/liveDir/search',
                     query:{
@@ -184,6 +197,10 @@
 
 <style lang="less">
   .index-page{
+      @font-face {
+          font-family: 'iconfont';
+          src:url('../assets/font/iconfont.ttf');
+      }
       .container{
           padding-top:0;
           padding-bottom:0;
@@ -240,6 +257,21 @@
                               cursor:pointer;
                           }
                       }
+                      .iconfont {
+                          font-family:"iconfont" !important;
+                          font-size:24px;
+                          margin-right:10px;
+                          font-style:normal;
+                          -webkit-font-smoothing: antialiased;
+                          -moz-osx-font-smoothing: grayscale;
+                      }
+                      .icon-zhubo:before { content: "\e67b"; }
+
+                      .icon-shuju:before { content: "\e618"; }
+
+                      .icon-danmu:before { content: "\e64d"; }
+
+
 
                   }
               }

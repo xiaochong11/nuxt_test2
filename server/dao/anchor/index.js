@@ -56,7 +56,7 @@ let anchorDao = {
         let anchorQuery={}
         if(!params.all){
             anchorQuery = anchorTable
-                .where({deleted:0})
+                .where('anchor_info.deleted = ?',0)
                 // .where('anchor_name LIKE',`%${params.searchItem}%`)
                 .where('anchor_name LIKE ?',`%${params.searchItem}%`)
                 .select('anchor_info.*,count(anchor_comment.anchor_id) AS comment_count')
