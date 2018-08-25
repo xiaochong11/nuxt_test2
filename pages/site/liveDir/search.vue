@@ -5,8 +5,11 @@
                 <span>搜索词：</span>
                 <span>{{$route.query.searchItem}}</span>
             </p>
-            <section v-if="anchorList.length===0">
-                <p style="text-align: center">没有搜索结果</p>
+            <section  class="anchor-null" v-if="anchorList.length===0">
+                <p>没有找到相关的主播，你可以选择提交给我们</p>
+                <div style="margin-top:20px;">
+                    <el-button @click="recommend" type="primary">提交主播资料</el-button>
+                </div>
             </section>
             <section v-else>
                 <div class="os">
@@ -68,13 +71,19 @@
                         <!--</el-option>-->
                     <!--</el-select>-->
                 <!--</el-form-item>-->
-
-                <el-form-item label="主播介绍">
+                <el-form-item label="直播类型">
+                    <el-input
+                            type="text"
+                            placeholder="比如英雄联盟、王者荣耀等"
+                            v-model="anchor.anchor_dir">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="推荐理由">
                     <el-input
                             type="textarea"
                             :rows="5"
-                            placeholder="主播介绍"
-                            v-model="anchor.anchor_intro">
+                            placeholder="主播的闪光点"
+                            v-model="anchor.recommend_reason">
                     </el-input>
                 </el-form-item>
 
@@ -152,8 +161,6 @@
             },
             async addAnchorSure(){
                 this.dialogVisible = true;
-                this.anchor.recommend_auth_id = 0;
-                this.anchor.deleted = 1;
                 let {data} = await axios.post('/api/site/anchor/addAnchor',this.anchor);
                 this.anchor = {};
                 if(data.code === 200){
@@ -222,7 +229,9 @@
         .el-select {
             width: 100%;
         }
-
+        .anchor-null{
+            text-align: center;
+        }
         .recommend-tip{
             position: fixed;
             right:0;

@@ -38,8 +38,12 @@
           <section class="search">
               <div>
                   <div class="form">
-                      <input type="text" v-model="searchModel"/>
+                      <input type="text" v-model="searchModel" ref="input"/>
                       <el-button type="primary" @click="searchAnchor">搜索</el-button>
+                      <div class="search-prompt" @click="setInputFocus" v-if="!inputIsFocus">
+                          <span class="anchor-num">1000+</span>
+                          <span>主播</span>
+                      </div>
                   </div>
                   <p>搜搜喜欢的主播，为他加油</p>
                   <div>
@@ -144,7 +148,8 @@
                     }
                 ],
                 searchModel:'',
-                osArr:osArr
+                osArr:osArr,
+                inputIsFocus:false
             }
         },
         mounted(){
@@ -177,6 +182,10 @@
                     path:to
                 })
             },
+            setInputFocus(){
+                this.inputIsFocus = true;
+                this.$refs.input.focus()
+            },
             searchAnchor(){
                 if(!this.searchModel){
 //                    bus.$emit('dialogShow','请输入内容')
@@ -189,7 +198,7 @@
                     }
                 })
             }
-        }
+        },
 
     }
 
@@ -287,6 +296,9 @@
                   padding:15px 0;
                   text-align: center;
                   .form{
+                      margin:0 auto;
+                      position: relative;
+                      width:590px;
                       input{
                           border: 1px solid #dcdfe6;
                           width: 520px;
@@ -296,6 +308,22 @@
                           border-left: 1px solid #E6E6E6;
                           padding-left: 10px;
                           color: #666666;
+                          text-align: center;
+                      }
+                      .search-prompt{
+                          position: absolute;
+                          left: 0;
+                          top:0;
+                          width: 520px;
+                          height: 40px;
+                          line-height: 40px;
+                          text-align: center;
+                          font-size:14px;
+                          color:#ccc;
+                          .anchor-num{
+                              color:#409EFF;
+                              margin-right:16px;
+                          }
                       }
                   }
                   p{

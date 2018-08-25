@@ -31,8 +31,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://www.app7752.com" title="网上赚钱" style="color:#afaaaa" target="_blank">
-                            网上赚钱
+                        <a href="http://www.app7752.com" title="网上赚钱" style="color:#afaaaa;" target="_blank">
+                            <span style="line-height:20px;">网上赚钱</span>
                         </a>
                     </li>
                 </ul>
@@ -116,13 +116,18 @@
                 margin:0 100px;
                 ul{
                     font-size:0;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items:flex-end ;
                     li{
-                        display: inline-block;
                         font-size:16px;
                         margin-right:20px;
+                        margin-bottom: 14px;
+                        box-sizing: border-box;
                         a{
                             img{
                                 width:30px;
+                                display: block;
                             }
                         }
                     }

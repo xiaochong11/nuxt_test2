@@ -5,6 +5,7 @@ import filter from '../../util/text-censor';
 
 let anchorTable = mohair.table('anchor_info');
 let anchorCommentTable =  mohair.table('anchor_comment');
+let anchorRecommendTable = mohair.table('anchor_recommend');
 
 let anchorDao = {
     async getDirAnchor(req,res,next){
@@ -95,11 +96,12 @@ let anchorDao = {
         }
     },
 
+    //推荐主播
     async addAnchor(req,res,next){
         let params = req.body;
-        params.add_date = new Date();
-        let anchorQuery = anchorTable.insert(params);
-
+        params.recommend_date = new Date();
+        let anchorQuery = anchorRecommendTable.insert(params);
+        console.log(anchorQuery.sql());
         try{
             let result = await executeQuery(anchorQuery.sql(),anchorQuery.params());
             res.json({
@@ -234,23 +236,6 @@ let anchorDao = {
         let params = req.body;
         console.log(params);
         let anchorQuery = anchorTable.where({anchor_id:params.row.id}).update(params.row);
-        try{
-            let result = await executeQuery(anchorQuery.sql(),anchorQuery.params());
-            res.json({
-                code:200,
-                data:'OK'
-            })
-        }catch(err){
-            res.json({
-                code:500,
-                data:err
-            })
-        }
-    },
-    async addAnchor(req,res,next){
-        let params = req.body;
-        params.add_date = new Date();
-        let anchorQuery = anchorTable.insert(params);
         try{
             let result = await executeQuery(anchorQuery.sql(),anchorQuery.params());
             res.json({

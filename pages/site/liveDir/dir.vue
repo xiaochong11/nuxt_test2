@@ -61,12 +61,29 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="主播介绍">
+                <!--<el-form-item label="直播分类">-->
+                <!--<el-select v-model="anchor.anchor_os" placeholder="请选择">-->
+                <!--<el-option-->
+                <!--v-for="(item,index) in osArr"-->
+                <!--:key="index"-->
+                <!--:label="item.name"-->
+                <!--:value="item.os">-->
+                <!--</el-option>-->
+                <!--</el-select>-->
+                <!--</el-form-item>-->
+                <el-form-item label="直播类型">
+                    <el-input
+                            type="text"
+                            placeholder="比如英雄联盟、王者荣耀等"
+                            v-model="anchor.anchor_dir">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="推荐理由">
                     <el-input
                             type="textarea"
                             :rows="5"
-                            placeholder="主播介绍"
-                            v-model="anchor.anchor_intro">
+                            placeholder="主播的闪光点"
+                            v-model="anchor.recommend_reason">
                     </el-input>
                 </el-form-item>
 
@@ -140,8 +157,6 @@
             },
             async addAnchorSure(){
                 this.dialogVisible = true;
-                this.anchor.recommend_auth_id = 0;
-                this.anchor.deleted = 1;
                 let {data} = await axios.post('/api/site/anchor/addAnchor',this.anchor);
                 this.anchor = {};
                 if(data.code === 200){
