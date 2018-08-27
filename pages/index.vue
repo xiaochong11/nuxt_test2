@@ -138,12 +138,40 @@
             }
         },
         async asyncData({ query,error}){
-            let {data} = await axios.get('/api/site/index/getList');
-            if(data.data){
-                return {indexObj:data.data};
+            let [data0,data1] = await Promise.all([
+                axios.get('/api/site/index/getList'),
+                axios.get('/api/site/anchor/getDirAnchor',{
+                    params:{
+                        dir_id:1
+                    }
+                })
+            ]);
+            if(data0.data.data){
+                return {
+                    indexObj:data0.data.data,
+                    anchorArr:data1.data.data
+                };
             }else{
                 error({ statusCode: 404, message: '接口错误' })
             }
+
+//            Promise.all([
+//                axios.get('/api/site/index/getList'),
+//                axios.get('/api/site/anchor/getDirAnchor',{
+//                    params:{
+//                        dir_id:1
+//                    }
+//                })
+//            ]).then((data0,data1)=>{
+//                if(data0.data.data){
+//                    return {
+//                        indexObj:data0.data.data,
+//                        anchorArr:data1.data.data
+//                    };
+//                }else{
+//                    error({ statusCode: 404, message: '接口错误' })
+//                }
+//            })
         },
         sockets:{
             connect: function(){
@@ -172,7 +200,7 @@
 //
         },
         mounted(){
-            this.getAnchorHot();
+            //this.getAnchorHot();
         },
         watch:{
             dataArr:function(){
@@ -187,14 +215,6 @@
             }
         },
         methods:{
-            async getAnchorHot(){
-                let {data} = await axios.get('/api/site/anchor/getDirAnchor',{
-                    params:{
-                        dir_id:1
-                    }
-                });
-                this.anchorArr = data.data;
-            },
             getOs(os){
                 let osObj = osArr.find((arr)=>{
                     return arr.os === os
