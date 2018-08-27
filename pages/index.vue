@@ -59,18 +59,33 @@
           <section class="main">
               <div class="main-container">
                   <aside class="left-aside">
-                      <h2>热门</h2>
-                      <ul class="widget">
-                          <li v-for="hot in indexObj.hotList">
-                              <a :href="hot.link_url">
-                                  <img :src="hot.img_url"/>
+                      <h2>主播留言数</h2>
+                      <!--<ul class="widget">-->
+                          <!--<li v-for="hot in indexObj.hotList">-->
+                              <!--<a :href="hot.link_url">-->
+                                  <!--<img :src="hot.img_url"/>-->
+                              <!--</a>-->
+                          <!--</li>-->
+                      <!--</ul>-->
+                      <ul class="anchor-hot">
+                          <li v-for="anchor in anchorArr">
+                              <a :href="'/site/liveDir/anchorMessage?anchorName='+anchor.anchor_name+'&anchorId='+anchor.anchor_id">
+                                  <div>
+                                      <span class="anchor-os">{{getOs(anchor.anchor_os)}}</span>
+                                      <span>{{anchor.anchor_name}}</span>
+                                      <!--<p>{{anchor.anchor_intro}}</p>-->
+                                  </div>
+                                  <div>
+                                      <span>{{anchor.comment_count}}</span>
+                                  </div>
                               </a>
+
                           </li>
                       </ul>
                   </aside>
                   <aside class="right-aside">
                       <div class="title">
-                        <h2>弹幕墙</h2>
+                        <h2>彩色弹幕墙</h2>
                         <h2 class="screen" @click="toBulletScreen">我要上墙 ></h2>
                       </div>
                       <ul id="ul-box">
@@ -149,11 +164,15 @@
                 ],
                 searchModel:'',
                 osArr:osArr,
-                inputIsFocus:false
+                inputIsFocus:false,
+                anchorArr:null
             }
         },
+        created(){
+//
+        },
         mounted(){
-
+            this.getAnchorHot();
         },
         watch:{
             dataArr:function(){
@@ -168,6 +187,22 @@
             }
         },
         methods:{
+            async getAnchorHot(){
+                let {data} = await axios.get('/api/site/anchor/getDirAnchor',{
+                    params:{
+                        dir_id:1
+                    }
+                });
+                this.anchorArr = data.data;
+            },
+            getOs(os){
+                let osObj = osArr.find((arr)=>{
+                    return arr.os === os
+                });
+                if(osObj){
+                    return osObj.name.replace('直播','')
+                }
+            },
             toLink(url){
                 console.log(444);
                 window.location.href = url;
@@ -363,6 +398,34 @@
                       padding-right:10px;
                       padding-left:10px;
                       padding-bottom:1px;
+                      ul.anchor-hot{
+                          font-size:14px;
+                          li{
+                              a{
+                                  display: flex;
+                                  justify-content: space-between;
+                                  padding:10px 0;
+                                  /*border-bottom:1px solid #ccc;*/
+                                  align-items:center;
+                                  .anchor-os{
+                                      color: #29d58e;
+                                      border: 1px solid #29d58e;
+                                      border-radius: 3px;
+                                      background: #edfcf6;
+                                      height: 20px;
+                                      line-height: 20px;
+                                      padding: 0px 5px;
+                                      font-style: normal;
+                                      display: inline-block;
+                                      font-size: 12px;
+                                      position: relative;
+                                      top: -2px;
+                                      margin-right:5px;
+                                  }
+                              }
+
+                          }
+                      }
                       ul.widget{
                           li{
                               width:180px;

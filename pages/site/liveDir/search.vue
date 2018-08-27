@@ -187,9 +187,12 @@
                 }).icon
             },
             getName(os){
-                return osArr.find((arr)=>{
+                let osObj = osArr.find((arr)=>{
                     return arr.os === os
-                }).name.replace('直播','')
+                });
+                if(osObj){
+                    return osObj.name.replace('直播','')
+                }
             },
             toDir(){
                this.$router.push({
