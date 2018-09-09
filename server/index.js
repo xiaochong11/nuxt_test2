@@ -164,9 +164,9 @@ io.on('connection', function (socket) {
 })
 //https相关
 if(process.env.NODE_ENV === 'production'){
-    const privateKey = fs.readFileSync(path.resolve(__dirname,'cert/privkey.pem', 'utf8'));
-    const certificate = fs.readFileSync(path.resolve(__dirname,'cert/cert.pem', 'utf8'));
-    const ca = fs.readFileSync('cert/chain.pem', 'utf8');
+    const privateKey = fs.readFileSync(path.resolve(__dirname,'cert/privkey.pem'),'utf8');
+    const certificate = fs.readFileSync(path.resolve(__dirname,'cert/cert.pem'), 'utf8'));
+    const ca = fs.readFileSync(path.resolve(__dirname,'cert/chain.pem'), 'utf8');
 
     const credentials = {
         key: privateKey,
