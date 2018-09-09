@@ -54,10 +54,10 @@
             }
         },
         created(){
-
+            this.getArticleList();
         },
         mounted() {
-            this.getArticleList();
+
         },
         methods: {
             async getArticleList(){

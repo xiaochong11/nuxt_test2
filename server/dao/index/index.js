@@ -28,7 +28,7 @@ let indexDao = {
                 result = result.filter((arr,index)=>{
                     return  arr.start_time === "00:00:00"||(arr.start_time>=nowTime&&arr.end_time<=nowTime)
                 });
-                console.log(result);
+                //console.log(result);
                 result.forEach((arr,index)=>{
                     if(arr.type==="banner"){
                         indexObj.bannerList.push(arr)
@@ -60,7 +60,7 @@ let indexDao = {
     },
     async updateIndexData(req,res,next){
         let params = req.body;
-        console.log(params);
+        //console.log(params);
         let indexQuery = indexTable.where({id:params.row.id}).update(params.row);
         try{
             let result = await executeQuery(indexQuery.sql(),indexQuery.params());

@@ -1,3 +1,7 @@
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+
 import express from 'express'
 import bodyParser from 'body-parser';
 import { Nuxt, Builder } from 'nuxt'
@@ -41,10 +45,11 @@ if (config.dev) {
 // Give nuxt middleware to express
 app.use(nuxt.render)
 
-
+// Listen the server
+const httpServer = http.createServer(app);
 //io
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+
+var io = require('socket.io')(httpServer);
 
 /*
 	*新手必读
@@ -155,10 +160,25 @@ io.on('connection', function (socket) {
     //     })
     // })
 })
+//https相关
+if(process.env.NODE_ENV === 'production'){
+    const privateKey = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem', 'utf8');
+    const certificate = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/cert.pem', 'utf8');
+    const ca = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/chain.pem', 'utf8');
 
+    const credentials = {
+        key: privateKey,
+        cert: certificate,
+        ca: ca
+    };
+    const httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(443,host)
+}else{
 
-// Listen the server
-server.listen(port, host)
+}
+
+httpServer.listen(port, host);
+
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
 
 //定时任务

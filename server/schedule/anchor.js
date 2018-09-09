@@ -10,6 +10,25 @@ let urlArr = [
     }
 ];
 
+let urlObj1 = {
+    url:'https://www.huya.com/g/lol',
+    anchor_os:'huya',
+    anchor_dir_id:2,
+}
+
+let urlObj2 ={
+    url:'https://www.huya.com/g/3203',
+    anchor_os:'huya',
+    anchor_dir_id:2
+}
+
+let urlObj3 ={
+    url:'https://www.huya.com/g/1663',
+    anchor_os:'huya',
+    anchor_dir_id:7
+}
+
+
 async function getAnchor(obj) {
     const instance = await phantom.create();
     const page = await instance.createPage();
@@ -47,6 +66,4 @@ async function getAnchor(obj) {
 }
 
 
-urlArr.forEach((obj)=>{
-    getAnchor(obj);
-});
+getAnchor(urlObj3);
