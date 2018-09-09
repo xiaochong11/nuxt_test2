@@ -13,6 +13,6 @@ dist
 # Backpack build
 build
 
-./server/data/*
+server/data/*
 
-./server/.babelrc
+server/*.babelrc
