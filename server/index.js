@@ -1,6 +1,7 @@
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
+const path =require('path');
 
 import express from 'express'
 import bodyParser from 'body-parser';
@@ -11,7 +12,8 @@ import api from './api'
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
+
 
 import filter from './util/text-censor/index'
 
@@ -162,8 +164,8 @@ io.on('connection', function (socket) {
 })
 //https相关
 if(process.env.NODE_ENV === 'production'){
-    const privateKey = fs.readFileSync('cert/privkey.pem', 'utf8');
-    const certificate = fs.readFileSync('cert/cert.pem', 'utf8');
+    const privateKey = fs.readFileSync(path.resolve(__dirname,'cert/privkey.pem', 'utf8'));
+    const certificate = fs.readFileSync(path.resolve(__dirname,'cert/cert.pem', 'utf8'));
     const ca = fs.readFileSync('cert/chain.pem', 'utf8');
 
     const credentials = {

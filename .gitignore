@@ -13,6 +13,8 @@ dist
 # Backpack build
 build
 
-server/data/*
 
+.DS_Store
+
+server/data/*
 server/*.babelrc
