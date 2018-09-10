@@ -41,7 +41,7 @@ module.exports = {
       {src:'~/plugins/date-format.js',ssr: true}
   ],
   build: {
-    vendor: ['axios','~/plugins/element-ui.js','~/plugins/quill-editor.js','~/plugins/vue-socketio.js','~/plugins/barrage.js'],
+    vendor: ['axios','~/plugins/element-ui.js'],
     /*
     ** Run ESLINT on save
     */
