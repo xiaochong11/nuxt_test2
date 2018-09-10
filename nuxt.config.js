@@ -26,7 +26,9 @@ module.exports = {
       'quill/dist/quill.bubble.css',
       'quill/dist/quill.core.css'
   ],
-
+    filenames: {
+        app: '[name].[chunkhash].js'
+    },
   /*
   ** Add axios globally
   */
@@ -54,6 +56,7 @@ module.exports = {
             test: /\.less$/,
             loader: "less-loader"
         })
+
       }
     }
   }
