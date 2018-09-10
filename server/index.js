@@ -164,14 +164,14 @@ io.on('connection', function (socket) {
 })
 //https相关
 if(process.env.NODE_ENV === 'production'){
-    const privateKey = fs.readFileSync(path.resolve(__dirname,'cert/privkey.pem'),'utf8');
-    const certificate = fs.readFileSync(path.resolve(__dirname,'cert/cert.pem'), 'utf8');
-    const ca = fs.readFileSync(path.resolve(__dirname,'cert/chain.pem'), 'utf8');
+    const privateKey = fs.readFileSync(path.resolve(__dirname,'cert_ali/1538367494158.key'),'utf8');
+    const certificate = fs.readFileSync(path.resolve(__dirname,'cert_ali/1538367494158.pem'), 'utf8');
+    // const ca = fs.readFileSync(path.resolve(__dirname,'cert/chain.pem'), 'utf8');
 
     const credentials = {
         key: privateKey,
         cert: certificate,
-        ca: ca
+        // ca: ca
     };
     const httpsServer = https.createServer(credentials, app);
     httpsServer.listen(443,host)
