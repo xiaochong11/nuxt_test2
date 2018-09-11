@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 import filter from './util/text-censor/index'
 
 
-app.set('port', port)
+// app.set('port', port)
 //express.static 函数提供的路径相对于您在其中启动 node 进程的目录。
 app.use('/static',express.static('static'));
 app.use(express.static('./')); //./这是命令运行的位置
@@ -49,8 +49,9 @@ app.use(nuxt.render)
 
 // Listen the server
 const httpServer = http.createServer(app);
+httpServer.listen(port, host);
+console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
 //io
-
 var io = require('socket.io')(httpServer);
 
 /*
@@ -174,14 +175,12 @@ if(process.env.NODE_ENV === 'production'){
         // ca: ca
     };
     const httpsServer = https.createServer(credentials, app);
-    httpsServer.listen(443,'www.zhiboke.site')
+    httpsServer.listen(443,host)
 }else{
 
 }
 
-httpServer.listen(port, host);
 
-console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
 
 //定时任务
-timed();
+//timed();
