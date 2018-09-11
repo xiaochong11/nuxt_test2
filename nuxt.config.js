@@ -8,21 +8,13 @@ module.exports = {
     head: {
         title: '直播客|打造直播乐园',
         meta: [
-            {charset: 'utf-8'},
-            {name: 'viewport', content: 'width=1200'},
-            {
-                hid: 'keywords',
-                name: 'keywords',
-                content: '彩色弹幕，好玩的直播间，主播评价推广，技术实力主播，直播新闻，直播界能量，直播工具下载，弹幕墙，赛事直播，王者荣耀数据，王者荣耀巅峰赛数据'
-            },
-            {
-                hid: 'description',
-                name: 'description',
-                content: '直播客为你推荐好玩的直播，主播资料大全，技术实力主播，汇集直播界能量，提供直播新闻、彩色弹幕、好玩的弹幕墙、赛事直播、王者荣耀巅峰赛数据'
-            }
+            { charset: 'utf-8' },
+            { name: 'viewport', content: 'width=1200' },
+            { hid: 'keywords', name: 'keywords', content: '彩色弹幕，好玩的直播间，主播评价推广，技术实力主播，直播新闻，直播界能量，直播工具下载，弹幕墙，赛事直播，王者荣耀数据，王者荣耀巅峰赛数据' },
+            { hid: 'description', name: 'description', content: '直播客为你推荐好玩的直播，主播资料大全，技术实力主播，汇集直播界能量，提供直播新闻、彩色弹幕、好玩的弹幕墙、赛事直播、王者荣耀巅峰赛数据' }
         ],
         link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
         ]
     },
     /*
@@ -34,35 +26,45 @@ module.exports = {
         'quill/dist/quill.bubble.css',
         'quill/dist/quill.core.css'
     ],
+
     /*
     ** Add axios globally
     */
-    plugins: [
+    plugins:[
         // {src:'~/plugins/axios.js',ssr: false},
-        {src: '~/plugins/element-ui.js', ssr: true},
-        {src: '~/plugins/quill-editor.js', ssr: false},
-        {src: '~/plugins/vue-socketio.js', ssr: false},
-        {src: '~/plugins/barrage.js', ssr: false},
-        {src: '~/plugins/date-format.js', ssr: true}
+        {src:'~/plugins/element-ui.js',ssr: true},
+        {src:'~/plugins/quill-editor.js',ssr: false },
+        {src:'~/plugins/vue-socketio.js',ssr: false},
+        {src:'~/plugins/barrage.js',ssr: false},
+        {src:'~/plugins/date-format.js',ssr: true}
     ],
     build: {
-        vendor: ['axios'],
-        /*
-        ** Run ESLINT on save
-        */
-        extend(config, ctx) {
+        analyze: false,
+        babel: {
+            plugins:['transform-decorators-legacy', 'transform-class-properties']
+        },
+        filenames: {
+            app: '[name].[chunkhash].js'
+        },
+        extend(config,ctx) {
+            const { vendor } = config.entry;
+            if (vendor) {
+                const vendor2 = ['axios','~/plugins/element-ui.js'];
+                config.entry.vendor = vendor.filter(v => !vendor2.includes(v));
+                config.entry.vendor2 = vendor2;
+            }
             if (ctx.isClient) {
                 config.module.rules.push({
                     enforce: 'pre',
                     test: /\.(js|vue)$/,
                     // loader: 'eslint-loader',
                     exclude: /(node_modules)/
-                }, {
+                },{
                     test: /\.less$/,
                     loader: "less-loader"
                 })
-
             }
-        }
+        },
+        vendor: ['axios','~/plugins/element-ui.js'],
     }
 }

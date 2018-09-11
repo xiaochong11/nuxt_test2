@@ -5,13 +5,18 @@ import store from '../conf/store';
 // The server-side needs a full url to works
 console.log('server:'+process.server)
 if (process.server) {
-    axios.defaults.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
+    if(process.env.NODE_ENV === 'production'){
+        axios.defaults.baseURL = `https://${'www.zhiboke.site:443'}`;
+    }else{
+        axios.defaults.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
+    }
+    //axios.defaults.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
 }
+
 
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
-    //console.log(config);
     if (config.method==="post"){
         //config.data = qs.stringify(config.data);
         config.headers['Content-Type'] = 'application/json';
