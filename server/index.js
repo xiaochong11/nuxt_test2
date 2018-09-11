@@ -173,8 +173,8 @@ if(process.env.NODE_ENV === 'production'){
         cert: certificate,
         // ca: ca
     };
-    const httpsServer = https.createServer(credentials, 'www.zhiboke.site');
-    httpsServer.listen(443,host)
+    const httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(443,'www.zhiboke.site')
 }else{
 
 }
