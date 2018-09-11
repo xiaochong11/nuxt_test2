@@ -6,7 +6,7 @@ import store from '../conf/store';
 console.log('server:'+process.server)
 if (process.server) {
     if(process.env.NODE_ENV === 'production'){
-        axios.defaults.baseURL = `https://${'www.zhiboke.site:443'}`;
+        axios.defaults.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
     }else{
         axios.defaults.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
     }
