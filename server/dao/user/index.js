@@ -35,16 +35,19 @@ let userDao = {
                 let openid = data.openid;
                 if(openid){
                     console.log(openid);
-                    let userQuery = userTable.select().where({openid:openid});
-
+                    let userQuery = userTable.select().where({'openid':openid+''});
+                    console.log(userQuery.sql(),userQuery.params());
                     executeQuery(userQuery.sql(),userQuery.params()).then((result)=>{
-                        if(result[0].user_id){
+                        // console.log(result);
+                        if(result.length===1){
                             res.json({
                                 code:200,
                                 data:result[0]
                             })
                         }else{
+                            // console.log('else');
                             let userQuery1 = userTable.insert({openid:openid});
+                            console.log(userQuery1.sql(),userQuery1.params());
                             executeQuery(userQuery1.sql(),userQuery1.params()).then((result)=>{
                                 res.json({
                                     code:200,
