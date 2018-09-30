@@ -49,7 +49,9 @@ app.use(nuxt.render)
 
 // Listen the server
 const httpServer = http.createServer(app);
-httpServer.listen(port, host);
+httpServer.listen(port, host,function(){
+    console.log('http启动...');
+});
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
 //io
 var io = require('socket.io')(httpServer);
@@ -175,7 +177,9 @@ if(process.env.NODE_ENV === 'production'){
         // ca: ca
     };
     const httpsServer = https.createServer(credentials, app);
-    httpsServer.listen(443,host)
+    httpsServer.listen(443,host,function(){
+        console.log('https启动...');
+    })
 }else{
 
 }
