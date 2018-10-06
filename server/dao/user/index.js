@@ -37,6 +37,7 @@ let userDao = {
                     console.log(openid);
                     let userQuery = userTable.select().where({'openid':openid+''});
                     console.log(userQuery.sql(),userQuery.params());
+                    //这里也可以用await
                     executeQuery(userQuery.sql(),userQuery.params()).then((result)=>{
                         // console.log(result);
                         if(result.length===1){

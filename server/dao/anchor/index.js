@@ -17,7 +17,7 @@ let anchorDao = {
                         .where({deleted:0,anchor_dir_id:params.dir_id})
                         .select('anchor_info.*,count(anchor_comment.anchor_id) AS comment_count')
                         .order('show_order ASC,comment_count DESC')
-                        .group('anchor_comment.anchor_id')
+                        .group('anchor_info.anchor_id')
                         .join('left JOIN anchor_comment ON anchor_info.anchor_id = anchor_comment.anchor_id');
         }else{
             anchorQuery=anchorTable.select('*').order('show_order ASC');
@@ -28,10 +28,6 @@ let anchorDao = {
 
             if(result){
                 //依照时间过滤
-                let nowTime = new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds();
-                result = result.filter((arr,index)=>{
-                    return  arr.start_time === "00:00:00"||(arr.start_time>=nowTime&&arr.end_time<=nowTime)
-                });
                 res.json({
                     code:200,
                     data:result
@@ -150,13 +146,25 @@ let anchorDao = {
                                 .join('left JOIN general_user ON general_user.user_id = anchor_comment.comment_auth_id')
                                 .limit(limit)
                                 .offset(offset)
-                                .select("*");
+                                .select('anchor_comment.*,general_user.user_nickname,general_user.user_avatar');
 
         console.log(anchorCommentQuery.sql());
         try {
             let anchorInfo = await executeQuery(anchorQuery.sql(), anchorQuery.params());
 
             let commentList = await executeQuery(anchorCommentQuery.sql(), anchorCommentQuery.params());
+            commentList.forEach((comment)=>{
+                if(comment.anonymous===0){
+                    //这会使用户名为空的也显示为匿名网友
+                    comment.comment_auth_name = comment.user_nickname||'匿名网友';
+                    comment.comment_auth_avatar = comment.user_avatar ||'http://img3.imgtn.bdimg.com/it/u=924427432,4036562115&fm=27&gp=0.jpg';
+                }else{
+                    comment.comment_auth_name = '匿名网友';
+                    comment.comment_auth_avatar = 'http://img3.imgtn.bdimg.com/it/u=924427432,4036562115&fm=27&gp=0.jpg';
+                }
+                comment.user_nickname = '';
+                comment.user_avatar = '';
+            });
             res.json({
                 code: 200,
                 data: {

@@ -39,7 +39,12 @@
             </div>
             <div>
                 <h4>主播加群</h4>
-                <p>群号：<span> 633950991</span></p>
+                <p>QQ群号：<span> 633950991</span></p>
+                <h4>小程序</h4>
+                <!--<p>微信搜索:主播热度榜</p>-->
+                <p>
+                    <img style="width:120px" src="/static/uploads/rcode.jpg"/>
+                </p>
                 <!--<img src="http://www.iresearch.tv/wp-content/themes/urionz/static/imgs/zbgc.png"/>-->
             </div>
         </div>

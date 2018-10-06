@@ -27,8 +27,8 @@
                 <li v-for="comment in commentData.commentList">
                     <section class="main">
                         <div class="user">
-                            <img src="http://img3.imgtn.bdimg.com/it/u=924427432,4036562115&fm=27&gp=0.jpg">
-                            <p>匿名网友</p>
+                            <img :src="comment.comment_auth_avatar">
+                            <p>{{comment.comment_auth_name}}</p>
                         </div>
                         <div class="user-message">
                             <p class="content" v-html="comment.content"></p>
