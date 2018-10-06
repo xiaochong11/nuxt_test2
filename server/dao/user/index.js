@@ -81,6 +81,7 @@ let userDao = {
         let userQuery = userTable.where({user_id:param.user_id}).update(param);
         try{
             let result = await executeQuery(userQuery.sql(),userQuery.params());
+            console.log(result);
             res.json({
                 code:200,
                 data:'OK'
