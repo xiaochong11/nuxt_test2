@@ -3,12 +3,14 @@ const cheerio = require('cheerio');
 import anchorDao from '../dao/anchor/addAnchorMultiple';
 let resultArr = [];
 let urlArr = [
-    {
-        url:'https://www.huya.com/g/wzry',
-        anchor_os:'huya',
-        anchor_dir_id:1,
-    }
+
 ];
+
+let urlObj0 =  {
+    url:'https://www.huya.com/g/wzry',
+    anchor_os:'huya',
+    anchor_dir_id:1,
+}
 
 let urlObj1 = {
     url:'https://www.huya.com/g/lol',
@@ -49,7 +51,8 @@ async function getAnchor(obj) {
             anchor_intro:$(ele).find('.title.new-clickstat').text().trim(),
             anchor_os:obj.anchor_os,
             anchor_link:$(ele).find('.video-info').attr('href').trim(),
-            anchor_num:$(ele).find('.js-num').text().trim(),
+            anchor_num:$(ele).find('#activityCount').text().trim(),
+            anchor_roomnum:$(ele).find('.host-rid').text().trim().replace(/[^0-9]/ig,""),
             recommend_auth_id:0,
             anchor_dir_id:obj.anchor_dir_id,
             add_date:new Date()
@@ -58,7 +61,7 @@ async function getAnchor(obj) {
     });
     if(resultArr.length>0){
         console.log(resultArr);
-        anchorDao.addAnchorArr(resultArr);
+        anchorDao.addAnchorArr(resultArr,obj.anchor_dir_id);
     }else{
         console.log('resultArr为空');
     }
@@ -66,4 +69,4 @@ async function getAnchor(obj) {
 }
 
 
-getAnchor(urlObj3);
+getAnchor(urlObj0);

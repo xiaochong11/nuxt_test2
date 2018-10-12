@@ -5,7 +5,7 @@ let userTable = mohair.table('general_user');
 // let  request = require('request');
 import request from 'request';
 let userDao = {
-    getAll:async function(req,res,next){
+    getAllUser:async function(req,res,next){
         let param = req.query || req.params;
         let userQuery =userTable.select('*');
 
@@ -71,7 +71,7 @@ let userDao = {
             }else{
                 res.json({
                     code:501,
-                    data:err
+                    data:error
                 })
             }
         });
@@ -79,6 +79,7 @@ let userDao = {
     wxUpdateUser:async function(req,res,next){
         let param = req.body;
         console.log(param);
+        param.add_date = new Date();
         let userQuery = userTable.where({user_id:param.user_id}).update(param);
         try{
             let result = await executeQuery(userQuery.sql(),userQuery.params());
@@ -86,6 +87,24 @@ let userDao = {
             res.json({
                 code:200,
                 data:'OK'
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+    },
+    getUserInfo:async function(req,res,next){
+        let param = req.query;
+        console.log(param);
+        let userQuery = userTable.where({user_id:param.user_id}).select('*');
+        try{
+            let result = await executeQuery(userQuery.sql(),userQuery.params());
+            console.log(result);
+            res.json({
+                code:200,
+                data:result[0]
             })
         }catch(err){
             res.json({

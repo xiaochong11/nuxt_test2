@@ -2,43 +2,53 @@ import mohair from 'mohair';
 import executeQuery from '../base/index';
 
 import filter from '../../util/text-censor';
-
+import osArr from '../../config/osArr';
+import dirConfigObj from '../../config/dirConfig';
 let anchorTable = mohair.table('anchor_info');
 let anchorCommentTable =  mohair.table('anchor_comment');
 let anchorRecommendTable = mohair.table('anchor_recommend');
-
+let commentUserRecordTable = mohair.table('comment_user_record');
 let anchorDao = {
     async getDirAnchor(req,res,next){
         let params = req.query;
         console.log(params);
-        let anchorQuery={}
-        if(!params.all){
+        let anchorQuery = null;
+        if(!params.all && !params.page){
             anchorQuery = anchorTable
-                        .where({deleted:0,anchor_dir_id:params.dir_id})
+                        .where({'anchor_info.deleted':0,anchor_dir_id:params.dir_id})
                         .select('anchor_info.*,count(anchor_comment.anchor_id) AS comment_count')
                         .order('show_order ASC,comment_count DESC')
                         .group('anchor_info.anchor_id')
-                        .join('left JOIN anchor_comment ON anchor_info.anchor_id = anchor_comment.anchor_id');
+                        .join('left JOIN anchor_comment ON anchor_info.anchor_id = anchor_comment.anchor_id and anchor_comment.deleted=0');
+        }else if(!params.all && params.page){
+            let limit = 20;
+            let offset = params.page*limit;
+            anchorQuery = anchorTable
+                .where({'anchor_info.deleted':0,anchor_dir_id:params.dir_id})
+                .limit(limit)
+                .offset(offset)
+                .select('anchor_info.*,count(anchor_comment.anchor_id) AS comment_count')
+                .order('show_order ASC,comment_count DESC')
+                .group('anchor_info.anchor_id')
+                .join('left JOIN anchor_comment ON anchor_info.anchor_id = anchor_comment.anchor_id and anchor_comment.deleted=0');
         }else{
             anchorQuery=anchorTable.select('*').order('show_order ASC');
         }
         console.log(anchorQuery.sql());
         try{
             let result = await executeQuery(anchorQuery.sql(),anchorQuery.params());
-
+            result.forEach((anchor)=>{
+                anchor.osName = osArr.find((osObj)=>{
+                    return osObj.os === anchor.anchor_os
+                }).name.replace('直播','');
+            })
             if(result){
                 //依照时间过滤
                 res.json({
                     code:200,
                     data:result
                 })
-            }else{
-                res.json({
-                    code:500,
-                    data:'查询结果为空'
-                })
             }
-
         }catch(err){
             res.json({
                 code:500,
@@ -131,17 +141,17 @@ let anchorDao = {
     },
     async getAnchorComment(req,res,next) {
         let params = req.query;
-        let limit = 3;
+        let limit = 5;
         let offset = params.page*limit;
         let anchorQuery = anchorTable
-                            .where({deleted:0,'anchor_info.anchor_id':params.anchor_id})
+                            .where({'anchor_info.anchor_id':params.anchor_id})
                             .select('anchor_info.*,avg(anchor_comment.rate) AS rateAvg')
                             .group('anchor_info.anchor_id')
                             .join('left JOIN anchor_comment ON anchor_info.anchor_id = anchor_comment.anchor_id');
 
 
         let anchorCommentQuery = anchorCommentTable
-                                .where({anchor_id:params.anchor_id})
+                                .where({anchor_id:params.anchor_id,'anchor_comment.deleted':0})
                                 .order('comment_up desc,comment_id desc')
                                 .join('left JOIN general_user ON general_user.user_id = anchor_comment.comment_auth_id')
                                 .limit(limit)
@@ -150,9 +160,20 @@ let anchorDao = {
 
         console.log(anchorCommentQuery.sql());
         try {
-            let anchorInfo = await executeQuery(anchorQuery.sql(), anchorQuery.params());
-
+            let anchorInfoArr = await executeQuery(anchorQuery.sql(), anchorQuery.params());
+            let anchorInfo = anchorInfoArr[0];
             let commentList = await executeQuery(anchorCommentQuery.sql(), anchorCommentQuery.params());
+
+            anchorInfo.dirName = dirConfigObj[anchorInfo.anchor_dir_id+''];
+            anchorInfo.roomNum = anchorInfo.anchor_link.split('/')[anchorInfo.anchor_link.split('/').length-1];
+
+            anchorInfo.osIcon  = 'https://www.zhiboke.site'+ osArr.find((osObj)=>{
+                return osObj.os === anchorInfo.anchor_os
+            }).icon;
+            anchorInfo.osName = osArr.find((osObj)=>{
+                return osObj.os === anchorInfo.anchor_os
+            }).name.replace('直播','');
+
             commentList.forEach((comment)=>{
                 if(comment.anonymous===0){
                     //这会使用户名为空的也显示为匿名网友
@@ -168,7 +189,7 @@ let anchorDao = {
             res.json({
                 code: 200,
                 data: {
-                    anchorInfo: anchorInfo[0],
+                    anchorInfo: anchorInfo,
                     commentList
                 }
             })
@@ -220,20 +241,44 @@ let anchorDao = {
     async updateCommentTimes(req,res,next){
         let params = req.query;
         console.log('update');
-        let anchorCommentQuery;
+        let anchorCommentQuery = null;
+        let commentUserRecordInsert = null;
+        let commentUserRecordQuery = commentUserRecordTable
+            .select()
+            .where({
+                    comment_id:params.comment_id,
+                    user_id:params.user_id
+            });
         if(params.item === 'up'){
             console.log('up');
             anchorCommentQuery= anchorCommentTable.where({comment_id:params.comment_id}).update({comment_up:mohair.raw('comment_up+1')});
+            commentUserRecordInsert = commentUserRecordTable.insert({
+                comment_id:params.comment_id,
+                user_id:params.user_id,
+                type:'up'
+            })
         }else if(params.item === 'down'){
            anchorCommentQuery = anchorCommentTable.where({comment_id:params.comment_id}).update({comment_down:mohair.raw('comment_down+1')});
         }
 
         try{
-            let result = await executeQuery(anchorCommentQuery.sql(),anchorCommentQuery.params());
-            res.json({
-                code:200,
-                data:'OK'
-            })
+            let  record=  await executeQuery(commentUserRecordQuery.sql(),commentUserRecordQuery.params());
+            if(record.length>0){
+                res.json({
+                    code:500,
+                    data:'已点赞此条留言'
+                });
+                return;
+            }
+
+            let insertResult = await executeQuery(commentUserRecordInsert.sql(),commentUserRecordInsert.params());
+            let updateResult = await executeQuery(anchorCommentQuery.sql(),anchorCommentQuery.params());
+            if(insertResult&&updateResult){
+                res.json({
+                    code:200,
+                    data:'OK'
+                })
+            }
         }catch(err){
             res.json({
                 code:500,

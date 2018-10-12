@@ -7,6 +7,9 @@ const router = Router();
 router.get('/wxStart', function (req, res, next) {
     userDao.wxStart(req,res,next);
 });
+router.get('/getUserInfo', function (req, res, next) {
+    userDao.getUserInfo(req,res,next);
+});
 
 router.post('/wxUpdateUser', function (req, res, next) {
     userDao.wxUpdateUser(req,res,next);

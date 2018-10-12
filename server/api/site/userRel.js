@@ -16,4 +16,8 @@ router.get('/getUserAttention', function (req, res, next) {
     userInfoDao.getUserAttention(req,res,next);
 });
 
+router.get('/getUserComment', function (req, res, next) {
+    userInfoDao.getUserComment(req,res,next);
+});
+
 export default router

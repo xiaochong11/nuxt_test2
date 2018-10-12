@@ -12,7 +12,9 @@ import anchor from './site/anchor';
 import divDir from './site/live_dir.js';
 import userInfo from './site/userRel';
 
-const router = Router()
+import rank from './site/rank.js';
+
+const router = Router();
 
 // Add USERS Routes
 
@@ -34,6 +36,7 @@ router.use('/site/liveDir',divDir);
 
 router.use('/site/user',user);
 router.use('/site/userInfo',userInfo);
+router.use('/site/rank',rank);
 
 
 export default router

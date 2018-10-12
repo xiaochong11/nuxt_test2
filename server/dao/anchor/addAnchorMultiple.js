@@ -2,12 +2,21 @@ import mohair from 'mohair';
 import executeQuery from '../base/index';
 let anchorTable = mohair.table('anchor_info');
 
-let anchorDao = {
-    async addAnchorArr(anchorArr){
+let addAnchorDao = {
+    async addAnchorArr(anchorArr,dir_id){
         //insertMany([{name: 'alice'}, {name: 'bob'}]);
-        let anchorQuery = anchorTable.insertMany(anchorArr);
         try{
-            let result = await executeQuery(anchorQuery.sql(),anchorQuery.params());
+            let selectAnchorQuery = anchorTable.select('*').where({anchor_dir_id:dir_id});
+            let anchorDBArr = await executeQuery(selectAnchorQuery.sql(),selectAnchorQuery.params());
+            anchorArr.forEach((anchor,index)=>{
+                anchorDBArr.forEach((anchorDB)=>{
+                    if(anchor === anchorDB.anchor_link){
+                        anchorArr.splice(index,1);
+                    }
+                })
+            });
+            let addAnchorQuery = anchorTable.insertMany(anchorArr);
+            let result = await executeQuery(addAnchorQuery.sql(),addAnchorQuery.params());
             console.log(result);
         }catch(err){
            console.log(err);
@@ -15,4 +24,4 @@ let anchorDao = {
     }
 }
 
-export default anchorDao;
+export default addAnchorDao;

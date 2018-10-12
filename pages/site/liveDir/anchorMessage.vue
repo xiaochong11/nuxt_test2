@@ -173,7 +173,7 @@
                     return;
                 }
                 this.pageNum = page;
-                const num = 3;//每一页接受多少条数据
+                const num = 5;//每一页接受多少条数据
 
                 axios.get('/api/site/anchor/getAnchorComment', {
                     params: {
