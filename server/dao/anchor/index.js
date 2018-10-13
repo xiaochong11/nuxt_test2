@@ -240,6 +240,7 @@ let anchorDao = {
     },
     async updateCommentTimes(req,res,next){
         let params = req.query;
+        params.record_date = new Date();
         console.log('update');
         let anchorCommentQuery = null;
         let commentUserRecordInsert = null;
@@ -255,7 +256,8 @@ let anchorDao = {
             commentUserRecordInsert = commentUserRecordTable.insert({
                 comment_id:params.comment_id,
                 user_id:params.user_id,
-                type:'up'
+                type:'up',
+                record_date:params.record_date
             })
         }else if(params.item === 'down'){
            anchorCommentQuery = anchorCommentTable.where({comment_id:params.comment_id}).update({comment_down:mohair.raw('comment_down+1')});
