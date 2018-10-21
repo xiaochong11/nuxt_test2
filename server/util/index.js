@@ -1,2 +1,3 @@
 import jwt from './jwt';
-export {jwt}
+import dateFormat from './dataFormat'
+export {jwt,dateFormat}

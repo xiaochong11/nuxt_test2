@@ -4,6 +4,7 @@ let userCommentTable = mohair.table('anchor_comment');
 let userTable = mohair.table('general_user');
 import osArr from '../../config/osArr';
 let  userAnchorTable = mohair.table('user_anchor_attention');
+let  shareRecordTable = mohair.table('share_record');
 let rankDao = {
     getUserCommentRank:async function(req,res,next){
         let params = req.query;
@@ -57,7 +58,30 @@ let rankDao = {
                 data:err
             })
         }
-    }
+    },
+    getUserShareRank:async function(req,res,next){
+        let params = req.query;
+        let selectQuery = shareRecordTable
+            .select('general_user.*,share_record.*,count(share_record.open_id) AS open_count')
+            .group('share_record.share_user_id')
+            .join('left JOIN general_user ON general_user.user_id = share_record.share_user_id')
+            .order('open_count DESC')
+            .offset(0)
+            .limit(10);
+
+        try{
+            let result = await executeQuery(selectQuery.sql(),selectQuery.params());
+            res.json({
+                code:200,
+                data:result
+            })
+        }catch(err){
+            res.json({
+                code:500,
+                data:err
+            })
+        }
+    },
 };
 
 

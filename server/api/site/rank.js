@@ -11,5 +11,8 @@ router.get('/getUserCommentRank', function (req, res, next) {
 router.get('/getAnchorAttentionRank', function (req, res, next) {
     rankDao.getAnchorAttentionRank(req,res,next);
 });
+router.get('/getUserShareRank', function (req, res, next) {
+    rankDao.getUserShareRank(req,res,next);
+});
 
 export default router

@@ -11,6 +11,8 @@ import screen from './site/screen';
 import anchor from './site/anchor';
 import divDir from './site/live_dir.js';
 import userInfo from './site/userRel';
+import share from './site/share';
+import notice from './site/notice';
 
 import rank from './site/rank.js';
 
@@ -36,7 +38,9 @@ router.use('/site/liveDir',divDir);
 
 router.use('/site/user',user);
 router.use('/site/userInfo',userInfo);
-router.use('/site/rank',rank);
+router.use('/site/share',share);
+router.use('/site/notice',notice);
 
+router.use('/site/rank',rank);
 
 export default router

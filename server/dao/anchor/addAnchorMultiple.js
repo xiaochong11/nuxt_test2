@@ -8,9 +8,13 @@ let addAnchorDao = {
         try{
             let selectAnchorQuery = anchorTable.select('*').where({anchor_dir_id:dir_id});
             let anchorDBArr = await executeQuery(selectAnchorQuery.sql(),selectAnchorQuery.params());
+            //console.log(anchorDBArr);
             anchorArr.forEach((anchor,index)=>{
                 anchorDBArr.forEach((anchorDB)=>{
-                    if(anchor === anchorDB.anchor_link){
+                    if(anchor.anchor_link === anchorDB.anchor_link){
+                        anchorArr.splice(index,1);
+                    };
+                    if(anchor.anchor_img === anchorDB.anchor_img){
                         anchorArr.splice(index,1);
                     }
                 })

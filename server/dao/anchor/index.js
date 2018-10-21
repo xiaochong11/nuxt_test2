@@ -8,6 +8,7 @@ let anchorTable = mohair.table('anchor_info');
 let anchorCommentTable =  mohair.table('anchor_comment');
 let anchorRecommendTable = mohair.table('anchor_recommend');
 let commentUserRecordTable = mohair.table('comment_user_record');
+import {dateFormat} from '../../util/index';
 let anchorDao = {
     async getDirAnchor(req,res,next){
         let params = req.query;
@@ -183,6 +184,7 @@ let anchorDao = {
                     comment.comment_auth_name = '匿名网友';
                     comment.comment_auth_avatar = 'http://img3.imgtn.bdimg.com/it/u=924427432,4036562115&fm=27&gp=0.jpg';
                 }
+                comment.comment_date = dateFormat('yyyy-MM-dd hh:mm:ss',new Date(comment.comment_date));
                 comment.user_nickname = '';
                 comment.user_avatar = '';
             });
